@@ -42,7 +42,7 @@ PeakPerformanceData/
 ### Clone everything at once (recommended)
 
 ```bash
-git clone --recursive https://github.com/daniellpsilva1/PeakPerformanceData.git
+git clone --recursive https://github.com/daniellpsilva1/PeakPerformanceDataMonorepo.git
 ```
 
 The `--recursive` flag automatically checks out all submodules.
@@ -50,7 +50,7 @@ The `--recursive` flag automatically checks out all submodules.
 ### Clone first, then fetch submodules
 
 ```bash
-git clone https://github.com/daniellpsilva1/PeakPerformanceData.git
+git clone https://github.com/daniellpsilva1/PeakPerformanceDataMonorepo.git
 cd PeakPerformanceData
 git submodule update --init --recursive
 ```
@@ -58,7 +58,7 @@ git submodule update --init --recursive
 ### Clone with a specific branch for all submodules
 
 ```bash
-git clone --recursive https://github.com/daniellpsilva1/PeakPerformanceData.git
+git clone --recursive https://github.com/daniellpsilva1/PeakPerformanceDataMonorepo.git
 cd PeakPerformanceData
 git submodule foreach 'git checkout main'
 ```
