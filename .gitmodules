@@ -22,6 +22,14 @@
 	path = PeakPerformanceDataMarketing/AcademiesPresentation
 	url = https://github.com/daniellpsilva1/ppd-academies-presentation.git
 	branch = main
+[submodule "PeakPerformanceDataMarketing/AI Videos"]
+	path = PeakPerformanceDataMarketing/AI Videos
+	url = https://github.com/daniellpsilva1/ppd-ai-videos.git
+	branch = main
+[submodule "PeakPerformanceDataMarketing/Manim"]
+	path = PeakPerformanceDataMarketing/Manim
+	url = https://github.com/daniellpsilva1/ppd-manim.git
+	branch = main
 [submodule "PeakPerformanceDataMarketing/Remotion"]
 	path = PeakPerformanceDataMarketing/Remotion
 	url = https://github.com/daniellpsilva1/ppd-remotion.git
