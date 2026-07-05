@@ -1,0 +1,28 @@
+[submodule "PeakPerformanceData/peak_performance_data"]
+	path = PeakPerformanceData/peak_performance_data
+	url = https://github.com/daniellpsilva1/PeakPerformanceDataV2.git
+	branch = main
+[submodule "PeakPerformanceData/ppd_backend"]
+	path = PeakPerformanceData/ppd_backend
+	url = https://github.com/daniellpsilva1/PPD_Backend.git
+	branch = main
+[submodule "PeakPerformanceData/ppd_extraction_backend"]
+	path = PeakPerformanceData/ppd_extraction_backend
+	url = https://github.com/daniellpsilva1/PPD_Extraction_Backend.git
+	branch = main
+[submodule "PeakPerformanceData/ppd_legacy_extraction_backend"]
+	path = PeakPerformanceData/ppd_legacy_extraction_backend
+	url = https://github.com/daniellpsilva1/ppd_legacy_extraction_backend.git
+	branch = main
+[submodule "PeakPerformanceData/ppd_vision"]
+	path = PeakPerformanceData/ppd_vision
+	url = https://github.com/daniellpsilva1/ppd_vision.git
+	branch = main
+[submodule "PeakPerformanceDataMarketing/AcademiesPresentation"]
+	path = PeakPerformanceDataMarketing/AcademiesPresentation
+	url = https://github.com/daniellpsilva1/ppd-academies-presentation.git
+	branch = main
+[submodule "PeakPerformanceDataMarketing/Remotion"]
+	path = PeakPerformanceDataMarketing/Remotion
+	url = https://github.com/daniellpsilva1/ppd-remotion.git
+	branch = main
