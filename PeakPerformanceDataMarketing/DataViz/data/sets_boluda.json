@@ -1,0 +1,16 @@
+[
+  {
+    "set_number": 1,
+    "host_score": 6,
+    "guest_score": 1,
+    "set_winner": "host"
+  },
+  {
+    "set_number": 2,
+    "host_score": 7,
+    "guest_score": 6,
+    "host_tiebreak": 7,
+    "guest_tiebreak": 2,
+    "set_winner": "host"
+  }
+]

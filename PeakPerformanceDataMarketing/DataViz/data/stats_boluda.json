@@ -1,0 +1,1622 @@
+[
+  {
+    "id": "84af6667-7d68-4fd5-aad1-875b9109ddd8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "1st Returns",
+    "stat_value": "47"
+  },
+  {
+    "id": "68921289-14ec-4b5a-bce5-d4e2473cc670",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "1st Returns Won",
+    "stat_value": "19"
+  },
+  {
+    "id": "5b3fb9f2-5b21-4c4b-a572-9e1a52d577a0",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "1st Serves",
+    "stat_value": "71"
+  },
+  {
+    "id": "2b13ebea-009d-4c30-a8d3-12a4cac70d95",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "1st Serves In",
+    "stat_value": "45"
+  },
+  {
+    "id": "b653e27d-7276-440b-9a4f-79e8663b20a2",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "1st Serves Won",
+    "stat_value": "25"
+  },
+  {
+    "id": "4642b572-66d0-4944-89a2-05141a353472",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "2nd Returns",
+    "stat_value": "18"
+  },
+  {
+    "id": "62a7a620-8084-41c9-8a60-e7b24a706149",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "8"
+  },
+  {
+    "id": "5ac5700b-8bce-4fd4-9897-a723f4714531",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "2nd Serves",
+    "stat_value": "26"
+  },
+  {
+    "id": "6cd550e7-ad62-4ead-bfe5-04d66e8f7985",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "2nd Serves In",
+    "stat_value": "19"
+  },
+  {
+    "id": "e9ee8dc9-cc93-4ff2-ace7-1a2d84913b1b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "7"
+  },
+  {
+    "id": "f9590e86-da18-47d5-8583-375727f814c8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Aces",
+    "stat_value": "2"
+  },
+  {
+    "id": "1c9d09cd-2e8a-490b-b9c4-4de38469f04c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "e54a4277-15f4-4a12-b66e-e294aee0299e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "d2d40ab5-6357-4145-851e-ef406d0b5734",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "16"
+  },
+  {
+    "id": "8c79d091-16c0-4129-b108-c4960fd5f987",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Backhand Winners",
+    "stat_value": "3"
+  },
+  {
+    "id": "a7a64425-e5a0-49e4-adb3-57fd6afa65e1",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "10"
+  },
+  {
+    "id": "9857f3a8-59ed-4aa0-a100-113a02729467",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Break Points",
+    "stat_value": "13"
+  },
+  {
+    "id": "c99467b2-9294-400a-8eb1-9c166d93cc34",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Break Points Saved",
+    "stat_value": "7"
+  },
+  {
+    "id": "08e1813a-bc49-4593-9825-9cba82061b6b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Break Points Won",
+    "stat_value": "4"
+  },
+  {
+    "id": "ba6d8993-83b6-4ac0-83a2-ada5fffa2c4a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "843d4267-17a9-4034-b919-4d51074c030f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "0b25bec0-ed0b-48a6-ab82-efc8ee8870f2",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "7bf6ea52-29f2-4eba-ba4d-38ba2e61b9e5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "22"
+  },
+  {
+    "id": "0adb6d6b-7139-44da-8213-1acfa5384c17",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Forehand Winners",
+    "stat_value": "8"
+  },
+  {
+    "id": "e740504e-8f33-48ae-993e-5e605ae34bc7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Service Winners",
+    "stat_value": "1"
+  },
+  {
+    "id": "d0a3fc5b-ddd0-4f3e-89e1-4c35f26a50e9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "0"
+  },
+  {
+    "id": "38be8f97-66ad-44a5-9ffd-3ce1a3ef7e83",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Set Points Saved",
+    "stat_value": "2"
+  },
+  {
+    "id": "7140e94e-605b-42f7-a652-fe7c867c07ff",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Set Points Won",
+    "stat_value": "0"
+  },
+  {
+    "id": "4f7f41d0-a020-4431-a8e7-319c73c4d347",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Total Points",
+    "stat_value": "136"
+  },
+  {
+    "id": "0bf37c73-e61f-41f6-b3f2-bedc53c35e3e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 0,
+    "stat_name": "Total Points Won",
+    "stat_value": "59"
+  },
+  {
+    "id": "0c916ac5-ee34-4168-93f2-705eb8a8e4d1",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "1st Returns",
+    "stat_value": "24"
+  },
+  {
+    "id": "3310192a-2756-4cc7-9f87-0bd519053391",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "1st Returns Won",
+    "stat_value": "8"
+  },
+  {
+    "id": "4736035f-b846-4ff4-8b8e-1152cf8c2d42",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "1st Serves",
+    "stat_value": "27"
+  },
+  {
+    "id": "ebbebdc9-2c25-47b2-a5ee-89c94d4f0947",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "1st Serves In",
+    "stat_value": "17"
+  },
+  {
+    "id": "f5efec19-6c83-458e-8177-96df6a7c1935",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "1st Serves Won",
+    "stat_value": "8"
+  },
+  {
+    "id": "d9554514-0f18-4b07-adb6-c2aadc4d7780",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "2nd Returns",
+    "stat_value": "1"
+  },
+  {
+    "id": "970ba68d-69b4-4220-b68c-a91b5329fed8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "1"
+  },
+  {
+    "id": "a97aed9f-5a4f-4ea3-9669-4e38148a17ba",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "2nd Serves",
+    "stat_value": "10"
+  },
+  {
+    "id": "4d4c2a5c-1d99-4cbd-8363-fa064768ccc6",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "2nd Serves In",
+    "stat_value": "7"
+  },
+  {
+    "id": "734ac909-5f00-47b2-80d3-e0e0a31aa3c1",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "2"
+  },
+  {
+    "id": "88eb1612-db6d-4cdd-ace3-e80d787f2186",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Aces",
+    "stat_value": "0"
+  },
+  {
+    "id": "a265aed7-fbcc-460a-b77c-69b23a16dfaf",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "498689ef-3a71-4398-93e3-897258833eb9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "e5fdff0b-2f07-45d9-8607-41dade0cf3f5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "4"
+  },
+  {
+    "id": "3e6ffb5a-963d-47fa-bf49-60d89af518e3",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Backhand Winners",
+    "stat_value": "2"
+  },
+  {
+    "id": "448d24d5-d379-4960-8783-c30203ffa7db",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "3"
+  },
+  {
+    "id": "458a83f2-fbc0-4a20-abb7-565f54b3a46f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Break Points",
+    "stat_value": "6"
+  },
+  {
+    "id": "5f492aff-1b54-4057-b4ff-fffa4ae7d677",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Break Points Saved",
+    "stat_value": "3"
+  },
+  {
+    "id": "eafb6546-40ee-43a3-9998-482d79419e32",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Break Points Won",
+    "stat_value": "1"
+  },
+  {
+    "id": "a8ae466b-5be9-4d96-8d67-0aa34f81b460",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "ed921f39-0bd8-4ec1-a8ca-8a461dec344d",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "6b96ec21-c83d-451a-81d9-5574eacd610e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "b4899b40-7249-4a7e-8f2d-8dd345c9e1ef",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "9"
+  },
+  {
+    "id": "ff0103a2-144e-4040-b0f7-ea02b987f6eb",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Forehand Winners",
+    "stat_value": "3"
+  },
+  {
+    "id": "ec5fdad3-653f-4b13-b87b-f101d3adf206",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Service Winners",
+    "stat_value": "1"
+  },
+  {
+    "id": "87db8450-6784-4b0e-87b7-9669d6fa8c96",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "0"
+  },
+  {
+    "id": "2fa32646-a6d2-4a43-a069-05219f9787dd",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Set Points Saved",
+    "stat_value": "0"
+  },
+  {
+    "id": "0696a1db-c973-441f-ae36-967ad6f66792",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Set Points Won",
+    "stat_value": "0"
+  },
+  {
+    "id": "c1b60c8c-5fea-43ce-8d4e-6624938bc9b6",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Total Points",
+    "stat_value": "52"
+  },
+  {
+    "id": "d1c7ae15-44b2-4d2e-b738-5849293db45b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 1,
+    "stat_name": "Total Points Won",
+    "stat_value": "19"
+  },
+  {
+    "id": "cfc9f870-165a-433b-9418-9be94bca289b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "1st Returns",
+    "stat_value": "23"
+  },
+  {
+    "id": "9f15df3b-d704-4162-a3b1-c819b9703dc7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "1st Returns Won",
+    "stat_value": "11"
+  },
+  {
+    "id": "f987c52d-e75a-45f0-ac96-7aa6fd2a462d",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "1st Serves",
+    "stat_value": "44"
+  },
+  {
+    "id": "8073eb28-1dbd-4602-8451-9122eb1bbc90",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "1st Serves In",
+    "stat_value": "28"
+  },
+  {
+    "id": "9c017a0e-3b53-4424-93e8-8640120afd74",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "1st Serves Won",
+    "stat_value": "17"
+  },
+  {
+    "id": "256a9b88-1e97-4e73-9bff-ce09ce4f27d2",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "2nd Returns",
+    "stat_value": "17"
+  },
+  {
+    "id": "2074bc8d-4e63-417e-bce7-d2c0a5b17b4e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "7"
+  },
+  {
+    "id": "7940f1cd-804a-4a59-9e7c-29cce8f362b1",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "2nd Serves",
+    "stat_value": "16"
+  },
+  {
+    "id": "9102a430-5f6d-40cf-9497-1d51e97e916b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "2nd Serves In",
+    "stat_value": "12"
+  },
+  {
+    "id": "921a6c5a-7be0-4ef2-9b57-4f1d2b797ddb",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "5"
+  },
+  {
+    "id": "43589d0d-d7a4-4a9f-9786-6dc07a784a6e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Aces",
+    "stat_value": "2"
+  },
+  {
+    "id": "fa932687-155e-4a76-ba6f-1875fe96ca2f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "673d42e3-f46d-4569-b44a-1ff48cb3a31c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "40582af8-9b0c-4b6e-bd6a-5f9cc74f5d01",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "12"
+  },
+  {
+    "id": "acbb7a23-23b2-41f5-8a8d-d976f2a26f1f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Backhand Winners",
+    "stat_value": "1"
+  },
+  {
+    "id": "1e8124e4-22f7-4e09-a359-cb0038094a29",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "7"
+  },
+  {
+    "id": "2b33d840-0c6f-4740-ba1b-0bf565bac671",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Break Points",
+    "stat_value": "7"
+  },
+  {
+    "id": "93ff4589-cf0b-462a-b192-c39f1399cf53",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Break Points Saved",
+    "stat_value": "4"
+  },
+  {
+    "id": "f61fb903-c236-4693-a06b-0839d807f9c9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Break Points Won",
+    "stat_value": "3"
+  },
+  {
+    "id": "af49bb79-c717-4a7f-abd1-a7063c0a6a84",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "4596fcd4-9a5f-457a-ac92-6c3588bedecf",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "657d46d7-754a-43ef-b66c-c270ebdacca9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "38ef6702-ba72-4097-a15e-ad2a9f15708a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "13"
+  },
+  {
+    "id": "09a6ecb8-ab76-482a-8354-81def4095e63",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Forehand Winners",
+    "stat_value": "5"
+  },
+  {
+    "id": "5bd4dcdd-d8d2-4f8d-8bc9-0fb802f43059",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Service Winners",
+    "stat_value": "0"
+  },
+  {
+    "id": "c017702b-f004-442c-88d7-8604a35f6b7b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "0"
+  },
+  {
+    "id": "5bdbad85-64b0-4494-9435-1944e4459bef",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Set Points Saved",
+    "stat_value": "2"
+  },
+  {
+    "id": "3cab87df-f08e-4666-92a8-e864eb3d4207",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Set Points Won",
+    "stat_value": "0"
+  },
+  {
+    "id": "0885a1c0-1020-4190-8f4a-e296264e849e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Total Points",
+    "stat_value": "84"
+  },
+  {
+    "id": "909bebe7-a6c3-4008-ba5a-e2503aabd709",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "guest",
+    "set_number": 2,
+    "stat_name": "Total Points Won",
+    "stat_value": "40"
+  },
+  {
+    "id": "a00ad19e-ad70-4af3-a95f-47565a0dbab2",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "1st Returns",
+    "stat_value": "45"
+  },
+  {
+    "id": "4bccc5eb-34f3-45b9-91a6-2794b9718cf5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "1st Returns Won",
+    "stat_value": "20"
+  },
+  {
+    "id": "b7f46b2e-c97d-4ae1-8a8e-f04deed52a3b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "1st Serves",
+    "stat_value": "65"
+  },
+  {
+    "id": "fdfbb48a-2cc2-40cb-8cc8-82a79efaa7e7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "1st Serves In",
+    "stat_value": "47"
+  },
+  {
+    "id": "97830a10-dd11-4baf-a9ca-87e2ed02790e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "1st Serves Won",
+    "stat_value": "28"
+  },
+  {
+    "id": "45b77a45-640d-4c4f-9efa-3e4995ba0291",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "2nd Returns",
+    "stat_value": "26"
+  },
+  {
+    "id": "8120d69e-f560-4ef5-ae07-dbfb612ff5c8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "19"
+  },
+  {
+    "id": "e7191147-70b3-4881-80ef-92f0cc5fa8e4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "2nd Serves",
+    "stat_value": "18"
+  },
+  {
+    "id": "c135e361-cbde-4fb5-b3e6-06ddf6a14a9a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "2nd Serves In",
+    "stat_value": "13"
+  },
+  {
+    "id": "45bee4c0-648b-4b78-9704-45c077305293",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "10"
+  },
+  {
+    "id": "9849244e-2ef2-41d9-9d73-9b43a1e6b91f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Aces",
+    "stat_value": "1"
+  },
+  {
+    "id": "d1dc8f58-705f-4a4a-8a20-bf61ce12c491",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "1f3b4659-a9fc-44b2-8581-c591c9fed748",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "1"
+  },
+  {
+    "id": "e0c321e3-1344-4805-a640-ca4832b6bb1a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "12"
+  },
+  {
+    "id": "3e895fb3-d65d-4eb1-87c1-cbecb0932f26",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Backhand Winners",
+    "stat_value": "4"
+  },
+  {
+    "id": "14805eda-1cd8-46ff-a148-e086702c91f9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "13"
+  },
+  {
+    "id": "4c985432-c77b-4259-87b5-33987cc282e3",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Break Points",
+    "stat_value": "10"
+  },
+  {
+    "id": "af13cbfa-408a-436f-8af9-828aa30c4bf4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Break Points Saved",
+    "stat_value": "6"
+  },
+  {
+    "id": "196b6c5c-e8a1-4225-84b1-4b78b6fd1968",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Break Points Won",
+    "stat_value": "6"
+  },
+  {
+    "id": "424007f6-0cce-400d-b67e-b9db9c8ebaf6",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "a688a460-8495-451e-b545-abbcf7740a92",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0.520684"
+  },
+  {
+    "id": "9f284351-ac43-4996-be8c-712c43d008f6",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "1"
+  },
+  {
+    "id": "9aecbbfe-3fe0-4293-b4c5-48963aa160f8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "15"
+  },
+  {
+    "id": "19e62152-7231-48aa-ae2e-df653d6abfd9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Forehand Winners",
+    "stat_value": "7"
+  },
+  {
+    "id": "2a27e454-dd94-46f2-a70d-6fc20e441dc0",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Service Winners",
+    "stat_value": "6"
+  },
+  {
+    "id": "d72f2905-36d5-4e18-b722-35310f3c466b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "4"
+  },
+  {
+    "id": "99346cbf-d62b-46cb-8eca-c5ad173ee872",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Set Points Saved",
+    "stat_value": "0"
+  },
+  {
+    "id": "01b81714-e8a4-4fb0-b51e-e5e06b1e7ac4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Set Points Won",
+    "stat_value": "2"
+  },
+  {
+    "id": "80e2aa53-f19a-4a0d-8e8b-b9f2ea0cf86c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Total Points",
+    "stat_value": "136"
+  },
+  {
+    "id": "4c3f1d07-b5de-4d57-90e4-7110a77f910b",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 0,
+    "stat_name": "Total Points Won",
+    "stat_value": "77"
+  },
+  {
+    "id": "161f3b55-4587-4f7a-8ee4-d56af2ab59ce",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "1st Returns",
+    "stat_value": "17"
+  },
+  {
+    "id": "226bfdd5-1c70-4670-82f0-edc7ee57ccf4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "1st Returns Won",
+    "stat_value": "9"
+  },
+  {
+    "id": "5dae2d2c-3dcd-447f-8213-167cb5cb1857",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "1st Serves",
+    "stat_value": "25"
+  },
+  {
+    "id": "153ce251-4b30-4cc5-a9da-1587c826dff0",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "1st Serves In",
+    "stat_value": "24"
+  },
+  {
+    "id": "dfdf9a8c-9e23-4d3b-912f-72cfbcf82473",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "1st Serves Won",
+    "stat_value": "16"
+  },
+  {
+    "id": "9c5c2f78-5ad1-4eec-8c4f-eda9adcd4b91",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "2nd Returns",
+    "stat_value": "10"
+  },
+  {
+    "id": "eb04a982-99b2-4487-b745-aaaf94aff2fa",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "8"
+  },
+  {
+    "id": "50a05f8c-2eca-4bf9-9cc2-7634f2b30ded",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "2nd Serves",
+    "stat_value": "1"
+  },
+  {
+    "id": "c6acdd49-341b-4a34-b942-c2d570b0b804",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "2nd Serves In",
+    "stat_value": "0"
+  },
+  {
+    "id": "a40315de-1e2c-4057-9513-e5dd22b69f05",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "0"
+  },
+  {
+    "id": "b0e78c35-f1fa-448c-8a9a-3e3c00887b49",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Aces",
+    "stat_value": "0"
+  },
+  {
+    "id": "184bdef5-a01d-4b8f-a1c8-c1a30e5776b9",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "29df2900-2cbc-4336-8509-20dca0fc3a64",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "1"
+  },
+  {
+    "id": "2999dc14-9a73-46f4-97be-8936e15b361f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "2"
+  },
+  {
+    "id": "a24e0926-b147-4573-aa6c-14b423cb95a8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Backhand Winners",
+    "stat_value": "0"
+  },
+  {
+    "id": "dee4c3a1-75c6-4127-8e08-7b99a7f610c8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "6"
+  },
+  {
+    "id": "79a4a214-06d1-43d9-b004-df6b57dba5e6",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Break Points",
+    "stat_value": "3"
+  },
+  {
+    "id": "9b665396-1fd9-4e9c-bd3a-357d209a00c5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Break Points Saved",
+    "stat_value": "2"
+  },
+  {
+    "id": "48c28898-9f18-4c3c-a68b-a22283ce5e09",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Break Points Won",
+    "stat_value": "3"
+  },
+  {
+    "id": "eb823d3c-03db-4b3f-95b0-14620808859a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "9df04d09-fbe0-43a1-9a3c-d3fa0047d732",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "854647cd-732b-429b-bc49-5dfd57c554a7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "1"
+  },
+  {
+    "id": "75537c1f-3333-411e-95a5-f9b8e5da2bed",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "5"
+  },
+  {
+    "id": "548f2e92-5606-4360-8659-baeea69816d5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Forehand Winners",
+    "stat_value": "4"
+  },
+  {
+    "id": "20fcf26f-a82f-4e84-a9f4-c888c130326c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Service Winners",
+    "stat_value": "5"
+  },
+  {
+    "id": "166723f3-6aee-413a-b7c4-50e871c41ea8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "1"
+  },
+  {
+    "id": "55b30488-8c02-4f29-9ec9-9e4876244f4d",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Set Points Saved",
+    "stat_value": "0"
+  },
+  {
+    "id": "302d2479-3518-43e7-8765-5a512325edea",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Set Points Won",
+    "stat_value": "1"
+  },
+  {
+    "id": "39311cde-a67d-4d52-ac5b-3a54b6d083eb",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Total Points",
+    "stat_value": "52"
+  },
+  {
+    "id": "2daf58a8-d166-49c5-a996-2fd4d8397a94",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 1,
+    "stat_name": "Total Points Won",
+    "stat_value": "33"
+  },
+  {
+    "id": "7e32b3dd-8f5f-423b-a456-65e3a5cb03a8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "1st Returns",
+    "stat_value": "28"
+  },
+  {
+    "id": "0aee2ecc-ce42-495a-ab35-c3b026183f30",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "1st Returns Won",
+    "stat_value": "11"
+  },
+  {
+    "id": "a3d90f05-e25a-493f-aea1-46431bda4d66",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "1st Serves",
+    "stat_value": "40"
+  },
+  {
+    "id": "e1e0c65b-ce5e-4345-b8eb-ef06ebb66678",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "1st Serves In",
+    "stat_value": "23"
+  },
+  {
+    "id": "bb9a6e42-fadd-41dd-9eb3-cce9cef76021",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "1st Serves Won",
+    "stat_value": "12"
+  },
+  {
+    "id": "0b966876-868a-47ab-aff7-bb35b95de26f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "2nd Returns",
+    "stat_value": "16"
+  },
+  {
+    "id": "78f145e1-13d2-4e30-b665-bb92cf921cac",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "2nd Returns Won",
+    "stat_value": "11"
+  },
+  {
+    "id": "ea6952f8-df23-4c36-b96f-d94f24070074",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "2nd Serves",
+    "stat_value": "17"
+  },
+  {
+    "id": "b09f6854-7121-44f3-bb59-3f891b4f8212",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "2nd Serves In",
+    "stat_value": "13"
+  },
+  {
+    "id": "4f275ed9-c8fd-4b63-951d-9c5457cf57a2",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "2nd Serves Won",
+    "stat_value": "10"
+  },
+  {
+    "id": "1faaaa22-1426-4d72-a98e-7f573aee58f8",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Aces",
+    "stat_value": "1"
+  },
+  {
+    "id": "9a922b04-fbaf-4e81-bdd6-a143bd3b50ef",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Average Heart Rate (BPM)",
+    "stat_value": "0"
+  },
+  {
+    "id": "fe59393e-331f-4069-a827-fb849289de44",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Backhand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "4e78db31-0050-49c9-92f0-a361eac6097c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Backhand Unforced Errors",
+    "stat_value": "10"
+  },
+  {
+    "id": "a045c12e-74fa-425e-9c1c-4fa5c2b9c41d",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Backhand Winners",
+    "stat_value": "4"
+  },
+  {
+    "id": "910a0016-6b8d-48f5-9c9a-68a194801c51",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Break Point Opportunities",
+    "stat_value": "7"
+  },
+  {
+    "id": "8e04a166-1455-42a0-9de3-56a022162266",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Break Points",
+    "stat_value": "7"
+  },
+  {
+    "id": "b6587ad2-b324-4fb5-a0a2-a1b5790074f7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Break Points Saved",
+    "stat_value": "4"
+  },
+  {
+    "id": "b5b1ab0b-1216-425e-b594-4fa5f787bb8f",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Break Points Won",
+    "stat_value": "3"
+  },
+  {
+    "id": "c22a45c2-3b50-481a-a929-714f5d1852d7",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Calories Burned (kCAL)",
+    "stat_value": "0"
+  },
+  {
+    "id": "46bfc5de-3273-4c2f-861a-8429f81a89f4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Distance Run (KM)",
+    "stat_value": "0.520684"
+  },
+  {
+    "id": "bfabde69-b3c7-4ecf-b78d-0de3881d8688",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Forehand Forced Errors",
+    "stat_value": "0"
+  },
+  {
+    "id": "c4bb847c-de23-4dfb-b9b6-bec3ce005ee5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Forehand Unforced Errors",
+    "stat_value": "10"
+  },
+  {
+    "id": "c9eacafc-687e-444f-a3d0-ecf1776b706e",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Forehand Winners",
+    "stat_value": "3"
+  },
+  {
+    "id": "a32bc542-8726-48e0-a04b-a30d789a989a",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Service Winners",
+    "stat_value": "1"
+  },
+  {
+    "id": "5a648976-1403-41c4-87f8-92cf0ffe65c5",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Set Point Opportunities",
+    "stat_value": "3"
+  },
+  {
+    "id": "27df8192-9bcd-4edd-b71c-0e2db9123e4c",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Set Points Saved",
+    "stat_value": "0"
+  },
+  {
+    "id": "11ede620-51fc-4421-af86-65316f30cfbe",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Set Points Won",
+    "stat_value": "1"
+  },
+  {
+    "id": "53c5af7a-8e52-438c-83b4-a019ce1219d4",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Total Points",
+    "stat_value": "84"
+  },
+  {
+    "id": "55b79ee2-fef5-48a9-a28c-cfce231b33fa",
+    "created_at": "2026-06-10 13:41:02.375434+00",
+    "match_id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+    "player": "host",
+    "set_number": 2,
+    "stat_name": "Total Points Won",
+    "stat_value": "44"
+  }
+]

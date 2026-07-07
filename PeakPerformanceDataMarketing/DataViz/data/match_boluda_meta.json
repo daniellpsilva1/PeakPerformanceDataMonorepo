@@ -1,0 +1,18 @@
+{
+  "id": "f6cd7d61-fc69-4dfc-8336-2c90a4ced93a",
+  "match_date": "2025-04-09",
+  "opponent_name": "Ángela Boluda",
+  "surface": "clay",
+  "total_points": 136,
+  "host_player_names": [
+    "Kaitlin Quevedo"
+  ],
+  "guest_player_names": [
+    "Ángela Boluda"
+  ],
+  "sets_per_match": 3,
+  "games_per_set": 6,
+  "has_ad_scoring": true,
+  "is_doubles": false,
+  "source": "swingvision"
+}
