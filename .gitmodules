@@ -34,3 +34,6 @@
 	path = PeakPerformanceDataMarketing/Remotion
 	url = https://github.com/daniellpsilva1/ppd-remotion.git
 	branch = main
+[submodule "PeakPerformanceDataMarketing/DataViz"]
+	path = PeakPerformanceDataMarketing/DataViz
+	url = https://github.com/daniellpsilva1/ppd-dataviz.git
