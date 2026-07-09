@@ -37,3 +37,6 @@
 [submodule "PeakPerformanceDataMarketing/DataViz"]
 	path = PeakPerformanceDataMarketing/DataViz
 	url = https://github.com/daniellpsilva1/ppd-dataviz.git
+[submodule "PeakPerformanceDataMarketing/courtviz"]
+	path = PeakPerformanceDataMarketing/courtviz
+	url = https://github.com/daniellpsilva1/ppd-courtviz.git
