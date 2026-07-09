@@ -1,0 +1,31 @@
+{
+  "name": "courtviz",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A professional tennis visualization library for React",
+  "license": "MIT",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
+    "typecheck": "turbo run typecheck",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "turbo run build && changeset publish",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "export:static": "turbo run build && pnpm --filter demo exec node ../../scripts/export-static.cjs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.12",
+    "@types/node": "^20.17.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

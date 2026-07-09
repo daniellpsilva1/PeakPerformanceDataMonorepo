@@ -1,0 +1,35 @@
+{
+  "name": "@courtviz/video",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Remotion match recap videos for courtviz",
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "tsc -b",
+    "render": "remotion render MatchRecap out/match-recap.mp4",
+    "render:social": "remotion render MatchRecapSocial out/match-recap-social.mp4",
+    "audio:generate": "node scripts/generate-audio.cjs",
+    "clean": "rm -rf dist .turbo out"
+  },
+  "dependencies": {
+    "@courtviz/core": "workspace:*",
+    "@courtviz/data": "workspace:*",
+    "@courtviz/react": "workspace:*",
+    "@courtviz/themes": "workspace:*",
+    "@remotion/google-fonts": "^4.0.272",
+    "@remotion/media": "4.0.486",
+    "@remotion/transitions": "^4.0.272",
+    "d3-interpolate": "^3.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.272"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.272",
+    "@types/d3-interpolate": "^3.0.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}

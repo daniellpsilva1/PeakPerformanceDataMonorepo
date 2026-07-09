@@ -1,0 +1,41 @@
+{
+  "name": "@courtviz/data",
+  "version": "0.0.0",
+  "description": "SwingVision/Supabase data schemas, loaders, and shots↔points join for courtviz",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./fixtures": {
+      "types": "./dist/fixtures/index.d.ts",
+      "import": "./dist/fixtures/index.js",
+      "require": "./dist/fixtures/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@courtviz/core": "workspace:*",
+    "@supabase/supabase-js": "^2.49.4",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "vitest": "^3.0.0"
+  }
+}

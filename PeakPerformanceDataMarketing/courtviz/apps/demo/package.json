@@ -1,0 +1,29 @@
+{
+  "name": "demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "export:static": "node ../../scripts/export-static.cjs",
+    "preview": "vite preview",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@courtviz/core": "workspace:*",
+    "@courtviz/data": "workspace:*",
+    "@courtviz/react": "workspace:*",
+    "@courtviz/themes": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}

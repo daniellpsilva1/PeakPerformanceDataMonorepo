@@ -1,0 +1,26 @@
+{
+  "name": "@courtviz/gallery",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Ladle gallery for courtviz component development",
+  "type": "module",
+  "scripts": {
+    "dev": "ladle serve",
+    "build": "ladle build",
+    "preview": "ladle preview",
+    "clean": "rm -rf .ladle dist .turbo"
+  },
+  "dependencies": {
+    "@courtviz/core": "workspace:*",
+    "@courtviz/data": "workspace:*",
+    "@courtviz/react": "workspace:*",
+    "@courtviz/themes": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@ladle/react": "^5.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}
