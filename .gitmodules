@@ -37,3 +37,7 @@
 [submodule "PeakPerformanceDataMarketing/courtviz"]
 	path = PeakPerformanceDataMarketing/courtviz
 	url = https://github.com/daniellpsilva1/ppd-courtviz.git
+[submodule "PeakPerformanceData/swingvision-pipeline"]
+	path = PeakPerformanceData/swingvision-pipeline
+	url = https://github.com/daniellpsilva1/swingvision-pipeline.git
+	branch = main
