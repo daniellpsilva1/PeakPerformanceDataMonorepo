@@ -1,0 +1,28 @@
+{
+  "name": "bodyviz",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Athlete digital twin visualization powered by React Three Fiber and PPD brand tokens",
+  "license": "MIT",
+  "scripts": {
+    "build": "turbo run build",
+    "build:demo": "turbo run build --filter=demo...",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:visual": "turbo run test:visual",
+    "test:watch": "turbo run test:watch",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

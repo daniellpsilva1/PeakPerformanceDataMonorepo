@@ -1,0 +1,28 @@
+{
+  "name": "@bodyviz/gallery",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Ladle gallery for bodyviz component development",
+  "type": "module",
+  "scripts": {
+    "dev": "ladle serve",
+    "build": "ladle build",
+    "preview": "ladle preview",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
+    "clean": "rm -rf .ladle dist .turbo visual-report visual-snapshots"
+  },
+  "dependencies": {
+    "@bodyviz/core": "workspace:*",
+    "@bodyviz/data": "workspace:*",
+    "@bodyviz/react": "workspace:*",
+    "@bodyviz/tokens": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@ladle/react": "^5.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "@bodyviz/react",
+  "version": "0.0.0",
+  "description": "React Three Fiber body twin, spotlight tour, day scrubber, and WebGL gate for BodyViz",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@bodyviz/core": "workspace:*",
+    "@bodyviz/shaders": "workspace:*",
+    "@bodyviz/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "@react-three/drei": ">=10.0.0",
+    "@react-three/fiber": ">=9.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "three": ">=0.173.0"
+  },
+  "devDependencies": {
+    "@bodyviz/data": "workspace:*",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.173.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.173.0",
+    "tsup": "^8.3.5",
+    "vitest": "^3.0.0"
+  }
+}

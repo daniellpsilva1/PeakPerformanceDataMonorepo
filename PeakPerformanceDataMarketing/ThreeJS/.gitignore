@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+coverage/
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Env
+.env
+.env.local
+
+# Demo dev cache
+apps/demo/.vite/
+
+# Ladle build
+apps/gallery/.ladle/
+apps/gallery/build/
+
+# Playwright visual regression
+apps/gallery/visual-report/
+apps/gallery/test-results/
