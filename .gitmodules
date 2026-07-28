@@ -41,3 +41,15 @@
 	path = PeakPerformanceData/swingvision-pipeline
 	url = https://github.com/daniellpsilva1/swingvision-pipeline.git
 	branch = main
+[submodule "PeakPerformanceData/ppd_research_papers"]
+	path = PeakPerformanceData/ppd_research_papers
+	url = https://github.com/daniellpsilva1/ppd_research_papers.git
+	branch = main
+[submodule "PeakPerformanceData/ppp_ai_agent"]
+	path = PeakPerformanceData/ppp_ai_agent
+	url = https://github.com/daniellpsilva1/ppp_ai_agent.git
+	branch = main
+[submodule "PeakPerformanceDataMarketing/ThreeJS"]
+	path = PeakPerformanceDataMarketing/ThreeJS
+	url = https://github.com/daniellpsilva1/ppd-threejs.git
+	branch = main
