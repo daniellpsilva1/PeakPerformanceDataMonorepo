@@ -1,55 +1,55 @@
 [submodule "PeakPerformanceData/peak_performance_data"]
 	path = PeakPerformanceData/peak_performance_data
-	url = https://github.com/daniellpsilva1/PeakPerformanceDataV2.git
+	url = git@github.com:daniellpsilva1/PeakPerformanceDataV2.git
 	branch = main
 [submodule "PeakPerformanceData/ppd_backend"]
 	path = PeakPerformanceData/ppd_backend
-	url = https://github.com/daniellpsilva1/PPD_Backend.git
+	url = git@github.com:daniellpsilva1/PPD_Backend.git
 	branch = main
 [submodule "PeakPerformanceData/ppd_extraction_backend"]
 	path = PeakPerformanceData/ppd_extraction_backend
-	url = https://github.com/daniellpsilva1/PPD_Extraction_Backend.git
+	url = git@github.com:daniellpsilva1/PPD_Extraction_Backend.git
 	branch = main
 [submodule "PeakPerformanceData/ppd_legacy_extraction_backend"]
 	path = PeakPerformanceData/ppd_legacy_extraction_backend
-	url = https://github.com/daniellpsilva1/ppd_legacy_extraction_backend.git
+	url = git@github.com:daniellpsilva1/ppd_legacy_extraction_backend.git
 	branch = main
 [submodule "PeakPerformanceData/ppd_vision"]
 	path = PeakPerformanceData/ppd_vision
-	url = https://github.com/daniellpsilva1/ppd_vision.git
+	url = git@github.com:daniellpsilva1/ppd_vision.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/AcademiesPresentation"]
 	path = PeakPerformanceDataMarketing/AcademiesPresentation
-	url = https://github.com/daniellpsilva1/ppd-academies-presentation.git
+	url = git@github.com:daniellpsilva1/ppd-academies-presentation.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/AI Videos"]
 	path = PeakPerformanceDataMarketing/AI Videos
-	url = https://github.com/daniellpsilva1/ppd-ai-videos.git
+	url = git@github.com:daniellpsilva1/ppd-ai-videos.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/Manim"]
 	path = PeakPerformanceDataMarketing/Manim
-	url = https://github.com/daniellpsilva1/ppd-manim.git
+	url = git@github.com:daniellpsilva1/ppd-manim.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/Remotion"]
 	path = PeakPerformanceDataMarketing/Remotion
-	url = https://github.com/daniellpsilva1/ppd-remotion.git
+	url = git@github.com:daniellpsilva1/ppd-remotion.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/courtviz"]
 	path = PeakPerformanceDataMarketing/courtviz
-	url = https://github.com/daniellpsilva1/ppd-courtviz.git
+	url = git@github.com:daniellpsilva1/ppd-courtviz.git
 [submodule "PeakPerformanceData/swingvision-pipeline"]
 	path = PeakPerformanceData/swingvision-pipeline
-	url = https://github.com/daniellpsilva1/swingvision-pipeline.git
+	url = git@github.com:daniellpsilva1/swingvision-pipeline.git
 	branch = main
 [submodule "PeakPerformanceData/ppd_research_papers"]
 	path = PeakPerformanceData/ppd_research_papers
-	url = https://github.com/daniellpsilva1/ppd_research_papers.git
+	url = git@github.com:daniellpsilva1/ppd_research_papers.git
 	branch = main
 [submodule "PeakPerformanceData/ppp_ai_agent"]
 	path = PeakPerformanceData/ppp_ai_agent
-	url = https://github.com/daniellpsilva1/ppp_ai_agent.git
+	url = git@github.com:daniellpsilva1/ppp_ai_agent.git
 	branch = main
 [submodule "PeakPerformanceDataMarketing/ThreeJS"]
 	path = PeakPerformanceDataMarketing/ThreeJS
-	url = https://github.com/daniellpsilva1/ppd-threejs.git
+	url = git@github.com:daniellpsilva1/ppd-threejs.git
 	branch = main
