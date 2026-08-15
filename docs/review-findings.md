@@ -243,9 +243,12 @@ The monorepo uses git submodules. Ensure `git clone --recursive` is used when cl
 
 The `courtviz` package is vendored into the frontend from `PeakPerformanceDataMarketing/courtviz/`. Updates to the marketing project's courtviz need to be manually synced to the vendor directory.
 
-### I-3: Two Supabase migration counts (49 vs 56)
+### I-3: Migration count has grown significantly
 
-The system memory mentions 49 migrations, but the directory listing shows 56 files. This is likely due to migrations being added over time. The `database.types.ts` may be out of date with the latest migrations.
+The directory now contains 75 migration files (up from 49/56 in earlier reviews). The `database.types.ts` may be out of date with the latest migrations. Regenerate via:
+```bash
+npx supabase gen types typescript --project-id bcfwtgqvusjhlrqsztod > src/lib/supabase/database.types.ts
+```
 
 ### I-4: Marketing projects are independent repos
 
@@ -263,17 +266,33 @@ This appears to be AI-assistant memory files (possibly from Claude or another to
 
 Neither backend has API versioning beyond the `/api/v1/` prefix on extraction backend routes. The `ppd_backend` has no version prefix at all. Breaking changes would affect all consumers simultaneously.
 
-### I-7: Frontend has 80+ API route handlers
+### I-7: Frontend has 65+ API route directories
 
 **Directory**: `PeakPerformanceData/peak_performance_data/src/app/api/`
 
-The BFF layer has approximately 80 API route handlers. This is a large surface area that could benefit from code generation or a more structured approach (e.g., tRPC or generated routes from OpenAPI spec).
+The BFF layer has 65+ API route directories containing approximately 200+ individual route handlers. This is a large surface area that could benefit from code generation or a more structured approach (e.g., tRPC or generated routes from OpenAPI spec).
 
 ### I-8: `vercel.json` has cron jobs but no visible cron auth verification
 
 **File**: `PeakPerformanceData/peak_performance_data/vercel.json`
 
 Cron jobs are defined but authentication relies on `CRON_API_KEY` / `CRON_SECRET_KEY` environment variables. Ensure these are checked in every cron-invoked route handler.
+
+### I-9: Stripe SDK not in package.json
+
+**File**: `PeakPerformanceData/peak_performance_data/package.json`
+
+The Stripe SDK is not listed as a dependency. B2C payment integration has subscription columns on `profiles` and a `/api/stripe/` route directory (3 items), but the actual Stripe SDK integration is not yet started. A pre-existing type error exists in `src/app/api/stripe/webhook/route.ts:71` (`current_period_end` does not exist on Stripe SDK v22 `Subscription` type).
+
+### I-10: `get_subject_entitlement` RPC does not exist
+
+Needed for Stripe entitlement checks, this RPC has not been created yet. It must exclude personal orgs from the org-seat fallback per the B2C plan.
+
+### I-11: Pre-existing build blocker in Stripe webhook route
+
+**File**: `PeakPerformanceData/peak_performance_data/src/app/api/stripe/webhook/route.ts:71`
+
+Type error: `current_period_end` does not exist on Stripe SDK v22 `Subscription` type. The build succeeds with `typescript.ignoreBuildErrors: true` in `next.config.js` (temporarily enabled).
 
 ---
 
@@ -285,8 +304,8 @@ Cron jobs are defined but authentication relies on `CRON_API_KEY` / `CRON_SECRET
 | High | 4 |
 | Medium | 8 |
 | Low | 9 |
-| Info | 8 |
-| **Total** | **30** |
+| Info | 11 |
+| **Total** | **33** |
 
 ### Top priorities:
 1. **Rotate all secrets** exposed in `.env.local` (C-1)
@@ -294,3 +313,17 @@ Cron jobs are defined but authentication relies on `CRON_API_KEY` / `CRON_SECRET
 3. **Move rate limiting to Redis** for multi-worker correctness (H-2)
 4. **Fix bare except clauses** in graph routes (H-3)
 5. **Fix Supabase client mutation** in database config (H-4)
+
+### Additional findings (Aug 2026 review):
+6. **Regenerate `database.types.ts`** — 75 migrations in folder, types file may be stale (I-3)
+7. **Stripe SDK not installed** — B2C payment integration not started, subscription columns exist on profiles (I-9)
+8. **`get_subject_entitlement` RPC missing** — needed for Stripe entitlement checks (I-10)
+9. **Pre-existing type error** in Stripe webhook route — build uses `ignoreBuildErrors: true` workaround (I-11)
+
+### Positive findings:
+- **RLS fully hardened**: 69 tables, all RLS-enabled, SECURITY DEFINER functions, search path hardened, RPC grants revoked
+- **B2C flow code-complete**: Personal orgs, consent events, rate limiting, GDPR cleanup — all deployed to prod
+- **Performance optimized**: All bundle budgets passing, locale-aware routing, virtualized lists, ISR
+- **Middleware parallelized**: Brand + auth run concurrently, session validation cached for 30 min
+- **Dashboard SSR seeding**: Eliminates loading spinners via SWR fallbackData pattern
+- **Cold start optimization**: Pervasive lazy imports in both backends

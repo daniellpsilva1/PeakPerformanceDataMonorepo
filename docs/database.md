@@ -10,8 +10,9 @@ The platform uses two database systems:
 ## Supabase (PostgreSQL)
 
 **URL**: `https://bcfwtgqvusjhlrqsztod.supabase.co`
-**Migrations**: `PeakPerformanceData/peak_performance_data/supabase/migrations/` (56 SQL files)
+**Migrations**: `PeakPerformanceData/peak_performance_data/supabase/migrations/` (75 SQL files)
 **Type definitions**: `PeakPerformanceData/peak_performance_data/src/lib/supabase/database.types.ts` (4373 lines)
+**Prod state**: 69 public tables, all RLS-enabled. Latest prod migration: 20260819 (processed_webhooks).
 
 ### Core Tables
 
@@ -28,6 +29,15 @@ User profiles. Central to the entire system.
 | role | text | `player`, `coach`, `parent`, `club_admin` |
 | organization_id | uuid (FK) | → organizations.id |
 | is_club_admin | bool | |
+| onboarding_completed | bool | Whether user completed onboarding |
+| onboarding_focus | text[] | Onboarding focus areas |
+| first_touch_utm | json | First-touch UTM attribution |
+| last_touch_utm | json | Last-touch UTM attribution |
+| signup_source | text | Signup source (organic, referral, etc.) |
+| subscription_status | text | Stripe subscription status |
+| subscription_plan | text | Stripe plan ID |
+| subscription_current_period_end | timestamptz | Subscription period end |
+| subscription_cancel_at_period_end | bool | Whether subscription cancels at period end |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
 
@@ -44,9 +54,9 @@ Multi-tenant organization (academy/club).
 | slug | text | URL-friendly identifier |
 | domain | text | Custom domain for brand resolution |
 | type | text | |
-| admin_user_id | uuid (FK) | → profiles.id |
-| brand_colors | json | Custom brand colors |
-| logo_url | text | |
+| admin_user_id | uuid (FK) | → profiles.id (org admin) |
+| brand_colors | json | Custom brand colors (primary, secondary, accent) |
+| logo_url | text | Organization logo URL |
 | is_personal | bool | Personal vs. org account |
 | created_at | timestamptz | |
 | updated_at | timestamptz | |
@@ -349,7 +359,8 @@ Tennis match tracking with full scorekeeper support. Created via migrations incl
 | `coach_observations` | Coach observations on athletes (with linked sessions/tournaments) |
 | `coach_player_assignments` | Coach-player mapping within organizations |
 | `coach_requests` / `member_requests` | Role upgrade / membership requests |
-| `consent_events` | GDPR consent tracking |
+| `consent_events` | GDPR consent tracking (action, actor_id, policy_version, jurisdiction, legal_basis, data_categories, purpose_codes) |
+| `rate_limits` | DB-backed rate limiting (key, count, window_start) — RLS deny-all, only accessible via SECURITY DEFINER RPC |
 | `fetch_status` | Wearable data fetch progress |
 | `garmin_connect_accounts` | Garmin account credentials (encrypted) |
 | `garmin_sync_jobs` | Garmin sync job tracking |
@@ -360,14 +371,36 @@ Tennis match tracking with full scorekeeper support. Created via migrations incl
 | `player_goals` | Player goal tracking with badges |
 | `admin_logs` | Admin action audit log |
 | `auth_tokens` | Custom auth tokens (invitations, etc.) |
+| `tennis_bench_features` | Tennis bench test features and configuration |
+| `tennis_match_share_links` | Shareable links for tennis matches |
+| `user_streaks` | User activity streaks (daily/weekly) |
+| `tennis_match_achievements` | Match-specific achievement tracking |
+| `processed_webhooks` | Deduplication table for processed webhook payloads |
+| `genetics_profiles` | Genetic profile data |
+| `lab_panels` | Lab test panel definitions and results |
+| `insight_store` | AI-generated insight storage |
+| `user_feedback` | User feedback submissions |
+| `court_coordination` | Court scheduling and coordination |
+| `player_groups` | Player group definitions |
+| `player_group_members` | Player group memberships |
+| `shock_microcycles` | Shock microcycle training records |
+| `series_training_sessions` | Series training session definitions |
+| `action_items` | Action item tracking |
+| `notification_settings` | User notification preferences |
 
 ### Row Level Security (RLS)
 
-56 migrations include RLS policy definitions. Key patterns:
+75 migrations include RLS policy definitions. Key patterns:
 - Organization-scoped tables enforce `organization_id = (select org_id from profiles where id = auth.uid())`
 - Profile-scoped tables enforce `user_id = auth.uid()` or `athlete_id = auth.uid()`
 - Coach/admin access via role checks on profiles
 - Multiple migrations address RLS recursion fixes (6 parts)
+- SECURITY DEFINER functions for privileged operations (create_personal_organization, check_and_increment_rate_limit, cleanup_user_data, get_player_dashboard_init, get_full_user_context, etc.)
+- Auth hook strips `role` from `user_metadata` to prevent privilege escalation (migration `20260803_auth_hook_strip_role_metadata.sql`)
+- RLS security hardening (migration `20260804_rls_security_fix.sql`, 36KB) — converts functions to SECURITY DEFINER to avoid RLS recursion
+- Search path hardening (migration `20260816_harden_search_path.sql`) — sets `search_path = public, extensions` on all functions
+- RPC grants revoked from anon/authenticated where not needed (migration `20260816_revoke_rpc_grants.sql`)
+- Organizations public brand lookup (migration `20260815_organizations_brand_lookup_public.sql`) — exposes only branding columns without auth
 
 ---
 
@@ -514,7 +547,7 @@ Tracks which providers each user has connected.
 ### Supabase Migrations
 
 **Location**: `PeakPerformanceData/peak_performance_data/supabase/migrations/`
-**Count**: 56 files
+**Count**: 75 files
 
 Key migrations (chronological):
 1. Account claims and invitation system
@@ -531,6 +564,17 @@ Key migrations (chronological):
 12. Genetics tracking
 13. Insight store
 14. Lab panels
+15. B2C onboarding (is_personal orgs, consent_events, auth hook, rate_limits)
+16. RLS security hardening (SECURITY DEFINER conversions, search path, RPC grants)
+17. create_personal_organization RPC
+18. GDPR cleanup_user_data RPC
+19. UTM/signup source attribution on profiles
+20. User streaks and tennis match achievements
+21. Subscription columns on profiles (Stripe)
+22. Processed webhooks deduplication table
+23. Performance tests write RLS
+24. Tennis bench features RLS fixes
+25. Coach personal org migration fix
 
 ### ClickHouse Migrations
 
@@ -582,4 +626,21 @@ profiles (1) ──< ai_conversations (N)
 profiles (1) ──< ai_memories (N)
 profiles (1) ──< garmin_connect_accounts (1)
 garmin_connect_accounts (1) ──< garmin_sync_jobs (N)
+profiles (1) ──< consent_events (N)
+profiles (1) ──< user_streaks (N)
+profiles (1) ──< tennis_match_achievements (N)
+organizations (1) ──< tennis_bench_features (N)
 ```
+
+### Key RPCs
+
+| RPC | Security | Purpose |
+|-----|----------|---------|
+| `create_personal_organization` | SECURITY DEFINER, anon+authenticated+service_role | Creates personal org for B2C users (idempotent) |
+| `create_organization_with_admin` | SECURITY DEFINER | Creates org with admin user |
+| `check_and_increment_rate_limit` | SECURITY DEFINER, authenticated only | Atomic rate limit check and increment |
+| `cleanup_user_data` | SECURITY DEFINER, service_role only | GDPR deletion across 60+ table pairs |
+| `get_player_dashboard_init` | SECURITY DEFINER | Player dashboard data (concurrent queries) |
+| `get_full_user_context` | SECURITY DEFINER | Full user context for AI agent |
+| `get_athletes_readiness_batch` | SECURITY DEFINER | Batch readiness data for coach athletes matrix |
+| `get_coach_dashboard_init` | SECURITY DEFINER | Coach dashboard initialization data |

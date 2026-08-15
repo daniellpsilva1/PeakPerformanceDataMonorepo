@@ -43,10 +43,10 @@ PeakPerformanceDataMonorepo/
 | `src/lib/calculations/` | Benchmarks, injury risk, readiness, training load |
 | `src/lib/dashboard/` | Dashboard init functions (coach, player, parent) |
 | `src/lib/communication/` | Email, WhatsApp, feedback notifications |
-| `src/middleware.ts` | Request pipeline: i18n → CORS → brand → auth → authorization |
+| `src/middleware.ts` | Request pipeline: i18n → CORS → brand+auth (parallel) → authorization |
 | `src/config/brands/` | Multi-brand configuration (colors, logos, features) |
-| `src/services/` | Brand service, domain resolution |
-| `supabase/migrations/` | 56 SQL migrations |
+| `src/services/` | Brand service, domain resolution with in-memory cache |
+| `supabase/migrations/` | 75 SQL migrations |
 | `vendor/courtviz/` | Vendored tennis court visualization package |
 | `tests/` | 94 items — Vitest + Testing Library + MSW |
 
@@ -63,6 +63,79 @@ PeakPerformanceDataMonorepo/
 **Data fetching**: SWR with network-aware overrides (fast/slow/offline), per-user sessionStorage cache persistence, debounced writes.
 
 **PWA**: `next-pwa` with custom service worker, runtime caching strategies, push notification support.
+
+#### Middleware Pipeline
+
+**File**: `src/middleware.ts` (251 lines) — orchestrates all middleware in a specific order:
+
+1. **i18n** (`src/middleware/intl.ts`) — next-intl locale redirect/handling for 4 locales (en, es, zh, ca)
+2. **CORS** (`src/middleware/cors.ts`) — handles OPTIONS preflight and sets CORS headers
+3. **Social crawler detection** — Rewrites `/watch/{token}` and `/tennis-bench/{slug}` paths to social OG endpoints for crawler user agents (Facebook, WhatsApp, Twitter, LinkedIn, Slack, Telegram, Discord, Pinterest)
+4. **Static file early return** — Skips `_next`, `_vercel`, `api/`, files with dots, favicon
+5. **Brand + Auth (parallelized)** — `handleBrand()` and `supabase.auth.getSession()` run concurrently via `Promise.all()` to save ~200ms on cold starts
+6. **Session validation** — `getUser()` called in parallel with `handleAuth()` only if session validation cookie (`ppd-session-validated`) is stale (30-min TTL). Skips redundant GoTrue round-trip for in-session navigation.
+7. **Authorization** (`src/middleware/authorization.ts`) — Role-based path gating using DB profile role (not client-writable `user_metadata.role`). Personal-mode users blocked from org-only routes.
+
+**Route classification** (`src/middleware/routes.ts`):
+- **Protected**: `/admin`, `/charts`, `/club-admin`, `/coach`, `/feedback`, `/genetics`, `/history`, `/labs`, `/management`, `/messages`, `/overview`, `/parent`, `/performance-tests`, `/player`, `/profile`, `/settings`, `/tennis-scorekeeper`
+- **Auth-only**: `/login`, `/signup` (redirect to dashboard if already authenticated)
+- **Public**: `/`, `/accept-invitation`, `/claim-account`, `/confirm-email`, `/forgot-password`, `/privacy-policy`, `/reset-password`, `/tennis-bench`, `/watch`
+
+**Profile cache** (`src/middleware/auth.ts`): Map-based LRU cache (500 entries, 30-min TTL) for profile data (role, orgId, orgName, isOrgAdmin, isPersonal). Cache invalidation via `x-invalidate-profile-cache` header or `ppd-inv-cache` cookie.
+
+#### Multi-Brand White-Label System
+
+**BrandConfig interface** (`src/config/brands/types.ts`):
+
+Defines brand identity with colors (primary, secondary, accent, optional background), assets (logo URLs, favicon, icon settings), and feature flags (ai, charts, genetics, labs, messaging, videoAnalysis, wearables, monthly quotas, historyDepthDays, athleteSeats, advancedMetrics, export, tier).
+
+**Brand resolution pipeline**:
+1. **Middleware** (`src/middleware/brand.ts`) — Resolves brand by domain on every request. In-memory LRU cache (5-min TTL). Known dev/preview domains short-circuit to default brand. For production domains, queries Supabase `organizations` table by domain using service role key. Merges org brand colors with defaults. Sets brand info in response headers (`x-middleware-brand-id`, `x-middleware-brand-config`).
+2. **Layout** (`src/app/[locale]/layout.tsx`) — Retrieves brand config from middleware headers. Falls back to DB query if headers missing. Caches brand config per request to avoid duplicate queries.
+3. **Brand service** (`src/services/brand-service.ts`) — Domain-based brand lookup with caching and concurrency deduplication. Merges partial DB brand colors with defaults. Returns `BrandConfig` or default brand for known domains.
+4. **Default brand** (`src/config/brands/default.ts`) — Fallback brand config with default colors and all features enabled.
+
+**Organization brand lookup** is public via a SECURITY DEFINER function (migration `20260815_organizations_brand_lookup_public.sql`) that exposes only `slug`, `domain`, `brand_colors`, `logo_url`, `name` for brand resolution without authentication.
+
+#### Dashboard Data Loading Architecture
+
+The frontend uses an SSR seeding pattern: server components fetch initial data and pass it as `fallbackData` to client-side SWR hooks. This eliminates loading spinners on first paint while keeping data fresh via SWR revalidation.
+
+**Coach dashboard** (`src/lib/dashboard/coach-init.ts`):
+- `fetchCoachDashboardInit()` — Concurrent fetch of: profile, coach-player assignments, pending coach/member requests (org-scoped), coach observations (limit 100). Enriches requests with user profiles. Fetches readiness matrix concurrently.
+- **Athletes matrix** (`src/lib/dashboard/coach-athletes-matrix.ts`) — Builds readiness + injury risk matrix. Fetches readiness snapshots with timeout budget. Merges batch RPC data with wearable snapshots.
+- **Matrix fetch** (`src/lib/dashboard/coach-matrix-fetch.ts`) — Fetches coach athlete assignments, calls batch RPC for readiness data, enriches with profiles.
+
+**Player dashboard** (`src/lib/dashboard/player-init.ts`):
+- `fetchPlayerDashboardInit()` — Concurrent fetch of: player dashboard RPC, training data, readiness snapshot (with timeout), tennis tests. Transforms raw data into structured overview, calendar, readiness, and tennis tests data. Returns `partial: true` flag if readiness timed out.
+- **Readiness snapshot** (`src/lib/dashboard/readiness-snapshot.ts`) — Fetches and processes readiness data. Extracts latest numeric values from graph data. Derives fallback readiness scores from various health metrics (HRV, sleep, stress, body battery).
+
+**Timeout pattern**: Readiness snapshot fetch uses `Promise.race()` with a budget (typically 3-5s) to avoid blocking UI. If it times out, the dashboard renders with partial data and the client fetches readiness asynchronously.
+
+#### Performance Optimization
+
+**Bundle budgets** (all passing, enforced by `scripts/check-bundle-budgets.js`):
+
+| Route | First Load JS | Budget | Headroom |
+|-------|--------------|--------|----------|
+| /[locale]/player | 266 KB | 350 KB | 84 KB |
+| /[locale]/coach | 115 KB | 350 KB | 235 KB |
+| /[locale]/parent | 115 KB | 300 KB | 185 KB |
+| /[locale]/charts | 239 KB | 400 KB | 161 KB |
+| /[locale]/management | 147 KB | 350 KB | 203 KB |
+| /[locale]/coach/tennis-analytics | 272 KB | 450 KB | 178 KB |
+
+Shared by all: 105 KB. Verification: `ANALYZE=true pnpm build` + `node scripts/check-bundle-budgets.js`.
+
+**Optimization phases completed**:
+- Phase 2: 58 files migrated to locale-aware routing
+- Phase 3: ISR, scorekeeper payload optimization, training SSR cap, skeleton loading
+- Phase 4: next/image conversions, landing transition fixes
+- Phase 5: `select('*')` replaced with explicit column selects in API routes
+- Phase 6: courtviz sideEffects added
+- Phase 7: Lists virtualized, providers stabilized
+- Phase 8: Landing page smoothness improvements
+- Phase 9: All routes verified within budget
 
 #### Supabase Authentication & signUp Flow
 
@@ -331,7 +404,7 @@ Connection management with auto-reconnect and chunked inserts:
 │  training, tennis,  │  │  Weekly pace      │  │  Provider sync           │
 │  AI conversations,  │  │  Airtable upload  │  │  OW→ClickHouse sync      │
 │  achievements, etc. │  │                   │  │                          │
-│  56 migrations      │  │  Port 8000        │  │  Port 8080               │
+│  75 migrations      │  │  Port 8000        │  │  Port 8080               │
 │  RLS policies       │  │                   │  │                          │
 └─────────────────────┘  └───────┬──────────┘  └───────┬──────────────────┘
                                  │                      │
@@ -390,4 +463,5 @@ Connection management with auto-reconnect and chunked inserts:
 - **Cold start optimization**: Lazy imports throughout both backends — heavy libraries (pandas, numpy, plotly, boto3) deferred to first use
 - **i18n**: next-intl with 4 locales (en, es, zh, ca), translation files in `messages/`
 - **PWA**: Service worker with NetworkFirst caching, push notifications, offline support
-- **Security**: Supabase RLS, JWT verification, internal service secrets, Fernet encryption for Garmin passwords, Cloudflare Turnstile captcha on signup
+- **Security**: Supabase RLS (69 tables, all RLS-enabled), JWT verification, internal service secrets, Fernet encryption for Garmin passwords, Cloudflare Turnstile captcha on signup, SECURITY DEFINER functions for privileged operations, consent event tracking (GDPR Art. 6), rate limiting (DB-backed for AI agent, in-memory for API), personal data cleanup RPC (60+ table pairs)
+- **B2C flow**: Personal organizations (`organizations.is_personal`) for solo users, `create_personal_organization` RPC (SECURITY DEFINER, idempotent), `check_and_increment_rate_limit` RPC, `cleanup_user_data` RPC for GDPR deletion, Stripe subscription columns on profiles, UTM/signup source attribution tracking

@@ -93,7 +93,7 @@ npx supabase start            # Start local Supabase stack
 npx supabase db reset         # Reset and apply all migrations
 ```
 
-Migration files: `PeakPerformanceData/peak_performance_data/supabase/migrations/` (56 files).
+Migration files: `PeakPerformanceData/peak_performance_data/supabase/migrations/` (75 files).
 
 ### Deploy to Vercel
 
@@ -405,6 +405,15 @@ npm test             # Vitest
 | `CRON_API_KEY` | Yes | Cron job authentication |
 | `CRON_SECRET_KEY` | Yes | Cron job secret |
 | `ADMIN_EMAIL` | Yes | Admin email for notifications |
+| `TURNSTILE_SECRET_KEY` | No | Cloudflare Turnstile captcha secret |
+| `STRIPE_SECRET_KEY` | No | Stripe API secret (B2C payments) |
+| `STRIPE_WEBHOOK_SECRET` | No | Stripe webhook signing secret |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | No | Stripe publishable key (client-side) |
+| `POSTHOG_KEY` | No | PostHog analytics project key |
+| `CLOUDFLARE_R2_ACCOUNT_ID` | No | Cloudflare R2 storage account ID |
+| `CLOUDFLARE_R2_ACCESS_KEY_ID` | No | R2 access key |
+| `CLOUDFLARE_R2_SECRET_ACCESS_KEY` | No | R2 secret key |
+| `CLOUDFLARE_R2_BUCKET_NAME` | No | R2 bucket name |
 
 ### ppd_backend (`.env`)
 
@@ -425,6 +434,28 @@ npm test             # Vitest
 ### ppd_extraction_backend (`.env`)
 
 See `PeakPerformanceData/ppd_extraction_backend/.env.example` for complete reference.
+
+## Performance Verification
+
+```bash
+# Bundle budget enforcement
+cd PeakPerformanceData/peak_performance_data
+node scripts/check-bundle-budgets.js
+
+# Production build with bundle analyzer
+ANALYZE=true pnpm build
+
+# Lint and typecheck
+pnpm lint
+pnpm typecheck
+```
+
+## Database Type Regeneration
+
+```bash
+cd PeakPerformanceData/peak_performance_data
+npx supabase gen types typescript --project-id bcfwtgqvusjhlrqsztod > src/lib/supabase/database.types.ts
+```
 
 ---
 

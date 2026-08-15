@@ -1,6 +1,6 @@
 # API Reference
 
-This document covers all backend API endpoints across the three services. Frontend Next.js API routes (~80 handlers) are not exhaustively listed here — they serve as a BFF layer and proxy to the backends below.
+This document covers all backend API endpoints across the three services plus a comprehensive listing of the Next.js BFF route directories.
 
 ## Service URLs
 
@@ -255,20 +255,68 @@ The OW sync service is not exposed via HTTP routes — it runs internally via th
 | `withOrgMemberAuth` | Org membership verified | 30s |
 | `withAuthAndProfile` | Authenticated + profile injected | 30s |
 
-### Other Key Routes
+### Complete BFF Route Directory
 
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| GET/POST | `/api/achievements/*` | Session | Achievement definitions and player achievements |
-| GET/POST | `/api/alerts/*` | Session | Alert definitions and triggered alerts |
-| GET/POST | `/api/competitions/*` | Session | Competition results |
-| GET/POST | `/api/goals/*` | Session | Player goals CRUD |
-| GET/POST | `/api/hiit-trainings/*` | Session | HIIT training records |
-| GET/POST | `/api/injuries/*` | Session | Injury tracking |
-| GET/POST | `/api/observations/*` | Session | Coach observations |
-| GET/POST | `/api/organizations/*` | Session | Organization management |
-| GET/POST | `/api/training-sessions/*` | Session | Training session management |
-| GET/POST | `/api/tournaments/*` | Session | Tournament management |
+All 65+ route directories under `src/app/api/`:
+
+| Directory | Items | Purpose |
+|-----------|-------|---------|
+| `achievements/` | 2 | Achievement definitions and player achievements |
+| `action-items/` | 1 | Action item management |
+| `admin/` | 10 | Admin operations (logs, feedback, tennis-bench) |
+| `ai-agent/` | 11 | AI chat agent with conversation memory |
+| `alerts/` | 4 | Alert definitions and triggered alerts |
+| `athletes/` | 10 | Athlete management and queries |
+| `auth/` | 7 | Auth operations (create-member-request, create-coach-request, etc.) |
+| `claim-account/` | 1 | Account claiming for minor/invited users |
+| `coach/` | 2 | Coach-specific operations |
+| `coaches/` | 3 | Coach management |
+| `competitions/` | 1 | Competition results |
+| `conversations/` | 8 | AI conversation history and management |
+| `court-plan/` | 4 | Court coordination and planning |
+| `courts/` | 3 | Court management |
+| `cron/` | 2 | Cron job endpoints (garmin sync, data processing) |
+| `dashboard/` | 22 | Dashboard init for all roles + athletes matrix + sub-dashboards |
+| `download/` | 1 | Data export/download |
+| `feedback/` | 3 | User feedback submission and history |
+| `garmin-connect/` | 13 | Garmin Connect proxy (OAuth, sync, status, disconnect, data) |
+| `hiit-trainings/` | 1 | HIIT training records |
+| `injuries/` | 1 | Injury tracking |
+| `invitation-requests/` | 1 | Invitation request management |
+| `invitations/` | 3 | Invitation accept, setup-password, list |
+| `management/` | 1 | Management dashboard operations |
+| `manifest/` | 1 | PWA manifest |
+| `messages/` | 2 | Messaging between users |
+| `notifications/` | 2 | Push notification management |
+| `observations/` | 2 | Coach observations |
+| `organizations/` | 14 | Organization CRUD, branding, members, invitations |
+| `parent/` | 7 | Parent-specific operations (children, progress) |
+| `parent-child-relationships/` | 4 | Parent-child linking |
+| `parents/` | 1 | Parent management |
+| `performance-tests/` | 3 | Physical performance tests |
+| `personal-tournaments/` | 2 | Personal tournament records |
+| `personal-trainings/` | 2 | Personal training records |
+| `player-groups/` | 3 | Player group management |
+| `players/` | 3 | Player queries |
+| `ppc-proxy/` | 1 | Proxy to ppd_backend (avoids CORS) |
+| `providers/` | 5 | Generic provider management (Polar, Whoop, Suunto) |
+| `pwa-icon/` | 1 | PWA icon generation |
+| `reports/` | 5 | Report generation and export |
+| `series-training-sessions/` | 1 | Series training sessions |
+| `shock-microcycles/` | 1 | Shock microcycle training |
+| `splash/` | 1 | Splash screen data |
+| `stripe/` | 3 | Stripe webhook and billing endpoints |
+| `tennis/` | 21 | Tennis match CRUD, scorekeeper, SwingVision import, stats |
+| `tennis-bench/` | 4 | Tennis bench tests, posts, social sharing |
+| `tournaments/` | 5 | Tournament management |
+| `training-plans/` | 2 | Training plan management |
+| `training-sessions/` | 3 | Training session management |
+| `transcribe/` | 1 | Audio transcription |
+| `transitions/` | 1 | Transition data |
+| `upload/` | 2 | File upload endpoints |
+| `user/` | 7 | User profile, settings, context |
+| `vision-proxy/` | 1 | Proxy for vision/video analysis |
+| `watch/` | 3 | Live match watch links and social OG |
 
 ---
 
@@ -290,6 +338,43 @@ Public paths exempt: `/health`, `/`, `/docs`, `/openapi.json`, `/redoc`
 |-------|-------|
 | Standard user | 50 req/hour |
 | Personal account | 20 req/hour |
+
+### Supabase DB-backed (`check_and_increment_rate_limit` RPC)
+
+Used by the AI agent for persistent, multi-worker rate limiting. The RPC is a SECURITY DEFINER function that atomically checks and increments a counter in the `rate_limits` table.
+
+## Internal Service APIs
+
+### Graph Factory (`data_processing/factories/graph_factory.py`)
+
+| Method | Parameters | Description |
+|--------|-----------|-------------|
+| `create_graph(graph_type, user_id, **kwargs)` | `graph_type`, `user_id`, `weeks_back`, `days_back` | Creates and executes a graph generator, returns dict with figure, data, layout, config, metadata |
+| `list_available_graphs()` | — | Returns categorized graph types with display names |
+| `data_processor` (property) | — | Lazily initializes `GraphDataProcessor` on first access |
+
+### Graph Registry (`data_processing/base/graph_registry.py`)
+
+| Method | Parameters | Description |
+|--------|-----------|-------------|
+| `register(graph_class)` | `graph_class` | Registers a graph generator class by instantiating with `None` to get `graph_type` |
+| `get_generator(graph_type, data_processor)` | `graph_type`, `data_processor` | Returns generator instance for the given graph type |
+| `is_registered(graph_type)` | `graph_type` | Checks if a graph type is registered |
+| `list_available_graphs()` | — | Returns list of `{graph_type, display_name, category}` |
+| `_ensure_discovered()` | — | Thread-safe lazy auto-discovery of graph generators from `graphs/` directory |
+| `_auto_discover_graphs()` | — | Imports all modules in `graphs/` subdirectories, triggers registration |
+
+### Graph Data Processor (`data_processing/base/graph_data_processor.py`)
+
+| Method | Parameters | Description |
+|--------|-----------|-------------|
+| `load_activity_data(user_id, days_back, ...)` | `user_id`, `days_back=90` | Loads activity data from ClickHouse with 30s cache |
+| `load_activity_summaries(user_id, days_back, ...)` | `user_id`, `days_back=90` | Loads daily activity summaries from ClickHouse |
+| `load_sleep_summaries(user_id, days_back, ...)` | `user_id`, `days_back=90` | Loads sleep summaries from ClickHouse |
+| `load_hrv_from_garmin_table(user_id, days_back, ...)` | `user_id`, `days_back=90` | Loads HRV data from Garmin table |
+| `load_timeseries_data(user_id, metric, days_back, ...)` | `user_id`, `metric`, `days_back` | Loads timeseries data for a specific metric |
+
+**Query cache** (`_QueryCache`): Thread-safe single-flight semantics. When a query is in progress, concurrent requests for the same key block until the producer completes. TTL: 30 seconds. Key format: `{user_id}:{query_type}:{params_hash}`.
 
 ## CLI Commands (Extraction Backend)
 
