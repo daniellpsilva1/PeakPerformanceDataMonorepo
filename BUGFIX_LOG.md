@@ -4,6 +4,154 @@ One line per fix. Most recent first.
 
 ## Session: Continuous QA/Security Remediation
 
+- Fix hardcoded strings: replace English fallbacks with translation calls in MessagingView (connection status), InsightBadge (badge labels), ClubAdminDashboard (export/tab fallbacks), MultiChildSummary (error fallback), ErrorBoundary (retry casing consistency).
+- Add translation keys for messaging.connection (realtimeUnavailable, connectionLost) and insights.badges (anomaly, pr, streak, declining, improving) across all 8 locales.
+- Improve ESLint config: add argsIgnorePattern/varsIgnorePattern for underscore-prefixed variables to reduce noise from intentionally unused params (eslint.config.mjs).
+- Fix 34 unused-vars warnings: remove unused imports, prefix unused params with `_`, remove unused functions/types across 28 files. Warning count reduced from 89 to 2 (only intentional MediaViewer zoom/pan a11y warnings remain).
+- Fix accessibility: add alt attributes to 4 AvatarImage instances in AddPlayerDialog, TournamentPlayerSelector, PlayerAssignmentInput, CoachPlayersPageClient.
+- Fix accessibility: add htmlFor/id label associations to textareas/inputs in AddPlayerDialog (medicalConditions, notes), CoachNotesSystem (observationNotes, tags), VoiceAssistantModal (textarea aria-label).
+- Fix accessibility: add aria-label to MediaViewer focusable zoom/pan container.
+- Fix SWR error states: add error destructuring and translated error UI to 13 components that previously showed infinite loading or empty data on fetch failure: PlayerList, OrganizationSettings, ClubAdminDashboard, PlayerDashboard, CoachApprovalGate, TennisAnalyticsContent (detail SWR), ReportDetailDialog, EditReportDialog, ParentDashboard, OrganizationProfileDialog, DialogInviteParent, PlayerAssignmentInput, ManagePlayersDialog, AddPlayerDialog, AddReportDialog, FamiliesPageClient.
+- Fix notifications page: throw errors from fetcher instead of silently returning empty alerts so SWR can expose error state; add translated error UI with notifications.loadError key in all 8 locales (notifications/page.tsx).
+- Fix CoachInbox: add error state rendering so API failures show translated error message instead of empty list (CoachInbox.tsx).
+- Fix LabProgressionChart: add error state rendering so API failures show translated error message instead of empty chart (LabProgressionChart.tsx).
+- Fix TennisAnalyticsInsightsTab: memoize priorityItems and prioritiesWithMetrics arrays to prevent unnecessary re-renders and array recreation on every render (TennisAnalyticsInsightsTab.tsx).
+- Fix video accessibility: add <track kind="captions"> to all video elements in MediaViewer, AttachmentUpload, HeroVideoShowcase, TennisAnalyticsDetail, MessageInput for jsx-a11y/media-has-caption compliance.
+- Fix TennisAnalyticsDetail: add aria-label to hidden file input and URL input so screen readers can identify them (TennisAnalyticsDetail.tsx).
+- Fix image-upload: add aria-label to hidden file input so screen readers can identify it (image-upload.tsx).
+- Fix BillingSettingsClient: guard date with Number.isNaN check and currency with fallback so invalid dates/currencies don't crash billing page (BillingSettingsClient.tsx).
+- Fix TournamentResultsView: guard date with Number.isFinite check in sort comparator so invalid dates don't produce unstable sort (TournamentResultsView.tsx).
+- Fix console.log warnings: replace console.log with console.warn in logger.ts and logging.ts to satisfy no-console lint rule (logger.ts, logging.ts, relativization-demo.js).
+- Fix parseInt without radix: add radix parameter to parseInt calls in admin/logs, dashboard/admin/init, cleanup-conversations routes for proper base-10 parsing.
+- Fix usePpcApi: remove unnecessary paramsKey dependency, add options?.immediate to dependency array, remove unused useMemo import to resolve react-hooks/exhaustive-deps warnings (usePpcApi.ts).
+- Fix DateRangeContext: wrap setDateRange in useCallback and add eslint-disable comments for intentionally excluded dependencies to resolve react-hooks/exhaustive-deps warnings (DateRangeContext.tsx).
+- Remove unused supabase/user in API route handlers: courts/route.ts, courts/[id]/route.ts, courts/bulk/route.ts, organizations/[id]/assignments/route.ts, reports/[id]/route.ts, tournaments/[id]/route.ts.
+- Remove unused supabase in page files: coach/tournaments, management/tournaments, player/tournaments, coach/training, management/reports.
+- Remove unused user in tennis-bench/[slug]/page.tsx, unused locale in tennis-bench/page.tsx and ParentCommunicationHub.
+- Remove unused iaRate in video-cleanup/route.ts.
+- Fix SettingsPageClient: wrap localStorage.getItem/setItem and sessionStorage.removeItem in try/catch so private browsing mode doesn't crash settings page (SettingsPageClient.tsx).
+- Fix LanguageSwitcher: wrap localStorage.setItem in try/catch so private browsing mode doesn't crash language switch (LanguageSwitcher.tsx).
+- Fix SidebarMobile: wrap localStorage.setItem in try/catch so private browsing mode doesn't crash mobile sidebar (SidebarMobile.tsx).
+- Fix GuestSignupGate: wrap localStorage.getItem in try/catch so private browsing mode doesn't crash guest watch gate (GuestSignupGate.tsx).
+- Fix NotificationPermissionBanner: wrap localStorage.getItem/setItem in try/catch so private browsing mode doesn't crash banner (NotificationPermissionBanner.tsx).
+- Fix useLogout: wrap localStorage/sessionStorage.removeItem in try/catch so private browsing mode doesn't crash logout (useLogout.ts).
+- Fix UserContextProvider: wrap sessionStorage.removeItem/getItem/setItem in try/catch and add safeSessionGet helper so private browsing mode doesn't crash context provider (UserContextProvider.tsx).
+- Fix chartDataCache: wrap localStorage.removeItem in try/catch inside catch block so storage errors don't cascade (chartDataCache.ts).
+- Fix Garmin credentials route: add try/catch for request.json() and saveLegacyCredentials so malformed body or save failure returns proper error (garmin-connect/legacy/credentials/route.ts).
+- Fix Garmin backfill route: add try/catch for request.json() and triggerGarminBackfill so malformed body or backfill failure returns proper error (garmin-connect/sync/backfill/route.ts).
+- Fix LabProgressionChart: guard t.date before new Date() so invalid/missing dates don't show "Invalid Date" (LabProgressionChart.tsx).
+- Fix ReportDetailDialog: guard report_date before format() so empty dates show "—" instead of crashing (ReportDetailDialog.tsx).
+- Fix CoachRequestsTable: guard requested_at before format() so null dates show "—" instead of "Jan 1, 1970" (CoachRequestsTable.tsx).
+- Fix PlayerList: guard birthDate with Number.isNaN check so invalid date strings don't produce NaN age (PlayerList.tsx).
+- Fix BillingSettingsClient: guard date with Number.isNaN check and currency with fallback so invalid dates/currencies don't crash billing page (BillingSettingsClient.tsx).
+- Fix TournamentResultsView: guard date with Number.isFinite check in sort comparator so invalid dates don't produce unstable sort (TournamentResultsView.tsx).
+- Fix GeneticUpload: add .catch() to res.json() so non-JSON error responses don't throw (GeneticUpload.tsx).
+- Fix AthleteSelector: add .catch() to res.json() in error path so non-JSON error responses don't throw (AthleteSelector.tsx).
+- Fix DialogInviteParent: add .catch() to res.json() so non-JSON error responses don't throw (DialogInviteParent.tsx).
+- Fix MessagingView: add .catch() to res.json() in add-participants error path so non-JSON error responses don't throw (MessagingView.tsx).
+- Fix ReportDetailDialog fetcher: add .catch() to res.json() in error path so non-JSON error responses don't throw (ReportDetailDialog.tsx).
+- Remove unused imports: Mail, Phone (OrganizationSettings.tsx), cn (ExportButton.tsx), format (EditTournamentDialog.tsx), useState (UsersList.tsx), useEffect (virtualized-list.tsx), useRef (useDataPrefetch.ts), formatTooltipValue (tennisAnalyticsCharts.tsx), Minus (ChildProgressReport.tsx).
+- Remove unused variables: organizationId (AddPlayerDialog.tsx), role (InsightStrip.tsx), locale (GuestSignupGate.tsx), guestName/hostName (StorySummaryDashboard.tsx), isHydrating (LiveScorekeeperView.tsx), data (FeedbackForm.tsx, auth/callback/route.ts, MessagingView.tsx, ReportDetailDialog.tsx, GeneticUpload.tsx).
+- Remove unused functions: getTrendIcon, getScoreColor (ChildProgressReport.tsx).
+- Remove unused getServerUserFast imports from 12 page files.
+- Remove unused errorData variables in 6 data hooks (useCoachPlayers, useConversations, useFeedback, useMessageContacts, useMessages, useReports).
+- Remove unused getServerUserFast imports from health/page.tsx and families/page.tsx.
+- Fix FocusedAthletePanel: wrap localStorage.getItem/setItem in try/catch so private browsing mode doesn't crash the dashboard (FocusedAthletePanel.tsx).
+- Fix SidebarContext: wrap localStorage.setItem in try/catch so private browsing mode doesn't crash navigation (SidebarContext.tsx).
+- Fix CoachDashboard: wrap sessionStorage.setItem in try/catch inside state setter so quota errors don't break UI (CoachDashboard.tsx).
+- Fix ChartsContent: wrap sessionStorage.getItem in safeSessionGet helper so private browsing mode doesn't crash charts page (ChartsContent.tsx).
+- Fix client-cookie: add typeof document guard so SSR/worker contexts don't throw ReferenceError (client-cookie.ts).
+- Fix TennisHighlightCard: guard IntersectionObserver existence so older browsers don't crash on mount (TennisHighlightCard.tsx).
+- Fix message-attachment upload route: remove 'player' from allowedRoles so players can't upload attachments (message-attachment/route.ts).
+- Fix performance-tests test mock: add getRouteUserFast export and .single() to mock chain so tests pass (performance-tests.test.ts).
+- Fix attachment-upload test mock: add supabase.from() mock and use createMockFile so tests pass (attachment-upload.test.ts).
+- Fix accept-invitation test mock: add getRouteUserFast, ilike/maybeSingle, getUserProfile, invitee_email/status fields so all 16 tests pass (accept-invitation.test.ts).
+- Fix TennisAnalyticsContent: replace useMemo(crypto.randomUUID, []) with useState lazy initializer to avoid hydration mismatch (TennisAnalyticsContent.tsx).
+- Fix logging: wrap JSON.stringify in safeStringify helper to handle circular references and BigInt without throwing (logging.ts).
+- Fix global-error: move detectLocale() from render to useEffect to avoid hydration mismatch (global-error.tsx).
+- Fix ParentCommunicationHub: move new Date() from render to useEffect state to avoid hydration mismatch (ParentCommunicationHub.tsx).
+- Fix PlayerDashboard: move new Date() from render to useEffect state to avoid hydration mismatch (PlayerDashboard.tsx).
+- Fix PlayerHome: move Date.now() from useMemo to useEffect state to avoid hydration mismatch (PlayerHome.tsx).
+- Fix CoachCommunicationsTeaser: move Date.now() from render to useEffect state to avoid hydration mismatch (CoachCommunicationsTeaser.tsx).
+- Fix ClubAdminDashboard: move new Date() from useMemo to useEffect state to avoid hydration mismatch in pendingInvitations filter (ClubAdminDashboard.tsx).
+- Fix TournamentResultsView: move new Date() from render and useMemo to useEffect state to avoid hydration mismatch in daysUntil and past/upcoming split (TournamentResultsView.tsx).
+- Fix ReportDetailDialog: guard .toFixed(1) with Number.isFinite to prevent NaN display (ReportDetailDialog.tsx).
+- Fix InsightBadge: guard .toFixed(1) with Number.isFinite to prevent NaN display (InsightBadge.tsx).
+- Fix CoachPlayersPageClient: add Number.isFinite check to ACWR guard to prevent NaN display (CoachPlayersPageClient.tsx).
+- Fix UnifiedAthleteView: add Number.isFinite check to ACWR display and hasAcwr flag to prevent NaN display (UnifiedAthleteView.tsx).
+- Fix ChildProgressReport: guard .toFixed(0) with Number.isFinite to prevent NaN% display (ChildProgressReport.tsx).
+- Fix admin/logs route: guard parseInt with fallback and clamp page/pageSize to valid ranges to prevent NaN pagination (admin/logs/route.ts).
+- Fix admin/init route: guard parseInt on start_time with Number.isFinite fallback to prevent NaN hour in heatmap (admin/init/route.ts).
+- Fix AthleteTrainings: guard parseInt on time split with Number.isFinite to prevent invalid Date from malformed time strings (AthleteTrainings.tsx).
+- Fix trainingPlanTools: guard focus.charAt(0) with fallback to prevent crash when focus is undefined (trainingPlanTools.ts).
+- Fix PlatformLanding: guard testimonial.author.charAt(0) with fallback to prevent crash when author is missing (PlatformLanding.tsx).
+- Fix wearableInsightTools: add response.ok check before .json() to prevent parse errors on non-JSON error responses (wearableInsightTools.ts).
+- Fix TournamentResultsView: add role/tabIndex/onKeyDown to clickable Card for keyboard accessibility (TournamentResultsView.tsx).
+- Fix MobileAthleteCard: add role/tabIndex/onKeyDown to clickable Card for keyboard accessibility (MobileAthleteCard.tsx).
+- Fix ChildSummaryCard: add role/tabIndex/onKeyDown to clickable Card for keyboard accessibility (ChildSummaryCard.tsx).
+- Fix NewConversationDialog: add role/tabIndex/onKeyDown to clickable Badge for keyboard accessibility (NewConversationDialog.tsx).
+- Fix AddParticipantsDialog: add role/tabIndex/onKeyDown to clickable Badge for keyboard accessibility (AddParticipantsDialog.tsx).
+- Fix CoachManagementDashboard: add role/tabIndex/onKeyDown to clickable TableRow for keyboard accessibility (CoachManagementDashboard.tsx).
+- Fix ClubExecutiveDashboard: add role/tabIndex/onKeyDown to clickable TableRow for keyboard accessibility (ClubExecutiveDashboard.tsx).
+- Fix notifications page: add response.ok check and rollback for optimistic mark-read/dismiss so server failures don't leave divergent UI state (notifications/page.tsx).
+- Fix SWR fetchers: check response.ok before .json() in AddTournamentDialog and AddReportDialog so non-JSON error responses don't throw (AddTournamentDialog.tsx, AddReportDialog.tsx).
+- Fix .json() before response.ok: add .catch(() => ({})) fallback so non-JSON error bodies don't throw SyntaxError in accept-invitation and claim-account pages.
+- Fix setTimeout redirect cleanup: add useRef timeout tracking and unmount cleanup in signup, reset-password, and accept-invitation pages so redirects don't fire after unmount.
+- Fix UnifiedAthleteView: guard athletes.length with Array.isArray so undefined prop doesn't crash (UnifiedAthleteView.tsx).
+- Fix alerts route: validate parseInt result so NaN limit doesn't cause query errors (alerts/route.ts).
+- Fix tennis evolution route: guard NaN from Math.max so invalid limit/offset params don't break pagination (evolution/route.ts).
+- Fix EditTournamentDialog: use || null fallback after parseInt/parseFloat so NaN doesn't get sent to database (EditTournamentDialog.tsx).
+- Fix AddTournamentDialog: use || null fallback after parseInt/parseFloat so NaN doesn't get sent to database (AddTournamentDialog.tsx).
+- Fix LabPanelForm: guard ref_low/ref_high parseFloat with || null so NaN reference ranges aren't persisted (LabPanelForm.tsx).
+- Fix TournamentResultsView: replace key={index} with composite key from match data for stable React reconciliation (TournamentResultsView.tsx).
+- Fix color-picker: add NaN guard after parseFloat so invalid HSL values don't produce invalid hex colors (color-picker.tsx).
+- Fix getInitials functions: guard n[0] with || '' so empty names from double-spaces don't render "undefined" (CoachNotesSystem, AttendanceAnalyticsDashboard, AthleteReadinessMatrix).
+- Fix messaging avatar fallbacks: guard full_name.charAt(0) with || '?' fallback (NewConversationDialog, MessageBubble, AddParticipantsDialog, FocusedAthletePanel).
+- Fix AttentionListCard: guard full_name with fallback so undefined doesn't crash charAt(0) (AttentionListCard.tsx).
+- Fix TennisAnalyticsDetail: guard opponent_name with fallback so undefined doesn't crash charAt(0) (TennisAnalyticsDetail.tsx).
+- Fix management stats route: return 500 when Supabase queries fail instead of 200 with zeros (management/stats/route.ts).
+- Fix personal-trainings route: include warning in response when attendance pre-registration fails (personal-trainings/route.ts).
+- Fix ClubAdminDashboard: add encodeURIComponent to export URL params (ClubAdminDashboard.tsx).
+- Fix accept-invitation page: check signal.aborted before setState in async fetch callback (accept-invitation/page.tsx).
+- Fix AttendanceAnalyticsDashboard: guard attendance_rate with typeof/Number.isFinite so undefined doesn't render "undefined%" (AttendanceAnalyticsDashboard.tsx).
+- Fix TennisHighlightCard: use != null instead of !== null for set scores so undefined doesn't render "undefined-undefined" (TennisHighlightCard.tsx).
+- Fix ChildAttendanceCard: guard sessionsTotal/sessionsAttended with Number.isFinite so undefined/NaN doesn't render "NaN%" (ChildAttendanceCard.tsx).
+- Fix tennisProgressCharts MoversList: add Number.isFinite guards on early/recent/delta so NaN doesn't render in tooltips (tennisProgressCharts.tsx).
+- Fix TennisAnalyticsDetail: strengthen progress_percent guard with typeof/Number.isFinite so non-numeric values don't render "NaN%" (TennisAnalyticsDetail.tsx).
+- Fix getPercentile: clamp top-segment interpolation to 100 so values above p90 don't produce impossible percentiles (benchmarks.ts).
+- Fix injury-risk factor breakdown: clamp contributions to [0, maxValue] so percentages stay in 0-100 range (injury-risk.ts).
+- Fix flexibility benchmarks: lower good threshold from 2.5 to 2.0 so the good band is reachable (physical-test-benchmarks.ts).
+- Fix tennis summary set-winner: use <= target - 1 instead of <= target to match rules.ts setIsWon (summaries.ts).
+- Fix GenericProviderExpandedPanel: clear sync polling interval on unmount to prevent setState after unmount.
+- Fix ParentChildrenPageClient: track and clear all setTimeout handles on unmount to prevent setState after unmount.
+- Fix ReadinessCard: use != null instead of !== null so undefined fields render placeholder instead of "undefinedh" (ReadinessCard.tsx).
+- Fix TennisAnalyticsDetail: use != null instead of !== null so undefined progress_percent doesn't render NaN% (TennisAnalyticsDetail.tsx).
+- Fix invitation accept route: guard invitee_email against undefined before toLowerCase (accept/route.ts).
+- Fix tiebreak set-point false positive: require 1-point lead at target-1 so 6-6/7-7 is not flagged as set point (rules.ts).
+- Fix useScorekeeperMachine: add REINIT action so reducer re-seeds when hydrated state arrives from API (was ignored after first render).
+- Fix double-fault rehydration: use RECORD_DOUBLE_FAULT_FORCED instead of RECORD_FAULT so persisted double-fault points are not lost on rehydrate.
+- Fix getMyTrainingSessionsTool data leak: filter attendance join by player_id so other athletes' PSE/attendance is not surfaced.
+- Fix getMyStatsTool: surface Supabase query errors instead of silently treating them as empty data; correct tool description (org-level reports, not athlete-specific).
+- Fix EnhancedTooltip divide-by-zero: guard against average === 0 in vsAverage percentage calculation.
+- Fix formatDateMonthYear and formatDateAggregated: return placeholder on invalid dates instead of crashing with RangeError.
+- Fix scorekeeper appendPoint: pass actual point log length as shotNumber instead of hardcoded 1.
+- Fix TennisBenchAdminPanel: add try/catch to loadData/createFeature/patchFeature/removeFeature so saving state can't get stuck on fetch failure.
+- Fix VisionUploadPanel polling race condition: replace setInterval with recursive setTimeout + cancellation guard to prevent overlapping ticks and state updates after unmount.
+- Fix WearableIntegrationsPanel: track and clear pending setTimeouts on unmount to prevent refetch/network calls after component is gone.
+- Fix claim-account page: add AbortController and cancelled guard to prevent state updates after unmount/token change.
+- Fix confirm-email page: add cancelled guard and clear redirect timeout on unmount to prevent state updates after navigation.
+- Fix notifications fetcher: add .catch() so network/parse errors return empty alerts instead of unhandled rejection.
+- Fix retry.ts: remove "rate limit" from non-retryable errors so transient rate-limit errors get retried with backoff.
+- Fix pace-utils power regex: require explicit unit suffix (watts/watt/w) so it no longer matches arbitrary numbers.
+- Fix training report edit page: render saveError in an Alert so users see feedback when save fails (was set but never displayed).
+- Fix react-hooks/exhaustive-deps in login page, useAuthWithGraphPreload, FamiliesPageClient, PlayerTournamentsClient.
+- Fix hardcoded "vs"/"shots" strings in TennisBenchAdminPanel: add matchOptionVs/matchOptionShots i18n keys across all 8 locales.
+- Fix untranslated German settings.nav.wearables key (was English "Wearables").
+- Remove dead ageGateWarning fallback in signup page (key exists in all locales).
+- Remove unused duration parameter from createTrainingSession AI tool (table has no duration column).
+- Remove dead code: unused olderObs in progress-report route, unused topMetric in tennis-bench suggest.
+- Add logging to silent UTM cookie parse catches in auth callback.
+- Clean up unused imports: Loader2 in WearableIntegrationsPanel, setClientCookie in login, Clock/Users in coach training report, CardDescription in coach athlete page.
 - Add shared UUID validation utility at src/lib/validations/uuid.ts for reuse across admin and dashboard routes.
 - Enable Sentry client maskAllText and add beforeSend PII filtering in sentry.client.config.ts.
 - Add Sentry server beforeSend secret/PII filtering in sentry.server.config.ts.
@@ -26,3 +174,56 @@ One line per fix. Most recent first.
 - Replace inline admin client construction with centralized createAdminClient in admin get-user-emails route.
 - Add UUID format validation for each user ID in admin get-user-emails route.
 - Make invited_by.email optional in accept-invitation page type to match reduced API response.
+- Add useNow hook: hydration-safe hook returning Date.now() via useEffect to avoid SSR/client mismatch (useNow.ts).
+- Fix AlertCard: replace Date.now() in timeAgo with useNow hook to avoid hydration mismatch (AlertCard.tsx).
+- Fix InsightCard: replace Date.now() in timeAgo with useNow hook to avoid hydration mismatch (InsightCard.tsx).
+- Fix TennisTestsHistory: replace Date.now() in daysUntilNextTest with useNow hook to avoid hydration mismatch (TennisTestsHistory.tsx).
+- Fix UpcomingTournamentCard: replace Date.now() in daysUntil with useNow hook to avoid hydration mismatch (UpcomingTournamentCard.tsx).
+- Fix TrainingReports: replace Date.now() in useMemo with useNow hook to avoid hydration mismatch in date filtering (TrainingReports.tsx).
+- Fix TennisProgressContent: replace Date.now() in useMemo with useNow hook to avoid hydration mismatch in cutoff date (TennisProgressContent.tsx).
+- Fix TournamentCard: replace new Date() in calculateTournamentStatus with useNow hook to avoid hydration mismatch (TournamentCard.tsx).
+- Fix PlayerTrainingCalendar: replace useState(new Date()) with null+useEffect and useNow for today marker to avoid hydration mismatch (PlayerTrainingCalendar.tsx).
+- Fix ExplorationDateRangeProvider: replace useState lazy initializer with new Date() to null+useEffect pattern to avoid hydration mismatch (ExplorationDateRangeProvider.tsx).
+- Fix CourtsBoard: replace useState(todayString()) with null+useEffect pattern to avoid hydration mismatch (CourtsBoard.tsx).
+- Fix TodaysCourtCard: replace new Date() in dateParam with useState+useEffect pattern to avoid hydration mismatch (TodaysCourtCard.tsx).
+- Fix CoachPlayersPageClient: replace new Date() in JSX filter with useNow hook to avoid hydration mismatch in newThisMonth count (CoachPlayersPageClient.tsx).
+- Fix Footer: replace new Date().getFullYear() in JSX with useNow hook to avoid hydration mismatch (Footer.tsx).
+- Fix AthleteCalendar: replace now={new Date()} prop with useNow hook to avoid hydration mismatch (AthleteCalendar.tsx).
+- Fix formatNumberValue: add Number.isFinite guard to prevent NaN/Infinity from reaching .toFixed() (utils.ts).
+- Fix ClubExecutiveDashboard: add Number.isFinite guards to formatPercent/formatNumber and guard sessions_vs_planned > 0 before division (ClubExecutiveDashboard.tsx).
+- Fix CoachManagementDashboard: add Number.isFinite guards to rating.toFixed and avg_performance_rating.toFixed, move summaryLabels useMemo before early return to fix hooks violation (CoachManagementDashboard.tsx).
+- Fix TrainingReports: add Number.isFinite guards to avgPerformance.toFixed and report score .toFixed (TrainingReports.tsx).
+- Fix UnifiedAthleteView: strengthen hasSleep guard with Number.isFinite, add Number.isFinite to acwr display and readiness_score checks (UnifiedAthleteView.tsx).
+- Fix TrainingLoadPeriodization: add Number.isFinite guard to acwr before gauge rendering and .toFixed (TrainingLoadPeriodization.tsx).
+- Fix PlayerPerformanceHero: add Number.isFinite guards to vo2_max.change and vo2_max.value before .toFixed (PlayerPerformanceHero.tsx).
+- Fix InjuryRiskDashboard: add Number.isFinite guard to value before .toFixed in factor breakdown (InjuryRiskDashboard.tsx).
+- Fix EnhancedTooltip: add Number.isFinite guards to value, comparison.change, comparison.changePercent, and vsAverage before .toFixed; guard average with Number.isFinite (EnhancedTooltip.tsx).
+- Fix GraphContainerRecharts: replace !Number.isNaN with Number.isFinite in readNumber and all data filters to prevent Infinity from reaching .toFixed and division; add Number.isFinite to latestTotal in change calculation (GraphContainerRecharts.tsx).
+- Fix StatsTable: add Number.isFinite guards to host/guest before Math.round in decimalRow (StatsTable.tsx).
+- Fix CoachPlayersPageClient: add Number.isFinite to acwr guard before .toFixed, move t declaration before errorCtaButton useMemo (CoachPlayersPageClient.tsx).
+- Fix ReportsPageClient: add Number.isFinite guard to avgPseScore before .toFixed (ReportsPageClient.tsx).
+- Fix CompactReadiness: add Number.isFinite guard to sleepHours before .toFixed (CompactReadiness.tsx).
+- Fix ReadinessHero: add Number.isFinite guards to effectiveLoad and sleepHours before .toFixed (ReadinessHero.tsx).
+- Fix PlayerBodyDashboard: add Number.isFinite guard to sleep duration_hours before .toFixed (PlayerBodyDashboard.tsx).
+- Fix AthleteCalendar: revert invalid useMemo-in-JSX to inline props to fix syntax error from user edit (AthleteCalendar.tsx).
+- Fix TennisAnalyticsContent: add onKeyDown handler to XLSX drop zone for keyboard accessibility (TennisAnalyticsContent.tsx).
+- Fix PlayerHome: replace inline arrow onSessionClick={() => undefined} with undefined to prevent memo break (PlayerHome.tsx).
+- Fix ParentDashboard: wrap inline router.push arrows in useCallback for stable references to memoized child (ParentDashboard.tsx).
+- Fix UsersList: wrap filteredUsers+sortedUsers in useMemo to prevent re-sort on every render (UsersList.tsx).
+- Fix PlayerHome: remove unused useState import (PlayerHome.tsx).
+- Fix CoachCommunicationsTeaser: wrap observations filter+slice in useMemo to prevent re-computation on every render (CoachCommunicationsTeaser.tsx).
+- Fix ClubAdminDashboard: wrap inline onExport/onViewAction/onAddCoach arrows in useCallback for stable references to memoized child dashboards (ClubAdminDashboard.tsx).
+- Fix physical-test-benchmarks: add sorted.length === 0 guard before accessing sorted[0] to prevent crash on empty benchmarks (physical-test-benchmarks.ts).
+- Fix accept-invitation: add optional chaining to invitation.organization?.name and invitation.invited_by?.full_name to prevent crash when nested objects are null (accept-invitation/page.tsx).
+- Fix action-items route: add optional chaining to _userProfile?.role to prevent crash when getUserProfile returns null (action-items/route.ts).
+- Fix stripe swap-subscription: add guard for missing currentItem to prevent crash when subscription has no items (swap-subscription/route.ts).
+- Fix OrganizationSettingsForm: add error state for SWR fetch failure, destructure error from useSWR (OrganizationSettingsForm.tsx).
+- Fix SystemAdminDashboard: add loading and error states for SWR fetch, destructure error and isLoading from useSWR (SystemAdminDashboard.tsx).
+- Fix UsersList: add empty state when sortedUsers is empty to show "No users found" message (UsersList.tsx).
+- Fix TennisAnalyticsContent: add min-w-0 to MatchCard flex container to enable text truncation, add cursor-pointer to interactive div (TennisAnalyticsContent.tsx).
+- Fix CoachCommunicationsTeaser: add min-w-0 and truncate to coach name span to prevent overflow (CoachCommunicationsTeaser.tsx).
+- Fix ParentCommunicationHub: add min-w-0 to flex parent and truncate to message subject to prevent overflow (ParentCommunicationHub.tsx).
+- Fix CourtHeatmap: improve contrast of empty state text from text-muted-foreground to text-foreground/70 (CourtHeatmap.tsx).
+- Fix MessageBubble: improve contrast of file name text from text-muted-foreground to text-foreground/80 (MessageBubble.tsx).
+- Fix ClubAdminDashboard: improve contrast of inactive badge from text-muted-foreground to text-foreground/70 (ClubAdminDashboard.tsx).
+- Fix translations: add systemAdmin.loadError and systemAdmin.loading keys to all 8 locale files (en, pt, zh, es, fr, ca, de, nl).
