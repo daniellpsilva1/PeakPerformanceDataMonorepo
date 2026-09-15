@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Repository catalog",
+  "type": "object",
+  "required": ["schema_version", "repositories", "occurrences"],
+  "properties": {
+    "schema_version": {"type": "number", "const": 1},
+    "repositories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "namespace", "name", "owner", "profile", "doc_root", "lifecycle"],
+        "properties": {
+          "id": {"type": "string"},
+          "namespace": {"type": "string"},
+          "name": {"type": "string"},
+          "canonical_remote": {"type": "string"},
+          "owner": {"type": "string"},
+          "profile": {"type": "string"},
+          "doc_root": {"type": "string"},
+          "lifecycle": {"type": "string", "enum": ["unconfirmed", "active", "experimental", "frozen", "retired"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "occurrences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "repo_id", "parent_occurrence_id", "path", "role"],
+        "properties": {
+          "id": {"type": "string"},
+          "repo_id": {"type": "string"},
+          "parent_occurrence_id": {"type": "string"},
+          "path": {"type": "string"},
+          "role": {"type": "string", "enum": ["project", "dependency"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

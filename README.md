@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-OVERVIEW-README
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: draft
+title: PeakPerformanceData monorepo
+type: overview
+visibility: internal
+---
+
+> **Incomplete.** This README lists fewer submodules than `.gitmodules` defines. See gap DG-01 in `docs/audits/documentation-baseline.md`.
+
 # PeakPerformanceData
 
 Monorepo containing all PeakPerformanceData projects, organized as Git submodules.

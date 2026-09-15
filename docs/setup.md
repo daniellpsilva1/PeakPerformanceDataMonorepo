@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-REF-SETUP
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: draft
+title: Setup guide (stale)
+type: reference
+visibility: internal
+---
+
+> **Stale.** This document says npm while the frontend declares pnpm. See gap DG-03 in `docs/audits/documentation-baseline.md`.
+
 # Setup Guide
 
 ## Prerequisites

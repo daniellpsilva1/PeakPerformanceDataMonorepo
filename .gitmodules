@@ -26,14 +26,6 @@
 	path = PeakPerformanceDataMarketing/AI Videos
 	url = git@github.com:daniellpsilva1/ppd-ai-videos.git
 	branch = main
-[submodule "PeakPerformanceDataMarketing/Manim"]
-	path = PeakPerformanceDataMarketing/Manim
-	url = git@github.com:daniellpsilva1/ppd-manim.git
-	branch = main
-[submodule "PeakPerformanceDataMarketing/Remotion"]
-	path = PeakPerformanceDataMarketing/Remotion
-	url = git@github.com:daniellpsilva1/ppd-remotion.git
-	branch = main
 [submodule "PeakPerformanceDataMarketing/courtviz"]
 	path = PeakPerformanceDataMarketing/courtviz
 	url = git@github.com:daniellpsilva1/ppd-courtviz.git

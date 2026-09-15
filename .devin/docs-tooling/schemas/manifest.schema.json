@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Local documentation manifest",
+  "type": "object",
+  "required": ["schema_version", "repo_id", "doc_root", "profile"],
+  "properties": {
+    "schema_version": {"type": "number", "const": 1},
+    "repo_id": {"type": "string"},
+    "doc_root": {"type": "string"},
+    "profile": {"type": "string"},
+    "tooling_version": {"type": "string"},
+    "managed": {
+      "type": "object",
+      "properties": {
+        "include": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "historical": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "excluded": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "source_mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {"type": "string"},
+          "source_globs": {"type": "array", "items": {"type": "string"}},
+          "doc_id": {"type": "string"}
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "repo_id": {"type": "string"},
+          "occurrence_id": {"type": "string"}
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "command": {"type": "string"},
+          "safety_class": {"type": "string", "enum": ["local-read", "local-build", "external-read", "external-write", "destructive"]}
+        }
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reason": {"type": "string"},
+          "owner": {"type": "string"},
+          "scope": {"type": "string"},
+          "review_ref": {"type": "string"},
+          "expiry": {"type": "string", "format": "date"}
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

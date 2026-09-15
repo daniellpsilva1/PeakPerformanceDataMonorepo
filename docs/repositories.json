@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "repositories": [
+    {"id": "app", "namespace": "PPD-APP", "name": "peak_performance_data", "canonical_remote": "submodule", "owner": "daniel", "profile": "application", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "backend", "namespace": "PPD-BACKEND", "name": "ppd_backend", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "engineering", "lifecycle": "active"},
+    {"id": "extraction", "namespace": "PPD-EXTRACTION", "name": "ppd_extraction_backend", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "legacy-extraction", "namespace": "PPD-LEGACY", "name": "ppd_legacy_extraction_backend", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "docs", "lifecycle": "unconfirmed"},
+    {"id": "research", "namespace": "PPD-RESEARCH", "name": "ppd_research_papers", "canonical_remote": "submodule", "owner": "daniel", "profile": "research", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "vision", "namespace": "PPD-VISION", "name": "ppd_vision", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "agent", "namespace": "PPD-AGENT", "name": "ppp_ai_agent", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "swingvision", "namespace": "PPD-SWINGVISION", "name": "swingvision-pipeline", "canonical_remote": "submodule", "owner": "daniel", "profile": "service", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "academies", "namespace": "PPD-ACADEMIES", "name": "AcademiesPresentation", "canonical_remote": "submodule", "owner": "daniel", "profile": "media", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "ai-videos", "namespace": "PPD-AIVIDEOS", "name": "AI Videos", "canonical_remote": "submodule", "owner": "daniel", "profile": "media", "doc_root": "docs", "lifecycle": "unconfirmed"},
+    {"id": "manim", "namespace": "PPD-MANIM", "name": "Manim", "canonical_remote": "submodule", "owner": "daniel", "profile": "media", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "remotion", "namespace": "PPD-REMOTION", "name": "Remotion", "canonical_remote": "submodule", "owner": "daniel", "profile": "media", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "bodyviz", "namespace": "PPD-BODYVIZ", "name": "ThreeJS", "canonical_remote": "submodule", "owner": "daniel", "profile": "library", "doc_root": "docs", "lifecycle": "active"},
+    {"id": "courtviz", "namespace": "PPD-COURTVIZ", "name": "courtviz", "canonical_remote": "submodule", "owner": "daniel", "profile": "library", "doc_root": "docs", "lifecycle": "active"}
+  ],
+  "occurrences": [
+    {"id": "app-direct", "repo_id": "app", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/peak_performance_data", "role": "project"},
+    {"id": "backend-direct", "repo_id": "backend", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppd_backend", "role": "project"},
+    {"id": "extraction-direct", "repo_id": "extraction", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppd_extraction_backend", "role": "project"},
+    {"id": "legacy-extraction-direct", "repo_id": "legacy-extraction", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppd_legacy_extraction_backend", "role": "project"},
+    {"id": "research-direct", "repo_id": "research", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppd_research_papers", "role": "project"},
+    {"id": "vision-direct", "repo_id": "vision", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppd_vision", "role": "project"},
+    {"id": "agent-direct", "repo_id": "agent", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/ppp_ai_agent", "role": "project"},
+    {"id": "swingvision-direct", "repo_id": "swingvision", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceData/swingvision-pipeline", "role": "project"},
+    {"id": "academies-direct", "repo_id": "academies", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/AcademiesPresentation", "role": "project"},
+    {"id": "ai-videos-direct", "repo_id": "ai-videos", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/AI Videos", "role": "project"},
+    {"id": "manim-direct", "repo_id": "manim", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/Manim", "role": "project"},
+    {"id": "remotion-direct", "repo_id": "remotion", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/Remotion", "role": "project"},
+    {"id": "bodyviz-direct", "repo_id": "bodyviz", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/ThreeJS", "role": "project"},
+    {"id": "courtviz-direct", "repo_id": "courtviz", "parent_occurrence_id": "portfolio", "path": "PeakPerformanceDataMarketing/courtviz", "role": "project"},
+    {"id": "app-bodyviz-vendor", "repo_id": "bodyviz", "parent_occurrence_id": "app-direct", "path": "vendor/bodyviz", "role": "dependency"},
+    {"id": "app-courtviz-vendor", "repo_id": "courtviz", "parent_occurrence_id": "app-direct", "path": "vendor/courtviz", "role": "dependency"}
+  ]
+}

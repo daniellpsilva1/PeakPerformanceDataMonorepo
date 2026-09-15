@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "bundle_type": "docs-policy",
+  "files": [
+    {
+      "path": "docs/governance/documentation-standard.md",
+      "sha256": "dd91c43381f4364851e8d896f26b8414377623615d54379ec8d5f259c479c29a",
+      "size": 3954
+    },
+    {
+      "path": "docs/governance/sdlc.md",
+      "sha256": "05de526a694dfcef5e11d006a9cf788fc2628c4f8cc6717f3ef711e6dfb9fc6f",
+      "size": 3585
+    },
+    {
+      "path": "docs/governance/evidence-and-traceability.md",
+      "sha256": "5957c86193a740456636fe5f5aae1898e4346612bfdadcda534950d4bd880a43",
+      "size": 2600
+    },
+    {
+      "path": "docs/governance/maintenance.md",
+      "sha256": "099c732e4804377e9df21a8e059d6fbde126af9478d88aa2f42608f24e68d235",
+      "size": 2795
+    },
+    {
+      "path": "docs/governance/research-basis.md",
+      "sha256": "15d1a4beb2d123b3aca2c670e8ac28ff0181eff49a1f26be1ea476736069c5f8",
+      "size": 3582
+    }
+  ],
+  "origin": {
+    "repo": "PeakPerformanceDataMonorepo",
+    "revision": "742306b28a233ab19cdc5d48f813d067397c201a"
+  },
+  "bundle_version": "0.1.0"
+}

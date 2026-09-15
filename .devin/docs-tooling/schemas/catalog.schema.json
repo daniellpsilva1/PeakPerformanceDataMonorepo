@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated document catalog",
+  "type": "object",
+  "required": ["schema_version", "repo_id", "documents", "generator_version", "input_digest"],
+  "properties": {
+    "schema_version": {"type": "number", "const": 1},
+    "repo_id": {"type": "string"},
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "path", "type", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "path": {"type": "string"},
+          "type": {"type": "string"},
+          "status": {"type": "string"},
+          "owner": {"type": "string"},
+          "visibility": {"type": "string"},
+          "summary": {"type": "string"},
+          "domain_tags": {"type": "array", "items": {"type": "string"}},
+          "source_refs": {"type": "array"},
+          "related": {"type": "array", "items": {"type": "string"}},
+          "content_digest": {"type": "string"}
+        }
+      }
+    },
+    "generator_version": {"type": "string"},
+    "input_digest": {"type": "string"}
+  },
+  "additionalProperties": false
+}

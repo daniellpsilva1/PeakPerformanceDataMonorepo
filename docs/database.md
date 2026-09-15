@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-REF-DATABASE
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: draft
+title: Database schema (needs review)
+type: reference
+visibility: internal
+---
+
+> **Needs review.** This document omits Vision and SwingVision separate stores. See gap DG-09 in `docs/audits/documentation-baseline.md`.
+
 # Database Schema
 
 The platform uses two database systems:

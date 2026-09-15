@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-ARCH-OVERVIEW
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: draft
+title: Architecture overview (needs source linking)
+type: explanation
+visibility: internal
+---
+
+> **Needs review.** This document provides a useful overview but is not source-linked or version-pinned. It will be superseded by source-linked architecture documents under `docs/architecture/`.
+
 # Architecture
 
 ## System Overview

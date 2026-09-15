@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-14",
+  "repo_id": "portfolio",
+  "repositories": [
+    {
+      "id": "app",
+      "path": "PeakPerformanceData/peak_performance_data",
+      "family": "main-app",
+      "package_manager": "pnpm 9.15.0",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "backend",
+      "path": "PeakPerformanceData/ppd_backend",
+      "family": "backend-services",
+      "package_manager": "python",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "extraction",
+      "path": "PeakPerformanceData/ppd_extraction_backend",
+      "family": "backend-services",
+      "package_manager": "python",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "legacy-extraction",
+      "path": "PeakPerformanceData/ppd_legacy_extraction_backend",
+      "family": "backend-services",
+      "package_manager": "python",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "vision",
+      "path": "PeakPerformanceData/ppd_vision",
+      "family": "backend-services",
+      "package_manager": "python",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "agent",
+      "path": "PeakPerformanceData/ppp_ai_agent",
+      "family": "backend-services",
+      "package_manager": "python",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "swingvision",
+      "path": "PeakPerformanceData/swingvision-pipeline",
+      "family": "video-pipeline",
+      "package_manager": "npm",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "courtviz",
+      "path": "PeakPerformanceDataMarketing/courtviz",
+      "family": "visualization-libraries",
+      "package_manager": "pnpm",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "bodyviz",
+      "path": "PeakPerformanceDataMarketing/bodyviz",
+      "family": "visualization-libraries",
+      "package_manager": "pnpm",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "academies",
+      "path": "PeakPerformanceDataMarketing/academies",
+      "family": "marketing-media",
+      "package_manager": "npm",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "ai-videos",
+      "path": "PeakPerformanceDataMarketing/ai-videos",
+      "family": "marketing-media",
+      "package_manager": "npm",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    },
+    {
+      "id": "manim",
+      "path": "PeakPerformanceDataMarketing/manim",
+      "family": "marketing-media",
+      "package_manager": "npm",
+      "has_agents_md": false,
+      "has_docs_json": false,
+      "has_docs_ci": false
+    },
+    {
+      "id": "remotion",
+      "path": "PeakPerformanceDataMarketing/remotion",
+      "family": "marketing-media",
+      "package_manager": "npm",
+      "has_agents_md": false,
+      "has_docs_json": false,
+      "has_docs_ci": false
+    },
+    {
+      "id": "research",
+      "path": "PeakPerformanceData/ppd_research_papers",
+      "family": "research",
+      "package_manager": "n/a",
+      "has_agents_md": true,
+      "has_docs_json": true,
+      "has_docs_ci": true
+    }
+  ],
+  "nested_occurrences": [
+    {
+      "id": "bodyviz",
+      "path": "PeakPerformanceData/peak_performance_data/vendor/bodyviz",
+      "pinned_revision": "00caeda7b8",
+      "differs_from_marketing": true
+    },
+    {
+      "id": "courtviz",
+      "path": "PeakPerformanceData/peak_performance_data/vendor/courtviz",
+      "pinned_revision": "7bad49b63d",
+      "differs_from_marketing": true
+    }
+  ],
+  "documentation_status": {
+    "root_governance_docs": 5,
+    "root_architecture_docs": 6,
+    "root_managed_docs_validated": 6,
+    "tooling_tests_passing": 114,
+    "tooling_modules_implemented": 8,
+    "tooling_modules_missing": [],
+    "per_repo_agents_md": "12 of 14 (manim+remotion blocked by missing checkout)",
+    "per_repo_docs_json": "12 of 14 (manim+remotion blocked by missing checkout)",
+    "per_repo_docs_ci": "12 of 14 (manim+remotion blocked by missing checkout)",
+    "devin_skills": "3 of 3",
+    "evaluation_cases": "15 of 15",
+    "policy_bundle_synced": "12 of 14 repos"
+  },
+  "what_this_index_does_not_claim": [
+    "That the status fields reflect a complete implementation (they reflect observed state at generation time).",
+    "That missing modules are planned (they are tracked in the gap task list).",
+    "That per-repo coverage is sufficient (it is not; see gap list)."
+  ]
+}

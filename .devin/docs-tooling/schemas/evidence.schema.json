@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence record",
+  "type": "object",
+  "required": ["id", "procedure", "environment", "result"],
+  "properties": {
+    "id": {"type": "string"},
+    "procedure": {"type": "string"},
+    "environment": {"type": "string", "enum": ["local", "ci", "staging", "production"]},
+    "fixture_id": {"type": "string"},
+    "source_revisions": {"type": "array", "items": {"type": "string"}},
+    "result": {"type": "string", "enum": ["passed", "failed", "not_run", "blocked", "not_applicable"]},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "tool_versions": {"type": "object"},
+    "artifact_digest": {"type": "string"},
+    "limitations": {"type": "string"}
+  },
+  "additionalProperties": false
+}

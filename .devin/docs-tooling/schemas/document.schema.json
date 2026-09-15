@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Managed document frontmatter",
+  "type": "object",
+  "required": ["id", "owner", "schema_version", "status", "title", "type", "visibility"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^PPD-[A-Z]+-[A-Z]+-[A-Z0-9-]+$",
+      "description": "Namespaced document ID matching PPD-<REPO>-<KIND>-<SLUG>"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Accountable owner identifier"
+    },
+    "schema_version": {
+      "type": "number",
+      "const": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "accepted", "superseded", "archived"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["overview", "tutorial", "how-to", "reference", "explanation", "prd", "rfc", "adr", "ux-spec", "test-plan", "runbook", "release", "postmortem", "research", "metric-card", "model-card"]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["internal", "public-approved"]
+    },
+    "approval_ref": {
+      "type": ["string", "null"]
+    },
+    "last_reviewed": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "related": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "requirements": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": {"type": "string"},
+          "repo_id": {"type": "string"},
+          "revision": {"type": "string"},
+          "symbol": {"type": "string"}
+        }
+      }
+    },
+    "supersedes": {"type": ["string", "null"]},
+    "superseded_by": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: archived
+title: Review findings (historical)
+type: explanation
+visibility: internal
+---
+
+> **Historical document.** This review was performed before 2026-09-13. Several findings have been contradicted by later repository inspection: frontend CI exists at `.github/workflows/ci.yml`, AI-agent tests exist under `tests/api/ai-agent/`, and Stripe SDK is present in `package.json`. Treat this document as historical evidence, not current truth. See `docs/audits/documentation-baseline.md` for the current gap register.
+
 # Review Findings
 
 All issues identified during the deep codebase review, ordered by severity: **Critical**, **High**, **Medium**, **Low**, **Info**.

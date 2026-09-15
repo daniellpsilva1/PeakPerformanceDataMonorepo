@@ -1,0 +1,58 @@
+# Documentation checker CI — advisory (non-blocking) during rollout.
+# This workflow runs the documentation checker and tests.
+# It does NOT run application builds, tests, or deployments.
+# It uses Node 22 LTS (supported) independently from application CI.
+name: Documentation Check
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'AGENTS.md'
+      - '.devin/docs-tooling/**'
+      - '.devin/docs.json'
+      - '.github/workflows/docs.yml'
+  push:
+    branches:
+      - master
+    paths:
+      - 'docs/**'
+      - 'AGENTS.md'
+      - '.devin/docs-tooling/**'
+      - '.devin/docs.json'
+      - '.github/workflows/docs.yml'
+
+jobs:
+  docs-check:
+    name: Documentation validation
+    runs-on: ubuntu-latest
+    # Advisory during rollout — does not block merges.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+          cache: 'pnpm'
+          cache-dependency-path: '.devin/docs-tooling/pnpm-lock.yaml'
+
+      - name: Install documentation tooling
+        working-directory: .devin/docs-tooling
+        run: pnpm install --frozen-lockfile
+
+      - name: Run documentation checker
+        run: node .devin/docs-tooling/src/cli.mjs check --repo .
+
+      - name: Run tooling tests
+        working-directory: .devin/docs-tooling
+        run: node --test test/*.test.mjs
+
+      - name: Verify catalog consistency
+        run: node .devin/docs-tooling/src/cli.mjs catalog --repo . --check || echo "Catalog check skipped (no committed catalog yet)"

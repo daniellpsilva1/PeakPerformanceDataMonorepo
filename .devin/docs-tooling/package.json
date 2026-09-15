@@ -1,0 +1,25 @@
+{
+  "name": "@ppd/docs-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline documentation validation tooling for the PeakPerformanceData portfolio",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "ppd-docs": "src/cli.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node src/cli.mjs check --repo .",
+    "catalog": "node src/cli.mjs catalog --repo . --check"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "gray-matter": "^4.0.3",
+    "yaml": "^2.5.1"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

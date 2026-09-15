@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-13",
+  "description": "Inventory of historical/legacy documentation collections. Each entry records provenance and disposition. This is a reference, not a deletion list.",
+  "collections": [
+    {
+      "id": "LEGACY-RESEARCH-PLANS",
+      "path": "_plans/research/",
+      "count": 81,
+      "format": "markdown",
+      "provenance": "Historical research notes from prior planning cycles. Numbered 01-81 covering API layer, config, schema, agents, tools, evaluation, deployment, and domain topics.",
+      "disposition": "preserve",
+      "status": "historical",
+      "notes": "These are context, not executable instructions. Do not treat as current requirements."
+    },
+    {
+      "id": "LEGACY-PLAN-COPY",
+      "path": "_plans/plan-9ca601f2d6aaafc2.md",
+      "count": 1,
+      "format": "markdown",
+      "provenance": "Untracked copy of a prior planning document. Differs from the authoritative plan at .devin/plans/plan-9fac8d6c90253cd3.md.",
+      "disposition": "preserve",
+      "status": "historical",
+      "notes": "Untracked. Left untouched per preservation rules."
+    },
+    {
+      "id": "LEGACY-OPENWEARABLES-MISSING",
+      "path": "_plans/OpenWearablesMissingIntegrations.md",
+      "count": 1,
+      "format": "markdown",
+      "provenance": "Historical note on missing OpenWearables integrations.",
+      "disposition": "preserve",
+      "status": "historical",
+      "notes": "May be partially resolved; needs verification against current code."
+    },
+    {
+      "id": "LEGACY-EXTRACTION-MEMORY-BANK",
+      "path": "PeakPerformanceData/ppd_extraction_backend/memory_bank/",
+      "count": 6,
+      "format": "mixed (markdown, sql, resolved task file)",
+      "provenance": "Extraction backend memory bank with research notes on Garmin, Polar, Whoop, ClickHouse schema, and pipeline design.",
+      "disposition": "preserve",
+      "status": "historical",
+      "notes": "Cataloged separately from managed docs. Contains garmin_clickhouse_schema.sql and task.md.resolved."
+    },
+    {
+      "id": "LEGACY-ROOT-DOCS",
+      "path": "docs/*.md (root-level pre-existing)",
+      "count": 6,
+      "format": "markdown",
+      "provenance": "Pre-existing root docs: README.md, api.md, architecture.md, database.md, review-findings.md, setup.md. Migrated with frontmatter and correction notices.",
+      "disposition": "preserve-with-notice",
+      "status": "migrated",
+      "notes": "Frontmatter added; correction notices applied where content is stale or inaccurate."
+    },
+    {
+      "id": "LEGACY-APP-REVIEW",
+      "path": "docs/review-findings.md",
+      "count": 1,
+      "format": "markdown",
+      "provenance": "Historical review of the app. States no frontend CI, no AI-tool tests, no Stripe SDK. All three now exist.",
+      "disposition": "preserve-with-notice",
+      "status": "archived",
+      "notes": "Marked as archived with correction notice pointing to current state."
+    }
+  ],
+  "disposition_legend": {
+    "preserve": "Keep as-is. No modification.",
+    "preserve-with-notice": "Keep but add correction/supersession notice.",
+    "migrate": "Move to new structure with redirect.",
+    "retire": "Mark as retired (not deleted)."
+  },
+  "what_this_inventory_does_not_claim": [
+    "That all legacy content has been reviewed for accuracy (only listed collections have been cataloged).",
+    "That dispositions are final (owner may change them).",
+    "That historical content should be deleted (it should not)."
+  ]
+}

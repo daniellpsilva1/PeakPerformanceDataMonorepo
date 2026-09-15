@@ -1,3 +1,16 @@
+---
+id: PPD-PORTFOLIO-REF-API
+last_reviewed: 2026-09-13
+owner: daniel
+schema_version: 1
+status: draft
+title: API reference (needs review)
+type: reference
+visibility: internal
+---
+
+> **Needs review.** This document uses simplified paths that may not match actual router composition. See gap DG-10 in `docs/audits/documentation-baseline.md`.
+
 # API Reference
 
 This document covers all backend API endpoints across the three services plus a comprehensive listing of the Next.js BFF route directories.

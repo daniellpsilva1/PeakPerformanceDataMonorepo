@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "repo_id": "portfolio",
+  "documents": [
+    {
+      "id": "PPD-PORTFOLIO-ARCH-OVERVIEW",
+      "title": "Architecture overview (needs source linking)",
+      "path": "docs/architecture.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "32ca5bb957724244"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
+      "title": "Review findings (historical)",
+      "path": "docs/review-findings.md",
+      "type": "explanation",
+      "status": "archived",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "2d88a099f5f94bc7"
+    },
+    {
+      "id": "PPD-PORTFOLIO-OVERVIEW-README",
+      "title": "PeakPerformanceData monorepo",
+      "path": "README.md",
+      "type": "overview",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "87b995a699ac17dd"
+    },
+    {
+      "id": "PPD-PORTFOLIO-REF-API",
+      "title": "API reference (needs review)",
+      "path": "docs/api.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "bc3c307283fe0e24"
+    },
+    {
+      "id": "PPD-PORTFOLIO-REF-DATABASE",
+      "title": "Database schema (needs review)",
+      "path": "docs/database.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "9051e6c0ee5a0c89"
+    },
+    {
+      "id": "PPD-PORTFOLIO-REF-SETUP",
+      "title": "Setup guide (stale)",
+      "path": "docs/setup.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "c1c20073034987d1"
+    }
+  ],
+  "generator_version": "0.1.0",
+  "input_digest": "74cc707e23b969ae"
+}
+
