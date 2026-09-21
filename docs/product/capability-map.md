@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-PRODUCT-CAPABILITY-MAP
-last_reviewed: 2026-09-13
+last_reviewed: 2026-09-20
 owner: daniel
 related:
   - PPD-PORTFOLIO-PRODUCT-OVERVIEW
@@ -27,6 +27,7 @@ This matrix maps product capabilities to the repositories and services that impl
 | Court visualization | Adapter | — | — | — | — | — | Library | — |
 | Body twin | Route + UI | — | — | — | — | — | — | Library |
 | AI insights | Orchestrator | — | — | — | — | Specialist tools | — | — |
+| AI capture & proposals | Capture/approve routes + review UI | — | — | — | — | — | — | — |
 | Billing | Webhook + BFF | — | — | — | — | — | — | — |
 | Identity/auth | Middleware + BFF | Auth middleware | (gap DG-18) | API key | — | Auth middleware | — | — |
 
@@ -39,6 +40,7 @@ This matrix maps product capabilities to the repositories and services that impl
 | Tennis scoring | Reads/writes | — | — | — |
 | Tennis video analysis | Reads | — | Writes | Reads/writes |
 | AI insights | Reads (via RPC) | — | — | — |
+| AI capture & proposals | Reads/writes (`ai_proposals`, `ai_voice_captures`, session participants) | — | — | — |
 | Billing | Reads/writes | — | — | — |
 | Identity/auth | Auth + profiles | — | — | — |
 

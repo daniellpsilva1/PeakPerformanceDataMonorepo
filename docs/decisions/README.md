@@ -18,3 +18,4 @@ This directory contains ADRs for the PeakPerformanceData portfolio. Each ADR rec
 | ID | Title | Status |
 |---|---|---|
 | [ADR-0001](0001-documentation-system.md) | Adopt a repository-first documentation system | Draft |
+| [ADR-0002](0002-ai-proposal-approval-model.md) | AI proposal/approval model and per-task model routing | Draft |

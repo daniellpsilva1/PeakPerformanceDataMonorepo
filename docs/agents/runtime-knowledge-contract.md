@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-AGENT-KNOWLEDGE-CONTRACT
-last_reviewed: 2026-09-13
+last_reviewed: 2026-09-20
 owner: daniel
 related:
   - AGENTS.md
@@ -21,7 +21,7 @@ This document defines the contract for what runtime/application agents (the in-a
 1. **Default-deny:** Anything not explicitly allowed is denied.
 2. **Contract-only:** Agent knowledge comes from this contract, not from free-form documentation retrieval.
 3. **No autonomous approval:** Agents draft and suggest; only the owner approves.
-4. **No side effects:** Agents may not modify data, trigger deployments, or change configuration without explicit per-action approval.
+4. **No side effects:** Agents may not modify data, trigger deployments, or change configuration without explicit per-action approval. Per ADR-0002, covered writes execute only through durable `ai_proposals` rows approved by the user in the review card; the model never executes them directly.
 5. **Tenant-bound:** Agent actions are bound to the authenticated user's tenant context.
 6. **No medical claims:** Agents present values and zones only; they never diagnose or interpret medically.
 
@@ -72,7 +72,7 @@ This document defines the contract for what runtime/application agents (the in-a
 
 | Action | Denied |
 |---|---|
-| Data modification | Yes |
+| Data modification without an approved proposal | Yes — covered intents only via `ai_proposals` + approve route (ADR-0002); uncovered write tools remain a documented residual gap (RG-08) |
 | Deployment triggers | Yes |
 | Configuration changes | Yes |
 | User impersonation | Yes |
@@ -86,9 +86,11 @@ This document defines the contract for what runtime/application agents (the in-a
 |---|---|---|
 | Agent identity from session, not request body | Source inspection | Verified in `route.ts` |
 | Role-based athlete binding | Source inspection | Verified in `toolRouter.ts` |
+| Covered writes require approval | Deterministic tests | Verified — `tests/api/ai-agent/proposals.test.ts` (unauthorized/expired/foreign/double-approve) |
+| Athlete resolution is roster-bound + disambiguated | Deterministic tests | Verified — `tests/lib/ai/resolution/` |
 | No medical diagnosis | Tool descriptions | Verified in `specialistTools.ts` |
 | Tenant isolation in specialist tools | Per-tool review | Needs verification |
-| End-to-end model safety | Evaluation harness | DG-17 — incomplete |
+| End-to-end model safety | Evaluation harness | Partial — golden-set eval runner added (`pnpm eval:ai`); live bake-off pending |
 
 ## What this contract does not claim
 
