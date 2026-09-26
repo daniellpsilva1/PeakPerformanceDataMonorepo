@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-AUDIT-REMEDIATION-BACKLOG
-last_reviewed: 2026-09-19
+last_reviewed: 2026-09-23
 owner: daniel
 related:
   - docs/audits/documentation-baseline.md
@@ -182,3 +182,143 @@ Each item has:
 - **Risk:** Medium
 - **Status:** Resolved (2026-09-20)
 - **Description:** The remote `public.profiles` table lacked `subscription_status`, `subscription_tier`, and `notification_preferences`, although committed migrations defined them (`supabase/migrations/20260817_add_subscription_columns_to_profiles.sql`, `20260902_add_notification_preferences_to_profiles.sql`) and the previously committed `database.types.ts` contained them. **Resolution:** both migrations were applied remotely (8 subscription columns, 2 CHECK constraints, 4 partial indexes; the `set_updated_at` trigger block was omitted because remote `profiles` already has `update_profiles_updated_at` via `update_updated_at_column()`), and `database.types.ts` was regenerated wholesale. The regen also picked up remote-only tables the committed file had been missing (`garmin_connect_*`, `match_post_decks`, `match_post_jobs`). `tsc --noEmit` is clean against the regenerated file.
+
+## 2026-09-23 ClickHouse incident and deploy hardening
+
+Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 ClickHouse OOM incident and the associated backend/frontend deploy. Entries RG-25 through RG-34 are open follow-ups discovered during the same work.
+
+### RG-20: ClickHouse OOM on ds-wearables-extract (116.202.100.150)
+
+- **Source:** 2026-09-23 incident on ds-wearables-extract; evidence bundle on host at `/root/ch-incident-2026-09-23/{before,after,after3,after4,after5}.txt`
+- **Risk:** High
+- **Status:** Resolved (2026-09-23)
+- **Description:** The kernel OOM-killed `clickhouse-server` twice. Diagnostic log tables had grown unbounded — `text_log` 5.66GB / 67M rows at trace level, `metric_log` 3.95GB, `trace_log` 883MB, plus 13 orphaned `_N`-renamed log tables (including `asynchronous_metric_log_1` with 287M rows) — consuming memory/disk and driving ~30 concurrent merges. **Resolution:** all bloated system logs dropped/truncated; new `config.d/memory-tuning.xml` (text_log at warning level, metric_log and trace_log removed, `background_pool_size` 8 with merges_mutations ratio 4, merges memory capped at 25% of RAM, RAM ratio 0.75, caches capped at 256MB/0/64MB/128MB, max 50 concurrent queries); conflicting duplicate `max_server_memory_usage` entries deduplicated in `config.xml` and `config.d/memory.xml` removed; 4GiB swapfile added (fstab, `swappiness=10`); empty `clickhouse-dev` container stopped (`restart=no`); `/etc/cron.d/ch-health` now logs MemoryTracking/Merge/OSMemoryAvailable every 5 minutes to `/var/log/ch-health.log` (logrotate weekly × 12).
+- **Owner action required:** None for the fix itself. Watch item: jemalloc-tracked memory floor was ~5.25GiB (structural, not parts metadata) and dropped to ~3GiB after config reload — monitor via the health log. RAM headroom tracked as RG-31.
+
+### RG-21: Demo wearables clone tool and daily refresh
+
+- **Source:** 2026-09-23 demo data refresh; `ppd_extraction_backend/scripts/clone_demo_wearables.py` (commit `e4fc614`), `scripts/demo_wearables_targets.json`
+- **Risk:** Medium
+- **Status:** Resolved (2026-09-23)
+- **Description:** The clone script was rewritten with `dry-run` / `replace` / `refresh` modes. Source is Whoop user `573c3d0b-7a88-47f2-875d-e74316995432`; 16 targets in `demo_wearables_targets.json` (9 academy demo players + BCNPTA Player + 6 stale whoop ids). The 2026-09-23 `replace` run backed up to `Disk('backups','pre_whoop_clone_*.zip')`, deleted ~7.5k stale rows, and inserted 18,288 rows; all targets verified matching source ranges. A daily `refresh` cron runs at 05:30 UTC via `/etc/cron.d/demo-wearables-refresh` → `/usr/local/bin/demo-wearables-refresh.sh` (log `/var/log/demo-wearables-refresh.log`, logrotated); the job runs inside the `ppd-api` container (which has `clickhouse_driver`) and the wrapper `docker cp`s the script and targets file each run. Documented gotcha: `clickhouse_driver.execute()` silently drops the SELECT half of `INSERT INTO ... SELECT`, so the script uses SELECT + VALUES inserts.
+- **Owner action required:** None for the tool itself. Related open items: consent/privacy (RG-28), stalled upstream provider syncs (RG-27).
+
+### RG-22: Backend error surfacing for ClickHouse failures
+
+- **Source:** 2026-09-23 deploy; `ppd_backend` commit `734cac5b`, deployed to prod `/opt/ppd-backend`
+- **Risk:** Medium
+- **Status:** Resolved (2026-09-23)
+- **Description:** Loaders now raise `GraphDataUnavailableError` on query failure and routes return `503 {error: "data_unavailable", retryable: true}` instead of a fake "No Data" state; multi-source generator fallbacks are preserved. `ow_health_scores` was removed from provider-discovery UNIONs (the table does not exist). The ClickHouse client gained `send_receive_timeout=20` and `max_execution_time=15`.
+- **Owner action required:** None. Residual gap (missing `ow_health_scores` table vs `load_health_scores`) tracked as RG-32.
+
+### RG-23: Frontend error state for data_unavailable
+
+- **Source:** 2026-09-23 deploy; `peak_performance_data` commit `8b013daa`
+- **Risk:** Medium
+- **Status:** Resolved (2026-09-23)
+- **Description:** Added `GraphFetchError` / `isDataUnavailable` handling: the UI shows "Unable to load" + Retry instead of "No Data" for `data_unavailable` responses, errored payloads are never seeded into batch/SWR caches, and polling stops on a confirmed error.
+- **Owner action required:** None.
+
+### RG-24: INTERNAL_SERVICE_SECRET never configured in production
+
+- **Source:** 2026-09-23 deploy incident; `/opt/ppd-backend/.env`, Vercel project `prj_6P8wpuuVUxYrpPMh04hx66vB4QPN`
+- **Risk:** High
+- **Status:** Resolved (2026-09-23)
+- **Description:** `INTERNAL_SERVICE_SECRET` was never set on the backend `.env` or in Vercel. It went unnoticed because the previously deployed prod commit predated `AuthMiddleware`. A new 64-hex secret was rotated into `/opt/ppd-backend/.env` **and** the Vercel production environment. Note: a Vercel env change requires a new deployment to take effect.
+- **Owner action required:** None for production. Preview/development coverage tracked as RG-33; deploy-drift monitoring tracked as RG-34.
+
+### RG-25: Redis L2 graph cache prewarm unverified
+
+- **Source:** 2026-09-23 deploy; compose service `ppc-redis`
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** The Redis L2 graph cache and prewarm path are now live via the `ppc-redis` compose service, but whether the prewarm job actually runs and what hit rates look like in production is unverified.
+- **Owner action required:** Verify the prewarm job executes on schedule and measure cache hit rates; document or adjust TTL/warming scope accordingly.
+
+### RG-26: body_summaries fallbacks and primary-key-aware loader queries
+
+- **Source:** 2026-09-23 backend hardening review; `ppd_backend` loaders
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Loaders should get `body_summaries` fallbacks and primary-key-aware queries that use the `(app_id, org_id, user_id)` key prefix so ClickHouse can prune efficiently. Currently queries do not exploit the primary key prefix.
+- **Owner action required:** Approve the loader query changes (fallback source + key-prefix filters) and a verification pass against production query logs.
+
+### RG-27: Six stale Whoop users + BCNPTA Player stopped syncing upstream ~July
+
+- **Source:** 2026-09-23 demo clone run; `scripts/demo_wearables_targets.json` labels vs live data
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Six Whoop targets and the BCNPTA Player had not received upstream provider data since roughly July; their demo data was overwritten by the clone copy, so evidence for why provider syncs stalled is most likely in `provider_connections` state or extraction API logs, not in the wearables tables themselves.
+- **Owner action required:** Authorize an investigation into why provider syncs stalled for these users (provider_connections rows, extraction logs on ds-wearables-extract).
+
+### RG-28: Demo-data consent — real athlete Whoop data copied into 16 demo accounts
+
+- **Source:** 2026-09-23 demo clone run; `clone_demo_wearables.py` source user `573c3d0b-7a88-47f2-875d-e74316995432`
+- **Risk:** High
+- **Status:** Open
+- **Description:** The clone tool copies a real athlete's Whoop data (body summaries, timeseries, sleep, workouts) into 16 demo accounts across academies. Consent/privacy acknowledgement for using this individual's data as demo content has not been recorded.
+- **Owner action required:** Acknowledge or replace the demo data source; decide whether a synthetic/anonymized dataset is required.
+
+### RG-29: Orphan ppc-api container on ds-wearables-process (89.167.47.236)
+
+- **Source:** 2026-09-23 infrastructure review
+- **Risk:** Low
+- **Status:** Open
+- **Description:** A `ppc-api` container runs on ds-wearables-process with `CLICKHOUSE_WEARABLES_HOST=host.docker.internal`, but no ClickHouse runs on that host and nothing routes to the container. It consumes resources while serving no traffic.
+- **Owner action required:** Decide whether to decommission the container or fix its ClickHouse target and routing.
+
+### RG-30: Dead host 37.27.198.42 references
+
+- **Source:** 2026-09-23 infrastructure review; `ppd_extraction_backend/memory_bank/open-wearables.md:775`
+- **Risk:** Low
+- **Status:** Open
+- **Description:** Host 37.27.198.42 was rebuilt with a different SSH key and its ClickHouse ports are closed. The MCP config and IDE data source were repointed to 116.202.100.150, but stale references remain — at minimum `ppd_extraction_backend/memory_bank/open-wearables.md:775` and possibly other docs.
+- **Owner action required:** Approve a sweep for remaining 37.27.198.42 references and update or annotate them.
+
+### RG-31: RAM headroom on the ClickHouse host
+
+- **Source:** 2026-09-23 OOM incident (RG-20)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** The ClickHouse host on ds-wearables-extract was OOM-killing the server under merge load even before tuning. Config now caps merges and caches, and swap was added, but the box is shared and structural jemalloc usage sits around ~3GiB post-tuning.
+- **Owner action required:** Decide whether to upgrade the host to 16GiB RAM or move ClickHouse off the shared box; monitor `/var/log/ch-health.log` in the interim.
+
+### RG-32: load_health_scores still targets missing ow_health_scores table
+
+- **Source:** 2026-09-23 backend fix (RG-22); `ppd_backend` `data_processing/metric_aggregator.py`
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** `metric_aggregator._query_providers` was fixed (the nonexistent `ow_health_scores` was removed from provider-discovery UNIONs), but `load_health_scores` still targets the missing `ow_health_scores` table, so that metric path cannot succeed.
+- **Owner action required:** Decide whether to create the `ow_health_scores` table (migration + population path) or remove the `load_health_scores` metric path.
+
+### RG-33: INTERNAL_SERVICE_SECRET coverage for preview/development environments
+
+- **Source:** 2026-09-23 secret rotation (RG-24)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The rotated `INTERNAL_SERVICE_SECRET` was set for production (backend `.env` + Vercel production env). Whether Vercel preview/development environments — or any other deployment surfaces — also need the secret is unverified.
+- **Owner action required:** Confirm which environments call the backend service routes and set the secret where needed.
+
+### RG-34: Deploy drift — prod backend was 13 commits behind
+
+- **Source:** 2026-09-23 deploy; `/opt/ppd-backend` vs `ppd_backend` HEAD
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** The deployed production backend was 13 commits behind the repository HEAD, which is why the missing `INTERNAL_SERVICE_SECRET` (RG-24) went unnoticed — the deployed code predated `AuthMiddleware`. There is no deploy-drift check or monitoring.
+- **Owner action required:** Approve adding a deploy-drift check/monitor (e.g., deployed-revision endpoint vs HEAD alert).
+
+### RG-35: Design tokens live in globals.css fallback — courtviz token source is a stub
+
+- **Source:** 2026-10-27 design-system overhaul (plan-df5a2eb3958a6821, Wave 2a)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The app imports `vendor/courtviz/integration/css/ppd-variables.css`, but the vendored courtviz checkout is a stub file (submodule content not installed), so `@ppd/tokens` cannot be regenerated from source. The light/dark surface tokens (`--background` 0 0% 99%, `--card`/`--popover` 0 0% 100%, `--brand-*` fallbacks) were therefore updated directly in `peak_performance_data/src/app/globals.css`. If the real courtviz checkout is ever installed, the generated `ppd-variables.css` must be reconciled with these fallback values or it will silently override them.
+- **Owner action required:** Decide whether to install the real vendored courtviz packages and port the token definitions into `vendor/courtviz/packages/tokens`, or remove the stub import and make globals.css the declared source of truth.
+
+### RG-36: GET /api/injuries returns sensitive injury fields to coaches
+
+- **Source:** 2026-10-28 design-system overhaul (Wave 4.3 athlete detail)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** `peak_performance_data/src/app/api/injuries/route.ts` GET authorizes any `coach` role (no assignment check beyond role) and selects `diagnosis`, `symptoms`, `treatment`, and `notes` — fields the app's BodyViz policy classifies as athlete/admin-only. The new coach athlete-detail Health tab deliberately avoids this endpoint and renders only public fields (active flag, type, severity) from the readiness matrix plus the coach-authorized `injury-risk` endpoint, but the endpoint itself still over-shares sensitive health data.
+- **Owner action required:** Decide whether to restrict the sensitive columns to self/admin responses (or split the endpoint), and verify the coach assignment check.
