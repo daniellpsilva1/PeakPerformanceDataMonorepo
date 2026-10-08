@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-ADR-INDEX
-last_reviewed: 2026-09-13
+last_reviewed: 2026-10-02
 owner: daniel
 schema_version: 1
 status: draft
@@ -19,3 +19,4 @@ This directory contains ADRs for the PeakPerformanceData portfolio. Each ADR rec
 |---|---|---|
 | [ADR-0001](0001-documentation-system.md) | Adopt a repository-first documentation system | Draft |
 | [ADR-0002](0002-ai-proposal-approval-model.md) | AI proposal/approval model and per-task model routing | Draft |
+| [ADR-0003](0003-locale-persistence.md) | Locale persistence via NEXT_LOCALE cookie and profile preference | Draft |

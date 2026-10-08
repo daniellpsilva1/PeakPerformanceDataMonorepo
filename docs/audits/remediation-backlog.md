@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-AUDIT-REMEDIATION-BACKLOG
-last_reviewed: 2026-09-23
+last_reviewed: 2026-10-02
 owner: daniel
 related:
   - docs/audits/documentation-baseline.md
@@ -322,3 +322,35 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** `peak_performance_data/src/app/api/injuries/route.ts` GET authorizes any `coach` role (no assignment check beyond role) and selects `diagnosis`, `symptoms`, `treatment`, and `notes` — fields the app's BodyViz policy classifies as athlete/admin-only. The new coach athlete-detail Health tab deliberately avoids this endpoint and renders only public fields (active flag, type, severity) from the readiness matrix plus the coach-authorized `injury-risk` endpoint, but the endpoint itself still over-shares sensitive health data.
 - **Owner action required:** Decide whether to restrict the sensitive columns to self/admin responses (or split the endpoint), and verify the coach assignment check.
+
+### RG-37: Coach mobile UX branch lacks signed-in browser verification
+
+- **Source:** 2026-10-02 coach mobile UX effort (branch `fix/coach-mobile-ux-2026-10`, app commits `8b1b8a6a..35f32998`)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Signed-in browser verification at 390px and 1440px is still outstanding for the coach UX branch. Baseline screenshots and Server-Timing numbers (plan items P0.1/P0.2) were deferred because no QA coach login was available. Verification so far is unit tests, typecheck, and lint only.
+- **Owner action required:** Provide a QA coach account (or approve a seeded fixture) so the deferred screenshot and Server-Timing baselines can be captured before merge.
+
+### RG-38: Protected-route middleware getUser() round trip is unmeasured
+
+- **Source:** 2026-10-02 coach mobile UX effort (branch `fix/coach-mobile-ux-2026-10`)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The protected-route middleware's `getUser()` network round trip was kept on purpose (owner decision). It adds a Supabase call to every protected navigation and has never been measured on this branch.
+- **Owner action required:** Measure the round trip's contribution to navigation latency (e.g., Server-Timing or tracing) and decide whether it stays, is cached, or is restructured.
+
+### RG-39: Prefetch URLs with no exact-key SWR consumer
+
+- **Source:** 2026-10-02 SWR cache-scoping audit (app commit `35f32998`)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** These prefetched URLs have no SWR consumer reading the exact key, so each warm is a wasted request: `/api/observations`, `/api/performance-tests`, `/api/training-sessions` (`useTrainingSessions` is defined but never called), `/api/dashboard/admin/executive-metrics` (`useAdminExecutiveMetrics` is defined but never called), `/api/tennis/matches` and `/api/tennis/matches?limit=12` (the consumer is `useSWRInfinite`, which caches under `$inf$`-namespaced keys), and `/api/tennis/matches/evolution` for coach/parent views (the consumer appends `?playerId=`). Locations: `peak_performance_data/src/lib/navigation/prefetch-map.ts`, `peak_performance_data/src/components/navigation/Sidebar/navigationItems.tsx`, `peak_performance_data/src/lib/auth/loginPrefetch.ts`.
+- **Owner action required:** Decide per URL whether to remove the prefetch or align the consumer key so the warm actually lands.
+
+### RG-40: Module-level SWR helpers wrote to the wrong cache (fixed, needs observation)
+
+- **Source:** 2026-10-02 SWR cache-scoping audit (app commit `35f32998`)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Before `35f32998`, module-level SWR helpers (`invalidateCacheByPrefix`, the `useApiMutation` revalidate list, the optimistic helpers in `peak_performance_data/src/hooks/api/useSWR.ts`, and the conversation/message cache updaters in `peak_performance_data/src/hooks/data/useConversations.ts` and `peak_performance_data/src/hooks/data/useMessages.ts`) called the global `mutate`, which only writes SWR's default cache — AuthContext wraps the app in a keyed per-user `SWRConfig` provider, so every one of those calls was a silent no-op. The branch fixed this via `peak_performance_data/src/lib/swr/scoped-mutate.ts` (`appMutate` routed through a registered scoped mutator). Newly live paths — optimistic conversation/message updates and prefix invalidation — now actually write and revalidate, and need production observation for behavior that was previously dead code.
+- **Owner action required:** Watch optimistic messaging updates and post-mutation refetches in production (or staging) after merge; report any double-write or flicker regressions.

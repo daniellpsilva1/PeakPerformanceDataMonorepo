@@ -3,6 +3,264 @@
   "repo_id": "portfolio",
   "documents": [
     {
+      "id": "PPD-PORTFOLIO-ACCEPTANCE-CHECKLIST",
+      "title": "Final acceptance checklist",
+      "path": "docs/audits/acceptance-checklist.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/audits/documentation-baseline.md",
+        "docs/audits/historical-reconciliation.md",
+        "docs/governance/documentation-standard.md",
+        "docs/governance/sdlc.md"
+      ],
+      "content_digest": "e6c301ba9e270865"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ADR-0001",
+      "title": "ADR-0001 — Adopt a repository-first documentation system",
+      "path": "docs/decisions/0001-documentation-system.md",
+      "type": "adr",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "b4f1bdda89b02f7e"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ADR-0002",
+      "title": "ADR-0002 — AI proposal/approval model and per-task model routing",
+      "path": "docs/decisions/0002-ai-proposal-approval-model.md",
+      "type": "adr",
+      "status": "accepted",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/agents/runtime-knowledge-contract.md",
+        "docs/audits/remediation-backlog.md",
+        "PeakPerformanceData/peak_performance_data/docs/architecture/ai-agent.md"
+      ],
+      "content_digest": "0f1660073abe7ad7"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ADR-0003",
+      "title": "ADR-0003 — Locale persistence via NEXT_LOCALE cookie and profile preference",
+      "path": "docs/decisions/0003-locale-persistence.md",
+      "type": "adr",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": "src/i18n/routing.config.ts",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/lib/i18n/locale-preference.ts",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/app/[locale]/login/page.tsx",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/components/ui/LanguageSwitcher.tsx",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/components/ui/LanguageSheet.tsx",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/app/api/user/language/route.ts",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        },
+        {
+          "path": "src/app/api/manifest/route.ts",
+          "repo_id": "app",
+          "revision": "9617bbbcc00b4b09aeb24d54f6588ab48029458a"
+        }
+      ],
+      "related": [
+        "docs/decisions/0002-ai-proposal-approval-model.md"
+      ],
+      "content_digest": "fd70f9007f52cdb0"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ADR-INDEX",
+      "title": "Architecture Decision Records index",
+      "path": "docs/decisions/README.md",
+      "type": "overview",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "ea530eec4717c755"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AGENT-KNOWLEDGE-CONTRACT",
+      "title": "Runtime-agent knowledge contract",
+      "path": "docs/agents/runtime-knowledge-contract.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "AGENTS.md",
+        "docs/governance/documentation-standard.md"
+      ],
+      "content_digest": "b600287365ede01e"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AGENT-KNOWLEDGE-CONTRACT-LEGACY",
+      "title": "Runtime-agent knowledge contract (superseded)",
+      "path": "docs/agents/knowledge-contract.md",
+      "type": "reference",
+      "status": "superseded",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "AGENTS.md",
+        "docs/governance/documentation-standard.md"
+      ],
+      "content_digest": "ff25ddd63067e123"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AGENTS-NAVIGATION",
+      "title": "Agent navigation map",
+      "path": "docs/agents/navigation.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "AGENTS.md",
+        "docs/agents/runtime-knowledge-contract.md",
+        "docs/repositories.json"
+      ],
+      "content_digest": "83f189e6e72098bb"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ARCH-CONTAINERS",
+      "title": "Container architecture (C4 L2)",
+      "path": "docs/architecture/containers.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": "package.json",
+          "repo_id": "app",
+          "revision": "86faf8651a0be6f013af1bd49f8b0304f4b5273b"
+        },
+        {
+          "path": "api/main.py",
+          "repo_id": "backend",
+          "revision": "78fce68afcecccec201cf1116b98c0fe246340ca"
+        },
+        {
+          "path": "src/api/main.py",
+          "repo_id": "extraction",
+          "revision": "0433060b29a23bd2f29c761c10bcf9af4a58d812"
+        },
+        {
+          "path": "api/main.py",
+          "repo_id": "agent",
+          "revision": "335e5bc61e2063ab7d2d54050782f80488f4f106"
+        }
+      ],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-SYSTEM-CONTEXT",
+        "PPD-PORTFOLIO-ARCH-DATA-FLOWS"
+      ],
+      "content_digest": "db92524e19880ad1"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ARCH-DATA-FLOWS",
+      "title": "Cross-service data flows",
+      "path": "docs/architecture/data-flows.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "8863671b88b57857"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ARCH-DEPLOYMENT",
+      "title": "Deployment topology",
+      "path": "docs/architecture/deployment.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": "vercel.json",
+          "repo_id": "app",
+          "revision": "86faf8651a0be6f013af1bd49f8b0304f4b5273b"
+        },
+        {
+          "path": "render.yaml",
+          "repo_id": "backend",
+          "revision": "78fce68afcecccec201cf1116b98c0fe246340ca"
+        },
+        {
+          "path": "docker/docker-compose.yml",
+          "repo_id": "extraction",
+          "revision": "0433060b29a23bd2f29c761c10bcf9af4a58d812"
+        },
+        {
+          "path": "infra/launchd/",
+          "repo_id": "swingvision",
+          "revision": "1fe4763785d0318c38969a60c65b97ee57a6428a"
+        }
+      ],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-CONTAINERS"
+      ],
+      "content_digest": "d6f0b55e649c8bd4"
+    },
+    {
       "id": "PPD-PORTFOLIO-ARCH-OVERVIEW",
       "title": "Architecture overview (needs source linking)",
       "path": "docs/architecture.md",
@@ -15,6 +273,98 @@
       "source_refs": [],
       "related": [],
       "content_digest": "32ca5bb957724244"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ARCH-REPOSITORY-GRAPH",
+      "title": "Repository and dependency graph",
+      "path": "docs/architecture/repository-graph.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": ".gitmodules",
+          "repo_id": "portfolio",
+          "revision": "742306b28a233ab19cdc5d48f813d067397c201a"
+        },
+        {
+          "path": "docs/repositories.json",
+          "repo_id": "portfolio",
+          "revision": "742306b28a233ab19cdc5d48f813d067397c201a"
+        }
+      ],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-CONTAINERS"
+      ],
+      "content_digest": "0f3cf2c46b688f72"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ARCH-SYSTEM-CONTEXT",
+      "title": "System context (C4 L1)",
+      "path": "docs/architecture/system-context.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": "vercel.json",
+          "repo_id": "app",
+          "revision": "86faf8651a0be6f013af1bd49f8b0304f4b5273b"
+        },
+        {
+          "path": "render.yaml",
+          "repo_id": "backend",
+          "revision": "78fce68afcecccec201cf1116b98c0fe246340ca"
+        },
+        {
+          "path": "docker/docker-compose.yml",
+          "repo_id": "extraction",
+          "revision": "0433060b29a23bd2f29c761c10bcf9af4a58d812"
+        }
+      ],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-DATA-FLOWS"
+      ],
+      "content_digest": "be016419190f8b80"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AUDIT-BASELINE",
+      "title": "Documentation baseline audit",
+      "path": "docs/audits/documentation-baseline.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-REPOSITORIES"
+      ],
+      "content_digest": "bbd28dbae0c15471"
+    },
+    {
+      "id": "PPD-PORTFOLIO-AUDIT-REMEDIATION-BACKLOG",
+      "title": "Remediation backlog",
+      "path": "docs/audits/remediation-backlog.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/audits/documentation-baseline.md",
+        "docs/quality/verification-matrix.md"
+      ],
+      "content_digest": "6edf1806f359675d"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
@@ -31,6 +381,243 @@
       "content_digest": "2d88a099f5f94bc7"
     },
     {
+      "id": "PPD-PORTFOLIO-CHANGES-README",
+      "title": "Change log index",
+      "path": "docs/changes/README.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/templates/change-brief.md",
+        "docs/templates/release-record.md"
+      ],
+      "content_digest": "64947cd734e6f79f"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ENG-CONTRIBUTING",
+      "title": "Contributing guide",
+      "path": "docs/engineering/contributing.md",
+      "type": "how-to",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/governance/sdlc.md",
+        "docs/governance/documentation-standard.md"
+      ],
+      "content_digest": "c4c3aec854e65c4f"
+    },
+    {
+      "id": "PPD-PORTFOLIO-ENG-SUBMODULE-WORKFLOW",
+      "title": "Submodule workflow",
+      "path": "docs/engineering/submodule-workflow.md",
+      "type": "how-to",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/architecture/repository-graph.md",
+        "docs/engineering/contributing.md"
+      ],
+      "content_digest": "5c4e5eafb2317d26"
+    },
+    {
+      "id": "PPD-PORTFOLIO-GOV-EVIDENCE",
+      "title": "Evidence and traceability",
+      "path": "docs/governance/evidence-and-traceability.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "5957c86193a74045"
+    },
+    {
+      "id": "PPD-PORTFOLIO-GOV-MAINTENANCE",
+      "title": "Documentation maintenance",
+      "path": "docs/governance/maintenance.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "099c732e4804377e"
+    },
+    {
+      "id": "PPD-PORTFOLIO-GOV-RESEARCH",
+      "title": "Research basis",
+      "path": "docs/governance/research-basis.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "15d1a4beb2d123b3"
+    },
+    {
+      "id": "PPD-PORTFOLIO-GOV-SDLC",
+      "title": "Software development lifecycle",
+      "path": "docs/governance/sdlc.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "05de526a694dfcef"
+    },
+    {
+      "id": "PPD-PORTFOLIO-GOV-STANDARD",
+      "title": "Documentation standard",
+      "path": "docs/governance/documentation-standard.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "dd91c43381f43648"
+    },
+    {
+      "id": "PPD-PORTFOLIO-MARKETING-BASELINE",
+      "title": "Marketing media baselines",
+      "path": "docs/marketing/baseline.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [
+        {
+          "path": "README.md",
+          "repo_id": "academies",
+          "revision": "5a1731a6f4f8fa0dc7dc0d739763262c1afb06e5"
+        },
+        {
+          "path": "README.md",
+          "repo_id": "manim",
+          "revision": "74af23758dab981bcbb4cc09208851708589c8fe"
+        },
+        {
+          "path": "README.md",
+          "repo_id": "remotion",
+          "revision": "8ebd56149adbb6d17d52b4184a10628667cfb719"
+        }
+      ],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-REPOSITORY-GRAPH"
+      ],
+      "content_digest": "47173325649b28d6"
+    },
+    {
+      "id": "PPD-PORTFOLIO-NAV-DOCS-INDEX",
+      "title": "Documentation index",
+      "path": "docs/README.md",
+      "type": "overview",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "60646f15b8d7fa78"
+    },
+    {
+      "id": "PPD-PORTFOLIO-OPS-INCIDENT-PROCESS",
+      "title": "Incident process",
+      "path": "docs/operations/incident-process.md",
+      "type": "how-to",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/operations/reliability.md",
+        "docs/operations/runbooks-index.md",
+        "docs/templates/postmortem.md"
+      ],
+      "content_digest": "b24ed31953321e09"
+    },
+    {
+      "id": "PPD-PORTFOLIO-OPS-RELEASE-PROCESS",
+      "title": "Release process",
+      "path": "docs/operations/release-process.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-DEPLOYMENT",
+        "PPD-PORTFOLIO-SDLC-ASSURANCE-MATRIX"
+      ],
+      "content_digest": "5a42c3eb62740bc9"
+    },
+    {
+      "id": "PPD-PORTFOLIO-OPS-RELIABILITY",
+      "title": "Reliability and SLOs",
+      "path": "docs/operations/reliability.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/operations/release-process.md",
+        "docs/operations/runbooks-index.md",
+        "docs/architecture/deployment.md"
+      ],
+      "content_digest": "b3f8b269650d56a6"
+    },
+    {
+      "id": "PPD-PORTFOLIO-OPS-RUNBOOKS-INDEX",
+      "title": "Operations runbooks index",
+      "path": "docs/operations/runbooks-index.md",
+      "type": "overview",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-DEPLOYMENT",
+        "PPD-PORTFOLIO-SECURITY-DFD"
+      ],
+      "content_digest": "ad08b89a836bc239"
+    },
+    {
       "id": "PPD-PORTFOLIO-OVERVIEW-README",
       "title": "PeakPerformanceData monorepo",
       "path": "README.md",
@@ -43,6 +630,135 @@
       "source_refs": [],
       "related": [],
       "content_digest": "87b995a699ac17dd"
+    },
+    {
+      "id": "PPD-PORTFOLIO-PRIVACY-BASELINE",
+      "title": "Privacy baseline",
+      "path": "docs/privacy/baseline.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-SECURITY-DFD",
+        "PPD-PORTFOLIO-ARCH-SYSTEM-CONTEXT"
+      ],
+      "content_digest": "c24873871781c59c"
+    },
+    {
+      "id": "PPD-PORTFOLIO-PRODUCT-CAPABILITY-MAP",
+      "title": "Capability map",
+      "path": "docs/product/capability-map.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-PRODUCT-OVERVIEW",
+        "PPD-PORTFOLIO-ARCH-CONTAINERS"
+      ],
+      "content_digest": "8659ff1340974337"
+    },
+    {
+      "id": "PPD-PORTFOLIO-PRODUCT-DECISION-REGISTER",
+      "title": "Decision register",
+      "path": "docs/product/decision-register.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/decisions/README.md"
+      ],
+      "content_digest": "bb9d43f17423e3bc"
+    },
+    {
+      "id": "PPD-PORTFOLIO-PRODUCT-GLOSSARY",
+      "title": "Product glossary",
+      "path": "docs/product/glossary.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "3afa76259926fac9"
+    },
+    {
+      "id": "PPD-PORTFOLIO-PRODUCT-OVERVIEW",
+      "title": "Product overview",
+      "path": "docs/product/overview.md",
+      "type": "overview",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "7beb97d00ab6a1cf"
+    },
+    {
+      "id": "PPD-PORTFOLIO-QUALITY-STRATEGY",
+      "title": "Quality strategy",
+      "path": "docs/quality/strategy.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/governance/sdlc.md",
+        "docs/quality/verification-matrix.md"
+      ],
+      "content_digest": "b3a5587e6b5d65fa"
+    },
+    {
+      "id": "PPD-PORTFOLIO-QUALITY-VERIFICATION-MATRIX",
+      "title": "Verification matrix",
+      "path": "docs/quality/verification-matrix.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/quality/strategy.md",
+        "docs/governance/evidence-and-traceability.md"
+      ],
+      "content_digest": "de074a63ac16379a"
+    },
+    {
+      "id": "PPD-PORTFOLIO-RECONCILIATION-HISTORICAL",
+      "title": "Historical reconciliation",
+      "path": "docs/audits/historical-reconciliation.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/audits/documentation-baseline.md",
+        "docs/governance/documentation-standard.md"
+      ],
+      "content_digest": "5ee9ac0d3127bb42"
     },
     {
       "id": "PPD-PORTFOLIO-REF-API",
@@ -85,9 +801,218 @@
       "source_refs": [],
       "related": [],
       "content_digest": "c1c20073034987d1"
+    },
+    {
+      "id": "PPD-PORTFOLIO-SDLC-ASSURANCE-MATRIX",
+      "title": "SDLC assurance matrix",
+      "path": "docs/governance/assurance-matrix.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/governance/sdlc.md",
+        "docs/governance/evidence-and-traceability.md"
+      ],
+      "content_digest": "5f5c452afe733fd5"
+    },
+    {
+      "id": "PPD-PORTFOLIO-SDLC-EXAMPLE-WEARABLE",
+      "title": "Lifecycle example — wearable provider integration",
+      "path": "docs/governance/lifecycle-example-wearable.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-SDLC-ASSURANCE-MATRIX",
+        "PPD-PORTFOLIO-ARCH-DATA-FLOWS",
+        "PPD-APP-ARCH-WEARABLES"
+      ],
+      "content_digest": "eaa781532b308017"
+    },
+    {
+      "id": "PPD-PORTFOLIO-SECURITY-DFD",
+      "title": "Security data flow diagram",
+      "path": "docs/security/threat-model.md",
+      "type": "explanation",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "PPD-PORTFOLIO-ARCH-CONTAINERS",
+        "PPD-APP-ARCH-IDENTITY",
+        "PPD-APP-ARCH-WEARABLES"
+      ],
+      "content_digest": "45a294ddfb43ba36"
+    },
+    {
+      "id": "PPD-PORTFOLIO-SECURITY-PRIVACY",
+      "title": "Privacy and data handling baseline",
+      "path": "docs/security/privacy-and-data-handling.md",
+      "type": "reference",
+      "status": "draft",
+      "owner": "daniel",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [
+        "docs/security/threat-model.md",
+        "docs/audits/remediation-backlog.md"
+      ],
+      "content_digest": "8e03d5b42b121c43"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-ADR",
+      "title": "ADR-<NUMBER> — <title>",
+      "path": "docs/templates/adr.md",
+      "type": "adr",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "bac165cb70437ff6"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-CARD",
+      "title": "<Card title>",
+      "path": "docs/templates/model-or-metric-card.md",
+      "type": "metric-card",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "cb1eb38fd7e5a426"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-CHANGE-BRIEF",
+      "title": "<Change title>",
+      "path": "docs/templates/change-brief.md",
+      "type": "prd",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "0d5549b4ce718853"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-DESIGN-RFC",
+      "title": "<RFC title>",
+      "path": "docs/templates/design-rfc.md",
+      "type": "rfc",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "1551c5479be89cf2"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-POSTMORTEM",
+      "title": "<Postmortem title>",
+      "path": "docs/templates/postmortem.md",
+      "type": "postmortem",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "b77ae022f486f20c"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-PRD",
+      "title": "<PRD title>",
+      "path": "docs/templates/prd.md",
+      "type": "prd",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "d3be9d47effea44c"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-RELEASE-RECORD",
+      "title": "<Release title>",
+      "path": "docs/templates/release-record.md",
+      "type": "release",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "19e460f34ddc30bf"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-RUNBOOK",
+      "title": "<Runbook title>",
+      "path": "docs/templates/runbook.md",
+      "type": "runbook",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "67d8e599885ade92"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-TEST-PLAN",
+      "title": "<Test plan title>",
+      "path": "docs/templates/test-plan.md",
+      "type": "test-plan",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "0cacb2e50eb05461"
+    },
+    {
+      "id": "PPD-PORTFOLIO-TEMPLATE-UX-SPEC",
+      "title": "<UX spec title>",
+      "path": "docs/templates/ux-spec.md",
+      "type": "ux-spec",
+      "status": "draft",
+      "owner": "<owner>",
+      "visibility": "internal",
+      "summary": "",
+      "domain_tags": [],
+      "source_refs": [],
+      "related": [],
+      "content_digest": "1f037b29512da761"
     }
   ],
   "generator_version": "0.1.0",
-  "input_digest": "74cc707e23b969ae"
+  "input_digest": "edc4e6eded24d2b1"
 }
-
