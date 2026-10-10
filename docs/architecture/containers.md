@@ -39,7 +39,7 @@ flowchart TB
         UI --> BFF
     end
 
-    subgraph Graph["Graph Backend (Render)"]
+    subgraph Graph["Graph Backend (Hetzner Falkenstein/Traefik)"]
         GraphAPI["FastAPI\n/api/v1/graphs\n/api/weekly-km-pace"]
         WearablesAPI["FastAPI\n/wearables/activities"]
         GraphAPI --> GraphCache["Graph Cache"]
@@ -92,8 +92,8 @@ flowchart TB
 
 | Container | Repository | Runtime | Deployment | Evidence |
 |---|---|---|---|---|
-| Next.js BFF + UI | app | Node.js 22, Next.js 15.5 | Vercel (iad1) | `package.json`, `vercel.json` |
-| Graph backend | backend | Python, FastAPI | Render (Docker) | `render.yaml`, `api/main.py` |
+| Next.js BFF + UI | app | Node.js 22, Next.js 15.5 | Vercel (lhr1) | `package.json`, `vercel.json` |
+| Graph backend | backend | Python, FastAPI | Hetzner Falkenstein (Docker/Traefik) | `docker-compose.yml`, `api/main.py` |
 | Extraction backend | extraction | Python, FastAPI | Hetzner (Docker/Traefik) | `docker/docker-compose.yml` |
 | Python AI agent | agent | Python, FastAPI | Unconfirmed | `api/main.py` |
 | Vision service | vision | Python, FastAPI | Unconfirmed | `api/routes/analysis.py` |

@@ -49,8 +49,7 @@ flowchart TD
     PPD --> SV[SwingVision]
 
     PPD --> Vercel["Vercel (app)"]
-    PPD --> Render["Render (graph backend)"]
-    PPD --> Hetzner["Hetzner (extraction + video)"]
+    PPD --> Hetzner["Hetzner Falkenstein (extraction + graph backend + video)"]
 ```
 
 ## Actors
@@ -80,9 +79,10 @@ flowchart TD
 
 | Surface | Config evidence | Status |
 |---|---|---|
-| Vercel (app) | `vercel.json` — region `iad1`, crons, redirects | Configured |
-| Render (graph backend) | `render.yaml` — Docker, starter plan | Configured |
+| Vercel (app) | `vercel.json` — region `lhr1`, crons, redirects | Configured |
+| Hetzner Falkenstein (graph backend) | `docker-compose.yml` — `ppc-api` behind Traefik, PathPrefix `/ppc`, `api.wearablesync.app/ppc` | Configured |
 | Hetzner (extraction) | `docker/docker-compose.yml` — Traefik, ClickHouse | Configured |
+| Hetzner Helsinki ("Wearables-Data-Processing", 89.167.47.236) | — | Purpose unverified |
 | Mac Mini (SwingVision) | `infra/launchd/` — worker daemon | Configured |
 
 ## What this diagram does not show

@@ -360,9 +360,10 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 
 - **Source:** 2026-10 UX/perf improvement wave (branch `improve/ux-perf-wave-2026-10`); Vercel `regions: ["lhr1"]` and edge `preferredRegion = 'lhr1'` pinning
 - **Risk:** Medium
-- **Status:** Open
+- **Status:** Closed (invalid — see correction)
 - **Description:** The PPC backend Render service `ppc-backend-8ow2` runs in Oregon. With Vercel functions and edge routes now pinned to `lhr1` (next to Supabase in eu-west-2), every graph/extraction call from those functions still crosses the Atlantic to Oregon, so the latency gain from the region move is partially lost on backend-dependent routes.
-- **Owner action required:** Move the Render service `ppc-backend-8ow2` from Oregon to Frankfurt (Render `fra` region), or authorize an equivalent EU region, and update any environment/health-check configuration accordingly.
+- **Correction (2026-10-09):** The Oregon/Render premise was wrong — it was derived from a stale CORS origin (`ppc-backend-8ow2.onrender.com` in `src/middleware/cors.ts`). Render is no longer used (owner statement 2026-10-09). The PPC graph backend actually runs as Docker service `ppc-api` on the Hetzner "Wearables-Data-Extraction" server (CX33, 116.202.100.150, Falkenstein, Germany, eu-central), behind the shared Traefik of the extraction stack at `https://api.wearablesync.app/ppc` (`/ppc/health` returned 200 healthy on 2026-10-09). Production app env is `NEXT_PUBLIC_PPC_API_URL=https://api.wearablesync.app/ppc`. The graph path is browser → Vercel lhr1 → Hetzner Falkenstein — already intra-EU, so no move is needed.
+- **Owner action required:** None — no relocation needed.
 
 ### RG-42: Supabase asymmetric JWT signing keys not enabled — getClaims() falls back to Auth network call
 

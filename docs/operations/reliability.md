@@ -22,7 +22,7 @@ This document records the current state of reliability practices. It does not in
 | Surface | Platform | Documented | SLO defined |
 |---|---|---|---|
 | App (Next.js) | Vercel | Yes (`docs/architecture/deployment.md`) | No |
-| Backend (FastAPI) | Render | Yes | No |
+| Backend (FastAPI) | Hetzner (Docker/Traefik) | Yes | No |
 | Extraction (FastAPI) | Hetzner/Docker | Yes | No |
 | Vision (FastAPI) | Render | Yes | No |
 | Agent (Python) | TBD | No | No |

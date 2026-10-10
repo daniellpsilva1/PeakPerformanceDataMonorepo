@@ -30,7 +30,7 @@ This document records the privacy-relevant data categories in the platform and t
 | AI conversations | Supabase | AI agent | Medium | Needs audit |
 | Genetic data | Supabase (via agent) | User upload | Critical | Needs audit |
 | Video files | Cloudflare R2 | SwingVision/Vision | Medium | Access controlled |
-| IP addresses | Vercel/Render logs | HTTP requests | Medium | Provider-managed |
+| IP addresses | Vercel/Hetzner logs | HTTP requests | Medium | Provider-managed |
 
 ## Data subject rights
 
@@ -51,15 +51,17 @@ This document records the privacy-relevant data categories in the platform and t
 | AI conversations | `cleanup-conversations` cron (daily 3am) | Configured |
 | Video files | R2 lifecycle policy | Configured (needs review) |
 | Billing records | Unconfirmed | Needs policy |
-| Logs | Provider-managed (Vercel/Render) | Needs policy |
+| Logs | Provider-managed (Vercel/Hetzner) | Needs policy |
 
 ## Cross-border transfers
 
 | Transfer | Mechanism | Status |
 |---|---|---|
-| EU → US (Vercel iad1) | Vercel DPA | Needs verification |
-| EU → US (Render) | Render DPA | Needs verification |
-| EU → Hetzner (extraction) | Hetzner location | Needs verification |
+| EU (Vercel lhr1) | Vercel DPA | Configured (region moved from iad1, 2026-10) |
+| EU → Hetzner (extraction + graph backend) | Hetzner Falkenstein, Germany (eu-central) | Verified — owner-provided console screenshot, 2026-10-09 |
+
+> **Correction (2026-10-09):** Vercel functions and all edge routes now run in `lhr1` (London, eu-west), not iad1 — intra-EU. The previous "EU → US (Render)" row is removed: Render is no longer used for the graph backend (owner statement 2026-10-09) — it runs on Hetzner Falkenstein (see row above). Note: the app's `NEXT_PUBLIC_API_URL` env still points at `peakperformancedatav2.onrender.com`; whether that legacy backend is live is unverified.
+> A second Hetzner server "Wearables-Data-Processing" (CX23, 89.167.47.236, Helsinki, eu-central) exists; what runs on it is unverified.
 
 ## What this document does not claim
 

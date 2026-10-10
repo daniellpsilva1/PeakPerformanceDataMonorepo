@@ -207,7 +207,7 @@
         "PPD-PORTFOLIO-ARCH-SYSTEM-CONTEXT",
         "PPD-PORTFOLIO-ARCH-DATA-FLOWS"
       ],
-      "content_digest": "db92524e19880ad1"
+      "content_digest": "8d2e3f585bddf55e"
     },
     {
       "id": "PPD-PORTFOLIO-ARCH-DATA-FLOWS",
@@ -258,7 +258,7 @@
       "related": [
         "PPD-PORTFOLIO-ARCH-CONTAINERS"
       ],
-      "content_digest": "d6f0b55e649c8bd4"
+      "content_digest": "e0e321845b39f236"
     },
     {
       "id": "PPD-PORTFOLIO-ARCH-OVERVIEW",
@@ -272,7 +272,7 @@
       "domain_tags": [],
       "source_refs": [],
       "related": [],
-      "content_digest": "332f9d1f66d0eee9"
+      "content_digest": "20dce89b3eac6ce9"
     },
     {
       "id": "PPD-PORTFOLIO-ARCH-REPOSITORY-GRAPH",
@@ -331,7 +331,7 @@
       "related": [
         "PPD-PORTFOLIO-ARCH-DATA-FLOWS"
       ],
-      "content_digest": "be016419190f8b80"
+      "content_digest": "3fb3ae0023510675"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-BASELINE",
@@ -364,7 +364,7 @@
         "docs/audits/documentation-baseline.md",
         "docs/quality/verification-matrix.md"
       ],
-      "content_digest": "f52adb2b35fe31f4"
+      "content_digest": "91a3944ba04745fc"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
@@ -378,7 +378,7 @@
       "domain_tags": [],
       "source_refs": [],
       "related": [],
-      "content_digest": "2d88a099f5f94bc7"
+      "content_digest": "243d4df85dd041f2"
     },
     {
       "id": "PPD-PORTFOLIO-CHANGES-README",
@@ -580,7 +580,7 @@
         "PPD-PORTFOLIO-ARCH-DEPLOYMENT",
         "PPD-PORTFOLIO-SDLC-ASSURANCE-MATRIX"
       ],
-      "content_digest": "5a42c3eb62740bc9"
+      "content_digest": "6d110acf9703eb82"
     },
     {
       "id": "PPD-PORTFOLIO-OPS-RELIABILITY",
@@ -598,7 +598,7 @@
         "docs/operations/runbooks-index.md",
         "docs/architecture/deployment.md"
       ],
-      "content_digest": "b3f8b269650d56a6"
+      "content_digest": "8c5ece1115002ea3"
     },
     {
       "id": "PPD-PORTFOLIO-OPS-RUNBOOKS-INDEX",
@@ -615,7 +615,7 @@
         "PPD-PORTFOLIO-ARCH-DEPLOYMENT",
         "PPD-PORTFOLIO-SECURITY-DFD"
       ],
-      "content_digest": "ad08b89a836bc239"
+      "content_digest": "a347aeb86157153f"
     },
     {
       "id": "PPD-PORTFOLIO-OVERVIEW-README",
@@ -646,7 +646,7 @@
         "PPD-PORTFOLIO-SECURITY-DFD",
         "PPD-PORTFOLIO-ARCH-SYSTEM-CONTEXT"
       ],
-      "content_digest": "c24873871781c59c"
+      "content_digest": "9a9365a68e598a16"
     },
     {
       "id": "PPD-PORTFOLIO-PRODUCT-CAPABILITY-MAP",
@@ -800,7 +800,7 @@
       "domain_tags": [],
       "source_refs": [],
       "related": [],
-      "content_digest": "c1c20073034987d1"
+      "content_digest": "b48547c0a2a59155"
     },
     {
       "id": "PPD-PORTFOLIO-SDLC-ASSURANCE-MATRIX",
@@ -853,7 +853,7 @@
         "PPD-APP-ARCH-IDENTITY",
         "PPD-APP-ARCH-WEARABLES"
       ],
-      "content_digest": "45a294ddfb43ba36"
+      "content_digest": "38de2f0411cac6be"
     },
     {
       "id": "PPD-PORTFOLIO-SECURITY-PRIVACY",
@@ -1014,5 +1014,5 @@
     }
   ],
   "generator_version": "0.1.0",
-  "input_digest": "6ed489ddeb44d9d3"
+  "input_digest": "df241432c9ee975b"
 }

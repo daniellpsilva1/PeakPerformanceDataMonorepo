@@ -36,12 +36,12 @@ This index lists operational runbooks for the PeakPerformanceData platform. Runb
 | `app/feature-flag-toggle.md` | Toggle BodyViz or other feature flags | Pending |
 | `app/cron-failure.md` | Cron job `cleanup-conversations` fails | Pending |
 
-### Graph backend (Render)
+### Graph backend (Hetzner/Traefik)
 
 | Runbook | Scenario | Status |
 |---|---|---|
 | `backend/cache-flush.md` | Flush graph cache | Pending |
-| `backend/deployment.md` | Deploy a new version to Render | Pending |
+| `backend/deployment.md` | Deploy a new version to Hetzner (Docker/Traefik) | Pending |
 | `backend/health-check.md` | Verify backend health | Pending |
 
 ### Extraction backend (Hetzner)

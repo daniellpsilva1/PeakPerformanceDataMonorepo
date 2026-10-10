@@ -200,12 +200,14 @@ docker compose up -d
 
 **Config**: `PeakPerformanceData/ppd_backend/docker-compose.yml` — Redis + backend API with Traefik labels.
 
-### Deploy to Render
+### Deploy to Hetzner (production)
 
-**Config**: `PeakPerformanceData/ppd_backend/render.yaml`
-- Docker-based deployment
+**Config**: `PeakPerformanceData/ppd_backend/docker-compose.yml`
+- Docker service `ppc-api` on the "Wearables-Data-Extraction" server (Hetzner CX33, 116.202.100.150, Falkenstein)
+- Behind the extraction stack's shared Traefik at `https://api.wearablesync.app/ppc` (PathPrefix `/ppc`, stripprefix, network `ppd-shared`)
 - Health check: `/health`
-- Plan: starter
+- `render.yaml` is obsolete — Render is no longer used (owner statement 2026-10-09)
+- `scripts/deploy.sh` targets the Helsinki server (89.167.47.236) and does not reflect current production
 
 ---
 
@@ -477,7 +479,7 @@ npx supabase gen types typescript --project-id bcfwtgqvusjhlrqsztod > src/lib/su
 | Service | Platform | Config File | Health Check |
 |---------|----------|-------------|--------------|
 | Frontend | Vercel | `vercel.json` | Automatic |
-| ppd_backend | Render | `render.yaml` | `/health` |
+| ppd_backend | Docker (Hetzner Falkenstein/Traefik) | `docker-compose.yml` | `/health` |
 | ppd_extraction_backend | Docker (Hetzner) | `docker/docker-compose.yml` | `/health` |
 | ClickHouse | Native (Hetzner host) | — | — |
 | OpenWearables | Docker (Hetzner, separate stack) | External | — |

@@ -23,7 +23,7 @@ The monorepo at `/Users/danielsilva/Desktop/PeakPerformanceDataMonorepo` contain
 PeakPerformanceDataMonorepo/
 ├── PeakPerformanceData/           # Main application (3 sub-projects)
 │   ├── peak_performance_data/     # Next.js frontend (Vercel)
-│   ├── ppd_backend/               # FastAPI graph/data processing (Render)
+│   ├── ppd_backend/               # FastAPI graph/data processing (Docker/Hetzner)
 │   └── ppd_extraction_backend/    # FastAPI wearable data extraction (Docker/Hetzner)
 ├── PeakPerformanceDataMarketing/  # Marketing & visualization assets
 │   ├── Remotion/                  # React-based marketing video
@@ -262,7 +262,7 @@ All wrappers:
 | `utils/core/caching.py` | LRUCache with TTL, graph_cache, activity_cache, polyline_cache |
 | `config/database.py` | ClickHouse + Supabase client pools, circuit breaker |
 
-**Deployment**: Docker on Render. `render.yaml` configures web service with health check at `/health`.
+**Deployment**: Docker on Hetzner Falkenstein (116.202.100.150) — `ppc-api` service behind the extraction stack's shared Traefik at `https://api.wearablesync.app/ppc` (`docker-compose.yml`). `render.yaml` is obsolete (Render not used since owner statement 2026-10-09).
 
 **Cold start optimization**: Pervasive lazy imports — pandas, numpy, plotly, boto3 all deferred to first use. Background thread warms graph registry after startup.
 
@@ -412,7 +412,7 @@ Connection management with auto-reconnect and chunked inserts:
            │                      │                      │
 ┌──────────▼──────────┐  ┌───────▼──────────┐  ┌───────▼──────────────────┐
 │   Supabase          │  │  ppd_backend      │  │  ppd_extraction_backend  │
-│   (PostgreSQL)      │  │  (Render/Docker)  │  │  (Hetzner/Docker)        │
+│   (PostgreSQL)      │  │ (Hetzner/Traefik) │  │  (Hetzner/Docker)        │
 │                     │  │                   │  │                          │
 │  Auth, profiles,    │  │  Graph generation │  │  Garmin OAuth            │
 │  organizations,     │  │  ClickHouse query │  │  Webhooks (PING/PUSH)    │

@@ -32,19 +32,17 @@ This document records the deployment surfaces observed in checked-in configurati
 
 ```mermaid
 flowchart TB
-    subgraph Vercel["Vercel — region iad1"]
+    subgraph Vercel["Vercel — region lhr1"]
         App["Next.js App\n(build: pnpm build)"]
         Cron["Cron: cleanup-conversations\n(0 3 * * *)"]
     end
 
-    subgraph Render["Render — starter plan"]
-        Backend["Graph Backend\n(Docker, health: /health)"]
-    end
-
-    subgraph Hetzner["Hetzner — Docker/Traefik"]
+    subgraph Hetzner["Hetzner Falkenstein — Docker/Traefik"]
         Traefik["Traefik v3.3\n(SSL, routing, webhooks)"]
+        Backend["Graph Backend ppc-api\n(Docker, PathPrefix /ppc, health: /health)"]
         Extraction["Extraction Backend\n(uvicorn, 100MB max event)"]
         CHContainer["ClickHouse Container"]
+        Traefik --> Backend
         Traefik --> Extraction
         Extraction --> CHContainer
     end
@@ -80,22 +78,30 @@ flowchart TB
 
 | Config | Value | Source |
 |---|---|---|
-| Region | `iad1` | `vercel.json` |
+| Region | `lhr1` | `vercel.json` |
 | Build command | `HUSKY=0 pnpm run build` | `vercel.json` |
 | Install command | `ensure-vendor-stubs.sh && build:courtviz && build:bodyviz && pnpm install --frozen-lockfile` | `vercel.json` |
 | Cron | `cleanup-conversations` at `0 3 * * *` | `vercel.json` |
 | Redirects | `/strava-auth-callback`, `/presentation/*` | `vercel.json` |
 
-### Render (graph backend)
+### Hetzner Falkenstein (graph backend)
 
 | Config | Value | Source |
 |---|---|---|
-| Type | `web` (Docker) | `render.yaml` |
-| Plan | `starter` | `render.yaml` |
-| Health check | `/health` | `render.yaml` |
-| Env vars | `DATABASE_URL`, `STRAVA_*`, `AWS_*` | `render.yaml` |
+| Host | "Wearables-Data-Extraction" — Hetzner CX33, 116.202.100.150, Falkenstein, Germany (eu-central) | Owner-provided console screenshot, 2026-10-09 |
+| Service | `ppc-api` Docker service | `ppd_backend/docker-compose.yml` |
+| Proxy | Shared Traefik — router `ppc-api`, PathPrefix `/ppc`, stripprefix, port 8000, network `ppd-shared` | `ppd_backend/docker-compose.yml` |
+| Public URL | `https://api.wearablesync.app/ppc` (`api.wearablesync.app` and `ppc.peakperformancedata.app` both resolve to 116.202.100.150; `/ppc/health` healthy 2026-10-09) | Owner verification, 2026-10-09 |
+| Health check | `/health` | `api/main.py` |
 
-Note: `render.yaml` references `STRAVA_*` env vars, which may be stale. See gap DG-05.
+Note: `render.yaml` is obsolete — Render is no longer used for this service (owner statement 2026-10-09). The stale `STRAVA_*` env-var question (DG-05) applied to `render.yaml` and is now moot for deployment config.
+
+### Hetzner Helsinki (unverified)
+
+| Config | Value | Source |
+|---|---|---|
+| Host | "Wearables-Data-Processing" — Hetzner CX23, 89.167.47.236, Helsinki, Finland (eu-central) | Owner-provided console screenshot, 2026-10-09 |
+| Purpose | Unverified — `ppd_backend/scripts/deploy.sh` targets this server (Caddy, `ppc.peakperformancedata.app`), but DNS for that domain resolves to Falkenstein, so the script does not describe current production | `ppd_backend/scripts/deploy.sh` |
 
 ### Hetzner (extraction)
 

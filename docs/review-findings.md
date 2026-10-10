@@ -61,6 +61,8 @@ _buckets: Dict[str, List[float]] = defaultdict(list)
 
 The rate limiter uses an in-memory dict. The Dockerfile (`ppd_backend/Dockerfile:33`) runs gunicorn with `--workers 2`, and `--preload` means each worker has its own `_buckets` dict. This effectively doubles the rate limit. On Render with potential auto-scaling, the problem is worse.
 
+> **Correction (2026-10-09):** The service no longer runs on Render — it runs as the `ppc-api` Docker service on Hetzner Falkenstein behind Traefik. The multi-worker caveat still applies to the container's gunicorn workers.
+
 **Recommendation**: Use Redis (already in `docker-compose.yml`) for shared rate limit state.
 
 ### H-3: Bare `except:` clauses swallow all exceptions

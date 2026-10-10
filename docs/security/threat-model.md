@@ -37,7 +37,7 @@ flowchart TB
         AirRoute --> AdminClient
     end
 
-    subgraph BackendBoundary["Graph Backend Boundary (Render)"]
+    subgraph BackendBoundary["Graph Backend Boundary (Hetzner/Traefik)"]
         GraphAuth[AuthMiddleware]
         GraphAPI[Graph API\n/api/v1/graphs]
         WearablesAPI[Wearables API\n/wearables/activities]

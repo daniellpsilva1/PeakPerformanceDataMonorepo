@@ -21,7 +21,7 @@ This document describes the release process for the PeakPerformanceData platform
 | Surface | Mechanism | Configured | Verified |
 |---|---|---|---|
 | App | Vercel (auto-deploy on push to main) | Yes | Unconfirmed |
-| Graph backend | Render (Docker, manual or auto) | Yes | Unconfirmed |
+| Graph backend | Hetzner Falkenstein (Docker Compose, manual) | Yes | Unconfirmed |
 | Extraction | Hetzner (Docker Compose, manual) | Yes | Unconfirmed |
 | SwingVision | Mac Mini (launchd, manual) | Yes | Unconfirmed |
 | Vision | Unconfirmed | Unconfirmed | Unconfirmed |
@@ -73,7 +73,7 @@ flowchart LR
 | Service | Mechanism | Status |
 |---|---|---|
 | App | Vercel instant rollback | Configured |
-| Graph backend | Render redeploy previous | Configured |
+| Graph backend | Docker Compose redeploy | Manual |
 | Extraction | Docker Compose redeploy | Manual |
 | SwingVision | launchd restart with previous code | Manual |
 | Database | Migration down script | Per-migration |
