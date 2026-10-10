@@ -89,6 +89,8 @@ PeakPerformanceDataMonorepo/
 6. **Session validation** — `getUser()` called in parallel with `handleAuth()` only if session validation cookie (`ppd-session-validated`) is stale (30-min TTL). Skips redundant GoTrue round-trip for in-session navigation.
 7. **Authorization** (`src/middleware/authorization.ts`) — Role-based path gating using DB profile role (not client-writable `user_metadata.role`). Personal-mode users blocked from org-only routes.
 
+> **Correction (2026-10-08):** Step 6 is stale on two counts. The `ppd-session-validated` cookie marker was removed earlier — the `SECURITY (F02)` comments in `src/middleware.ts` now require JWT validation on every protected-route session. And per the 2026-10-08 owner decision, that check uses `auth.getClaims()` (local JWT signature verification via JWKS once asymmetric signing keys are enabled, GoTrue fallback while HS256) instead of `getUser()`. Revocation is detected at token expiry; sensitive writes keep `withAuth` `verifyUser`.
+
 **Route classification** (`src/middleware/routes.ts`):
 - **Protected**: `/admin`, `/charts`, `/club-admin`, `/coach`, `/feedback`, `/genetics`, `/history`, `/labs`, `/management`, `/messages`, `/overview`, `/parent`, `/performance-tests`, `/player`, `/profile`, `/settings`, `/tennis-scorekeeper`
 - **Auth-only**: `/login`, `/signup` (redirect to dashboard if already authenticated)

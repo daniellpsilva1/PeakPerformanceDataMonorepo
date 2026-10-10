@@ -272,7 +272,7 @@
       "domain_tags": [],
       "source_refs": [],
       "related": [],
-      "content_digest": "32ca5bb957724244"
+      "content_digest": "332f9d1f66d0eee9"
     },
     {
       "id": "PPD-PORTFOLIO-ARCH-REPOSITORY-GRAPH",
@@ -364,7 +364,7 @@
         "docs/audits/documentation-baseline.md",
         "docs/quality/verification-matrix.md"
       ],
-      "content_digest": "6edf1806f359675d"
+      "content_digest": "f52adb2b35fe31f4"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
@@ -1014,5 +1014,5 @@
     }
   ],
   "generator_version": "0.1.0",
-  "input_digest": "edc4e6eded24d2b1"
+  "input_digest": "6ed489ddeb44d9d3"
 }

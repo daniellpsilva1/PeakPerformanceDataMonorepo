@@ -335,8 +335,9 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 
 - **Source:** 2026-10-02 coach mobile UX effort (branch `fix/coach-mobile-ux-2026-10`)
 - **Risk:** Low
-- **Status:** Open
+- **Status:** Resolved (superseded — see correction)
 - **Description:** The protected-route middleware's `getUser()` network round trip was kept on purpose (owner decision). It adds a Supabase call to every protected navigation and has never been measured on this branch.
+- **Correction (2026-10-08):** Owner decision — protected-route validation in `src/middleware.ts` and `src/middleware/auth.ts` switched from `getUser()` to `getClaims()` (local JWT signature verification via JWKS once asymmetric signing keys are enabled, GoTrue fallback while HS256). Revocation is detected at token expiry; sensitive writes keep `withAuth` `verifyUser`. The getUser round-trip measurement question is moot for the middleware path.
 - **Owner action required:** Measure the round trip's contribution to navigation latency (e.g., Server-Timing or tracing) and decide whether it stays, is cached, or is restructured.
 
 ### RG-39: Prefetch URLs with no exact-key SWR consumer
@@ -354,3 +355,19 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** Before `35f32998`, module-level SWR helpers (`invalidateCacheByPrefix`, the `useApiMutation` revalidate list, the optimistic helpers in `peak_performance_data/src/hooks/api/useSWR.ts`, and the conversation/message cache updaters in `peak_performance_data/src/hooks/data/useConversations.ts` and `peak_performance_data/src/hooks/data/useMessages.ts`) called the global `mutate`, which only writes SWR's default cache — AuthContext wraps the app in a keyed per-user `SWRConfig` provider, so every one of those calls was a silent no-op. The branch fixed this via `peak_performance_data/src/lib/swr/scoped-mutate.ts` (`appMutate` routed through a registered scoped mutator). Newly live paths — optimistic conversation/message updates and prefix invalidation — now actually write and revalidate, and need production observation for behavior that was previously dead code.
 - **Owner action required:** Watch optimistic messaging updates and post-mutation refetches in production (or staging) after merge; report any double-write or flicker regressions.
+
+### RG-41: PPC backend Render service runs in Oregon while functions moved to lhr1
+
+- **Source:** 2026-10 UX/perf improvement wave (branch `improve/ux-perf-wave-2026-10`); Vercel `regions: ["lhr1"]` and edge `preferredRegion = 'lhr1'` pinning
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** The PPC backend Render service `ppc-backend-8ow2` runs in Oregon. With Vercel functions and edge routes now pinned to `lhr1` (next to Supabase in eu-west-2), every graph/extraction call from those functions still crosses the Atlantic to Oregon, so the latency gain from the region move is partially lost on backend-dependent routes.
+- **Owner action required:** Move the Render service `ppc-backend-8ow2` from Oregon to Frankfurt (Render `fra` region), or authorize an equivalent EU region, and update any environment/health-check configuration accordingly.
+
+### RG-42: Supabase asymmetric JWT signing keys not enabled — getClaims() falls back to Auth network call
+
+- **Source:** 2026-10 UX/perf improvement wave (branch `improve/ux-perf-wave-2026-10`); `peak_performance_data/src/middleware.ts`, `peak_performance_data/src/middleware/auth.ts`
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Protected-route middleware now validates sessions with `auth.getClaims()`. The Supabase project still uses symmetric HS256 JWT signing, so `getClaims()` cannot verify locally via JWKS and falls back to a GoTrue Auth network call — keeping a round trip on every protected navigation. Enabling asymmetric signing keys (Supabase dashboard: JWT Settings → signing keys) lets `getClaims()` verify locally.
+- **Owner action required:** Enable asymmetric JWT signing keys for project `bcfwtgqvusjhlrqsztod` (new key + rotate), then verify middleware `getClaims()` resolves without an Auth network call.
