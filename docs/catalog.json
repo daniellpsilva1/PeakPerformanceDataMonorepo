@@ -364,7 +364,7 @@
         "docs/audits/documentation-baseline.md",
         "docs/quality/verification-matrix.md"
       ],
-      "content_digest": "91a3944ba04745fc"
+      "content_digest": "aecfbad35858d054"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
@@ -1014,5 +1014,6 @@
     }
   ],
   "generator_version": "0.1.0",
-  "input_digest": "df241432c9ee975b"
+  "input_digest": "2a57e12eba6aa137"
 }
+

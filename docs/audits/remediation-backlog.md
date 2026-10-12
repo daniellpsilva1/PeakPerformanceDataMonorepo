@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-AUDIT-REMEDIATION-BACKLOG
-last_reviewed: 2026-10-02
+last_reviewed: 2026-10-11
 owner: daniel
 related:
   - docs/audits/documentation-baseline.md
@@ -314,6 +314,7 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** The app imports `vendor/courtviz/integration/css/ppd-variables.css`, but the vendored courtviz checkout is a stub file (submodule content not installed), so `@ppd/tokens` cannot be regenerated from source. The light/dark surface tokens (`--background` 0 0% 99%, `--card`/`--popover` 0 0% 100%, `--brand-*` fallbacks) were therefore updated directly in `peak_performance_data/src/app/globals.css`. If the real courtviz checkout is ever installed, the generated `ppd-variables.css` must be reconciled with these fallback values or it will silently override them.
 - **Owner action required:** Decide whether to install the real vendored courtviz packages and port the token definitions into `vendor/courtviz/packages/tokens`, or remove the stub import and make globals.css the declared source of truth.
+- **Correction (2026-10-11):** The courtviz submodule *is* installed, at `7bad49b`. The 251-byte stub `integration/css/ppd-variables.css` is committed upstream in that revision. It defines only `--ppd-primary/secondary/accent/bg/surface/text/muted`, and none of them is referenced in `peak_performance_data/src` or `tailwind.config.js`, so the import is currently a no-op. Decide-ready recommendation: declare `globals.css` the source of truth and remove the import. See `peak_performance_data/docs/evidence/design-ux-audit-2026-10-11.md` §8.
 
 ### RG-36: GET /api/injuries returns sensitive injury fields to coaches
 
@@ -330,6 +331,7 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** Signed-in browser verification at 390px and 1440px is still outstanding for the coach UX branch. Baseline screenshots and Server-Timing numbers (plan items P0.1/P0.2) were deferred because no QA coach login was available. Verification so far is unit tests, typecheck, and lint only.
 - **Owner action required:** Provide a QA coach account (or approve a seeded fixture) so the deferred screenshot and Server-Timing baselines can be captured before merge.
+- **Update (2026-10-11):** The design/UX audit (`peak_performance_data/docs/evidence/design-ux-audit-2026-10-11.md`) captured only fixture-backed `/design/preview` surfaces and public auth pages, because the owner chose a static audit. Signed-in role routes, the BCN tenant, blocked-API and throttled states, open dialogs, and the keyboard-open assistant all remain uncaptured. The item stays open. It now needs coach, player, and parent QA logins plus a BCN-org account.
 
 ### RG-38: Protected-route middleware getUser() round trip is unmeasured
 
@@ -344,8 +346,9 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 
 - **Source:** 2026-10-02 SWR cache-scoping audit (app commit `35f32998`)
 - **Risk:** Low
-- **Status:** Open
+- **Status:** In progress
 - **Description:** These prefetched URLs have no SWR consumer reading the exact key, so each warm is a wasted request: `/api/observations`, `/api/performance-tests`, `/api/training-sessions` (`useTrainingSessions` is defined but never called), `/api/dashboard/admin/executive-metrics` (`useAdminExecutiveMetrics` is defined but never called), `/api/tennis/matches` and `/api/tennis/matches?limit=12` (the consumer is `useSWRInfinite`, which caches under `$inf$`-namespaced keys), and `/api/tennis/matches/evolution` for coach/parent views (the consumer appends `?playerId=`). Locations: `peak_performance_data/src/lib/navigation/prefetch-map.ts`, `peak_performance_data/src/components/navigation/Sidebar/navigationItems.tsx`, `peak_performance_data/src/lib/auth/loginPrefetch.ts`.
+- **Progress (2026-10-11):** Owner-approved plan item P1 (uncommitted): removed `/api/observations`, `/api/performance-tests` (navigation map and login prefetch) and `/api/tennis/matches?limit=12`. The exact-key consumer check kept `/api/tennis/matches/evolution`, `/api/dashboard/admin/executive-metrics` and the login `/api/training-sessions` prefetch; whether those consumers fire for coach/parent views is still to be re-checked with an authenticated run.
 - **Owner action required:** Decide per URL whether to remove the prefetch or align the consumer key so the warm actually lands.
 
 ### RG-40: Module-level SWR helpers wrote to the wrong cache (fixed, needs observation)
@@ -372,3 +375,142 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** Protected-route middleware now validates sessions with `auth.getClaims()`. The Supabase project still uses symmetric HS256 JWT signing, so `getClaims()` cannot verify locally via JWKS and falls back to a GoTrue Auth network call — keeping a round trip on every protected navigation. Enabling asymmetric signing keys (Supabase dashboard: JWT Settings → signing keys) lets `getClaims()` verify locally.
 - **Owner action required:** Enable asymmetric JWT signing keys for project `bcfwtgqvusjhlrqsztod` (new key + rotate), then verify middleware `getClaims()` resolves without an Auth network call.
+
+### RG-43: Semantic level/status text colors fail WCAG AA contrast
+
+- **Source:** 2026-10-11 design/UX audit (`peak_performance_data/docs/evidence/design-ux-audit-2026-10-11.md`, issue 1)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** Measured on a white card in light theme, `--level-excellent` is 2.59:1 and `--level-average` is 2.13:1. In dark theme, `--level-poor` is 2.83:1. All are below the 4.5:1 body-text minimum. These tokens are used as text 410 times across 115 product files: readiness chips, deltas, and test levels. axe reports `color-contrast` on the coach-home, fitness-tests, and tennis-analytics preview surfaces.
+- **Owner action required:** Approve text-only `-fg` token variants (DESIGN.md amendment A2) and the token-level fix.
+
+### RG-44: Training session/plan create and edit skip cache revalidation
+
+- **Source:** 2026-10-11 design/UX audit (issue 4)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** `peak_performance_data/src/components/management/training/GroupTrainingSchedule.tsx` creates and updates sessions through raw `fetch` and patches only local component state. It fabricates an `attendance` array for the count and shows no success toast. Only delete calls `globalMutate('/api/training-sessions')`. `IndividualTrainingPlans.tsx` follows the same pattern. As a result, coach overview "Today's court", `CourtsBoard`, and other SWR consumers can show stale data after a create or edit until their own revalidation runs.
+- **Owner action required:** Approve routing these mutations through `useApiMutation` / `appMutate` prefix invalidation, observing RG-40 for double-write or flicker.
+
+### RG-45: Charts lack text alternatives and accessible names
+
+- **Source:** 2026-10-11 design/UX audit (issue 6)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** 12 of 13 recharts-based components in `peak_performance_data/src/components` expose no accessible name and no data-table alternative. Only `GraphContainerRecharts.tsx` sets `role="img"` and `aria-label`. The fitness radar renders `polygon[role=button]` without names (axe `aria-command-name`). The DESIGN.md §12 analysis template requires a data table.
+- **Owner action required:** Approve a shared `ChartFrame` (figure, caption, sr-only table) and the chart rules in DESIGN.md amendment A5.
+
+### RG-46: Graph prewarm cache keys never match app chart requests
+
+- **Source:** 2026-10-11 request/data-path latency investigation (`peak_performance_data/docs/evidence/speed-baseline-2026-10-11.md`, static finding 5); extends RG-25
+- **Risk:** Medium
+- **Status:** In progress
+- **Description:** `ppd_backend/background_jobs/graph_prewarm.py` caches priority graphs for a 30-day explicit `start_date`/`end_date` window. The app's charts SSR seed and client batches request a 90-day window by default (`peak_performance_data/src/lib/chart-defaults.ts` `DEFAULT_CHART_DAYS_BACK = 90`). Explicit dates are part of the canonical cache key (`utils/core/caching.py` `build_cache_key_params`), so prewarmed entries are never read by default chart loads. `graph_cache` TTL is 2 hours and prewarm runs at 01:00, so entries expire by 03:00 anyway. The scheduler starts from the FastAPI `startup` event under `gunicorn --workers 2`, so two scheduler threads probably run (not verified). Prewarm selects only `role = player` (limit 500). Even if RG-25 shows the job running, it gives no cache benefit as written.
+- **Progress (2026-10-11):** Plan item P3 (uncommitted in `ppd_backend`, not deployed): prewarm now uses a 90-day explicit window and normalized `build_cache_key_params` keys (the old raw params also missed the normalized API keys), runs separately at 06:00 UTC, and each scheduled job takes a Redis `SET NX EX 6h` daily lock. TTL unchanged (2 h). Deploy and production hit-rate check remain owner actions (RG-25).
+- **Owner action required:** Decide whether to align prewarm to the app's default window and the active-hours TTL (or schedule it shortly before peak use), run a single scheduler instance, or remove prewarm. Pair with RG-25 production hit-rate measurement.
+
+### RG-47: Every authenticated API request repeats a GoTrue round trip and a profiles query
+
+- **Source:** 2026-10-11 request/data-path latency investigation (static finding 1); multiplier of RG-42
+- **Risk:** Medium
+- **Status:** In progress
+- **Description:** Middleware does not run for `/api/*`, so the `with*Auth` wrappers in `peak_performance_data/src/lib/api/with-auth.ts` call `auth.getClaims()` on every request. 84 route files use these wrappers. While HS256 is in use (RG-42), `getClaims()` falls back to a GoTrue `getUser()` network call. The role-checking wrappers also query `profiles` on every call with no cache. A dashboard load pays one GoTrue call per client API request in addition to the middleware call for the navigation. Not measured: no authenticated capture exists (RG-37).
+- **Progress (2026-10-11):** Plan item P4 (uncommitted): `with-auth.ts` `getUserProfile` now has a per-instance LRU (500 entries, 60 s TTL; errors and null rows not cached), with header/cookie bypass and `invalidateApiProfileCache` called from update-user-role, update-coach-request, switch-role, switch-organization and invitation accept. A role change made on another instance takes up to 60 s to apply. The GoTrue round trip remains until RG-42.
+- **Owner action required:** Prioritize RG-42 (removes the GoTrue call from every request without weakening verification). Decide whether a short per-instance profile cache, like the middleware LRU, is acceptable for API role checks. Measure with `PPD_TIMING=1` once an authenticated harness run is possible.
+
+### RG-48: Charts SSR seed blocks non-recovery groups on recovery graphs
+
+- **Source:** 2026-10-11 request/data-path latency investigation (static finding 4)
+- **Risk:** Low
+- **Status:** In progress
+- **Description:** `peak_performance_data/src/app/[locale]/charts/page.tsx` holds the HTML for up to 1,500 ms (`SERVER_SEED_TIMEOUT_MS`) while seeding graphs. For every group other than recovery, it seeds `hrv_trends` and `resting_heart_rate`, both recovery-group graphs (`src/lib/charts/metric-catalog.ts`). `/charts?group=sleep` and the other groups wait on graphs that are not their first visible content.
+- **Progress (2026-10-11):** Plan item P2 (uncommitted): `getSsrSeedGraphTypes(group)` seeds only the group's `allProviders` graphs (max 4); groups with none (sleep) skip the blocking seed.
+- **Owner action required:** Approve seeding the requested group's own priority graphs, or skipping the blocking seed for non-recovery groups.
+
+### RG-49: Charts preconnect header is ineffective and covers only four locales
+
+- **Source:** 2026-10-11 request/data-path latency investigation (static finding 6)
+- **Risk:** Low
+- **Status:** In progress
+- **Description:** `peak_performance_data/next.config.js` sends `Link: <https://api.wearablesync.app>; rel=preconnect` only for `/:locale(en|es|zh|ca)/charts/:path*`, which misses `nl`, `de`, `fr` and `pt`. The browser never connects to `api.wearablesync.app`, though: all PPC traffic goes through same-origin `/api/ppc-proxy` and server-side fetches. Widening the locale list would gain nothing. The header is dead configuration.
+- **Progress (2026-10-11):** Plan item P8 (uncommitted): header rule removed; verified absent on `/en/charts` and `/nl/charts` on a local build.
+- **Owner action required:** Approve removing the header (preferred) rather than widening it.
+
+### RG-50: Role routes ship 35–67% of the full message bundle in the RSC payload
+
+- **Source:** 2026-10-11 request/data-path latency investigation (payload table)
+- **Risk:** Low
+- **Status:** In progress
+- **Description:** The full `en` messages serialize to 371,160 B. Shell plus route-provider messages are 249,728 B for `/player`, 223,224 B for every `/coach/*` route (route messages are keyed by top-level segment), 199,060 B for `/parent`, 150,283 B for `/charts` and 130,047 B for `/performance-tests` (uncompressed). These bytes go into every full load of the route.
+- **Progress (2026-10-11):** Plan item P5 (uncommitted): `/coach` messages are now emitted per sub-route by `scripts/generate-route-namespaces.js`, and each sub-route mounts its own provider. Serialized `en` route sets are now 42,691–96,881 B (previously 179,512 B), with a byte-budget test at 150,000 B. Other segments unchanged.
+- **Owner action required:** Approve narrowing `route-namespaces` to the namespaces each sub-route renders (for example `/coach/players` versus `/coach/reports`), with a byte budget test.
+
+### RG-51: Some private API responses are still cached by the service worker
+
+- **Source:** 2026-10-11 request/data-path latency investigation (static finding 7)
+- **Risk:** Medium
+- **Status:** In progress
+- **Description:** The WP-02.8 / P4.6 policy makes personalized APIs `NetworkOnly`. These personalized routes still use shared SW caches in `peak_performance_data/next.config.js`: `/api/parent/*` (`NetworkFirst`, 1 h), `/api/organizations/*` (`StaleWhileRevalidate`, 1 h), `/api/training-*` (`NetworkFirst`, 30 min), `/api/management/*` (`StaleWhileRevalidate`, 15 min), `/api/admin/*` (`NetworkFirst`, 1 min), and Supabase REST (`NetworkFirst`, 1 h). Caches are purged on `SIGNED_OUT` (`src/lib/pwa/cacheInvalidation.ts`). They are not purged on token expiry without sign-out, or on an account switch that does not emit `SIGNED_OUT`. `StaleWhileRevalidate` also shows data up to 15–60 minutes old on first paint. Whether any of this is intentional offline support was not confirmed.
+- **Progress (2026-10-11):** Plan item P6 (uncommitted): all six rules switched to `NetworkOnly`; the retired cache names are kept in `PRIVATE_CACHE_NAMES` and added to the SW activation purge list.
+- **Owner action required:** Decide per route between `NetworkOnly` (privacy and freshness) and offline support. Confirm the purge triggers cover account switches.
+
+### RG-52: Login redirect drops the original query string
+
+- **Source:** 2026-10-11 request/data-path latency investigation (middleware probe)
+- **Risk:** Low
+- **Status:** In progress
+- **Description:** An unauthenticated request to `/en/charts?group=recovery` redirects to `/en/login?redirect=%2Fen%2Fcharts`. The `group` parameter is lost, so after sign-in the user lands on the default view and needs another navigation.
+- **Progress (2026-10-11):** Plan item P9 (uncommitted): redirect now carries path plus query; verified on a local build (`redirect=%2Fen%2Fcharts%3Fgroup%3Drecovery`).
+- **Owner action required:** Approve preserving a validated same-origin path plus query in `redirect`.
+
+### RG-53: Landing page transfers about 7.3 MB per load
+
+- **Source:** 2026-10-11 request/data-path latency investigation (`perf-audit-unauth-sw-{on,off}-2026-10-10.json`)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `/en` transferred 7,252–7,278 KB on every measured load (10 runs, SW on and off) on a local production build of an uncommitted tree. The source is probably the hero video (`HeroVideoShowcase`), which also has uncommitted changes from another workstream. There is no per-resource breakdown yet.
+- **Progress (2026-10-11):** Per-resource measurement on a local build: `videos/ppd-consumer.mp4` is 7.37 MB of the cold `/en` load; LCP p50 about 560 ms. No code change made (the landing files belong to another in-flight workstream).
+- **Owner action required:** Re-measure on the committed revision with a per-resource breakdown, then decide on poster-first/lazy video loading.
+- **Update (2026-10-11, runtime-perf baseline):** Per-resource breakdown at `4bceb9ef`: in 8 s unthrottled at 390 px, `/en` received 5.8 MB of `/videos/ppd-consumer.mp4` (HTTP 206). `autoPlay` plus `tryPlay()` on mount override `preload="metadata"`. Fix proposed as P1-5 in `peak_performance_data/docs/evidence/runtime-perf-baseline-2026-10-11.md`.
+- **Update (2026-10-11, P1-5 implemented, uncommitted):** The video gets a source only after intersection, never on Save-Data or reduced motion, and a 540w mobile rendition is used under 768 px. On a local build of HEAD plus the patch, `/en` at 390 px fetched 1,682 KB of video instead of 7,168 KB. Desktop still uses the 1080p files. Close this item once the change is committed and re-measured on a deploy.
+
+### RG-54: Named athlete report served from `public/` and precached by the service worker
+
+- **Source:** 2026-10-11 runtime-perf baseline (SW precache audit)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** `peak_performance_data/public/reports/ben-wiesel-2026-06-11/index.html` and `public/reports/ben-wiesel--11-06-2026/index.html` are tracked in git, served at public URLs with no auth, and listed in the `public/sw.js` precache manifest. Every installed PWA downloads them. Nothing in `src/` references them. Whether this is intentional (a shared report link) and whether consent covers public hosting was not confirmed.
+- **Owner action required:** Confirm intent and consent. If unintended, approve removing them from `public/` (and from git history if needed) and adding `reports/**` to `publicExcludes`.
+- **Owner decision (2026-10-11):** Not intended. `reports/**` is added to `publicExcludes` as part of runtime-perf plan item P0-1, so installed PWAs stop precaching the files. The files are still served publicly. Removing them from `public/` (or moving them behind auth), and deciding whether to purge them from git history, is a separate change that still needs approval.
+
+### RG-55: Service worker precaches every `_next` chunk in the app
+
+- **Source:** 2026-10-11 runtime-perf baseline
+- **Risk:** Low
+- **Status:** Open
+- **Description:** next-pwa's default build manifest precaches all 9.2 MB of `/_next/static/chunks` (every route, including admin, design and BodyViz chunks) on install and after every deploy (`skipWaiting: true`). The offline scope (which routes must work offline) is not documented, so the precache cannot be narrowed safely.
+- **Owner action required:** Decide the offline route scope, then approve restricting `buildExcludes`/precache to those routes' chunks.
+
+### RG-56: Optimized images bypass the service worker image cache
+
+- **Source:** 2026-10-11 runtime-perf baseline
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The `static-images-v3` runtime rule in `peak_performance_data/next.config.js` matches `/\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i`. `next/image` URLs (`/_next/image?url=…&w=…`) end in a query string, so they never match, and the custom `runtimeCaching` replaces next-pwa's default `next-image` rule. Optimized images (logos, avatars) are therefore not cached by the SW. The impact on repeat visits was not measured.
+- **Owner action required:** Approve adding a `/_next/image` rule, or confirm that HTTP caching is sufficient.
+
+### RG-57: Barlow Condensed rendered with synthetic bold on tennis-bench
+
+- **Source:** 2026-10-11 runtime-perf baseline (font audit)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `src/lib/fonts.ts` loads Barlow Condensed weight 600 only. `src/components/tennis-bench/*` (`MatchScoreboard`, `StorySummaryDashboard`, `StatPill`) use `font-bold`/`font-extrabold` with that family, so browsers synthesize bold. This is a design-fidelity issue on a marketing surface, not a performance one.
+- **Owner action required:** Choose to load weights 700/800 for tennis-bench only, or change those classes to `font-semibold`.
+
+### RG-58: Mobile sheet exit animations never run
+
+- **Source:** 2026-10-11 runtime-perf baseline (T1 review)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `src/components/mobile/MobileSheetContent.tsx` sets framer-motion `exit` props. `ResponsiveDialogContent` returns `null` when closed and is not wrapped in `AnimatePresence`, so the sheet unmounts instantly. Related: the comment in `src/components/navigation/LazyBottomNav.tsx` says the dynamic import "removes framer-motion", but `BottomNav` does not import framer-motion.
+- **Owner action required:** Decide whether sheets should animate out. If they should, the preferred fix is CSS / Radix `data-state` animations, which also drops the 41 KB framer chunk on first open. Approve the comment correction.
