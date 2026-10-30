@@ -32,9 +32,9 @@ This document records the deployment surfaces observed in checked-in configurati
 
 ```mermaid
 flowchart TB
-    subgraph Vercel["Vercel — region lhr1"]
-        App["Next.js App\n(build: pnpm build)"]
-        Cron["Cron: cleanup-conversations\n(0 3 * * *)"]
+    subgraph HetznerWeb["Hetzner Falkenstein ppd-web — Coolify/Docker/Traefik"]
+        App["Next.js App\n(Docker standalone image,\nGHCR via GitHub Actions)"]
+        Cron["Host cron → /api/cron/cleanup-conversations\n(0 3 * * * with CRON_SECRET)"]
     end
 
     subgraph Hetzner["Hetzner Falkenstein — Docker/Traefik"]
@@ -74,15 +74,19 @@ flowchart TB
 
 ## Configured deployment evidence
 
-### Vercel (app)
+### Hetzner ppd-web (app) — added 2026-10-29
 
 | Config | Value | Source |
 |---|---|---|
-| Region | `lhr1` | `vercel.json` |
-| Build command | `HUSKY=0 pnpm run build` | `vercel.json` |
-| Install command | `ensure-vendor-stubs.sh && build:courtviz && build:bodyviz && pnpm install --frozen-lockfile` | `vercel.json` |
-| Cron | `cleanup-conversations` at `0 3 * * *` | `vercel.json` |
-| Redirects | `/strava-auth-callback`, `/presentation/*` | `vercel.json` |
+| Host | `peak-performance-data` — Hetzner CX23, 188.245.233.118, Falkenstein | Verified live 2026-10-29 |
+| Runtime | Docker `node:22` standalone image, managed by Coolify, Traefik + Let's Encrypt | `Dockerfile` (app repo) |
+| Image | `ghcr.io/daniellpsilva1/ppd-web` (`latest`=main, `staging`=staging) | `.github/workflows/deploy.yml` |
+| CI | GitHub Actions builds + pushes image, triggers Coolify via restricted SSH | `.github/workflows/deploy.yml` |
+| Domains | `peakperformancedata.app`, `www.`, `staging.` | Coolify app config |
+| Cron | host crontab calls the route with `CRON_SECRET` | `/usr/local/bin/ppd-cron` |
+| Backups | nightly Supabase dump → age-encrypted → R2 `ppd-backups` | `/usr/local/bin/ppd-backup.sh` on `ds-wearables-process` |
+
+Note (2026-10-29): the app moved off Vercel; `vercel.json` was removed in the app repo. The `/presentation/*` rewrites still proxy to the separate `ppd-academies-presentation` Vercel project, which stays on Vercel. Historical Vercel config: region `lhr1`, cron `cleanup-conversations` at `0 3 * * *`, redirects `/strava-auth-callback` and `/presentation/*`.
 
 ### Hetzner Falkenstein (graph backend)
 
