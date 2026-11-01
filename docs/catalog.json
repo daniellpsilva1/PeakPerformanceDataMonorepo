@@ -117,7 +117,7 @@
       "domain_tags": [],
       "source_refs": [],
       "related": [],
-      "content_digest": "ea530eec4717c755"
+      "content_digest": "caa90521749b690e"
     },
     {
       "id": "PPD-PORTFOLIO-AGENT-KNOWLEDGE-CONTRACT",
@@ -258,7 +258,7 @@
       "related": [
         "PPD-PORTFOLIO-ARCH-CONTAINERS"
       ],
-      "content_digest": "e0e321845b39f236"
+      "content_digest": "befa378124051fbd"
     },
     {
       "id": "PPD-PORTFOLIO-ARCH-OVERVIEW",
@@ -364,7 +364,7 @@
         "docs/audits/documentation-baseline.md",
         "docs/quality/verification-matrix.md"
       ],
-      "content_digest": "aecfbad35858d054"
+      "content_digest": "4d3e01e878bedccc"
     },
     {
       "id": "PPD-PORTFOLIO-AUDIT-REVIEW-FINDINGS",
@@ -1014,6 +1014,5 @@
     }
   ],
   "generator_version": "0.1.0",
-  "input_digest": "2a57e12eba6aa137"
+  "input_digest": "c40efe916ff8c944"
 }
-

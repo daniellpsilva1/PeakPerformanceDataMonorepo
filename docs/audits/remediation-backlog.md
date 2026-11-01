@@ -375,6 +375,7 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** Protected-route middleware now validates sessions with `auth.getClaims()`. The Supabase project still uses symmetric HS256 JWT signing, so `getClaims()` cannot verify locally via JWKS and falls back to a GoTrue Auth network call — keeping a round trip on every protected navigation. Enabling asymmetric signing keys (Supabase dashboard: JWT Settings → signing keys) lets `getClaims()` verify locally.
 - **Owner action required:** Enable asymmetric JWT signing keys for project `bcfwtgqvusjhlrqsztod` (new key + rotate), then verify middleware `getClaims()` resolves without an Auth network call.
+- **Check (2026-10-16):** `/auth/v1/.well-known/jwks.json` returns `{"keys":[]}`, so the item is still open. Owner deferred it ("not now").
 
 ### RG-43: Semantic level/status text colors fail WCAG AA contrast
 
@@ -490,6 +491,8 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** next-pwa's default build manifest precaches all 9.2 MB of `/_next/static/chunks` (every route, including admin, design and BodyViz chunks) on install and after every deploy (`skipWaiting: true`). The offline scope (which routes must work offline) is not documented, so the precache cannot be narrowed safely.
 - **Owner action required:** Decide the offline route scope, then approve restricting `buildExcludes`/precache to those routes' chunks.
+- **Owner decision (2026-10-16):** Approved as implemented: pages work offline after their first visit. Status stays Open until the change is committed and deployed.
+- **Change (2026-10-16, uncommitted):** `buildExcludes` in `peak_performance_data/next.config.js` drops every `static/chunks/app/**` chunk except shell basenames (`layout-`, `loading-`, `error-`, `global-error-`, `not-found-`). A single `next-static-assets` CacheFirst runtime rule (400 entries, 30 days) caches `/_next/static/` assets. Measured with `scripts/check-precache-budget.js` after `pnpm build`: 944 entries / 14.65 MiB → 605 entries / 12.68 MiB. The implied offline scope: routes work offline once they have been visited, and routes never visited do not. If that scope is not acceptable, specific routes' page chunks must be re-included.
 
 ### RG-56: Optimized images bypass the service worker image cache
 
@@ -498,6 +501,8 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** The `static-images-v3` runtime rule in `peak_performance_data/next.config.js` matches `/\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i`. `next/image` URLs (`/_next/image?url=…&w=…`) end in a query string, so they never match, and the custom `runtimeCaching` replaces next-pwa's default `next-image` rule. Optimized images (logos, avatars) are therefore not cached by the SW. The impact on repeat visits was not measured.
 - **Owner action required:** Approve adding a `/_next/image` rule, or confirm that HTTP caching is sufficient.
+- **Owner decision (2026-10-16):** Approved as implemented. Status stays Open until committed and deployed.
+- **Change (2026-10-16, uncommitted):** `runtimeCaching` gains a `next-image` StaleWhileRevalidate rule (`url.pathname === '/_next/image'`, 100 entries, 30 days), placed before the navigation and API rules. Present in the 2026-10-16 production build's `public/sw.js`. The effect on repeat visits has not been measured.
 
 ### RG-57: Barlow Condensed rendered with synthetic bold on tennis-bench
 
@@ -506,6 +511,7 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** `src/lib/fonts.ts` loads Barlow Condensed weight 600 only. `src/components/tennis-bench/*` (`MatchScoreboard`, `StorySummaryDashboard`, `StatPill`) use `font-bold`/`font-extrabold` with that family, so browsers synthesize bold. This is a design-fidelity issue on a marketing surface, not a performance one.
 - **Owner action required:** Choose to load weights 700/800 for tennis-bench only, or change those classes to `font-semibold`.
+- **Owner decision and change (2026-10-16, uncommitted):** Use `font-semibold`. Changed on the three Barlow Condensed elements: `MatchScoreboard.tsx:55`, `story/StorySummaryDashboard.tsx:96`, `design-kit/StatPill.tsx:17`. Bold elements in other font families were left unchanged.
 
 ### RG-58: Mobile sheet exit animations never run
 
@@ -514,3 +520,84 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** `src/components/mobile/MobileSheetContent.tsx` sets framer-motion `exit` props. `ResponsiveDialogContent` returns `null` when closed and is not wrapped in `AnimatePresence`, so the sheet unmounts instantly. Related: the comment in `src/components/navigation/LazyBottomNav.tsx` says the dynamic import "removes framer-motion", but `BottomNav` does not import framer-motion.
 - **Owner action required:** Decide whether sheets should animate out. If they should, the preferred fix is CSS / Radix `data-state` animations, which also drops the 41 KB framer chunk on first open. Approve the comment correction.
+- **Owner decision and change (2026-10-16, uncommitted):** CSS/Radix animations. `MobileSheetContent` no longer imports framer-motion. Drag-to-dismiss on the handle now uses pointer events. Enter and exit use `data-state` slide/fade animations (300 ms, `motion-reduce:animate-none`). `ResponsiveDialog` keeps the sheet mounted after its first open, so Radix Presence runs the exit animation; the lazy chunk is still not fetched for dialogs that never open. `FitnessTestDetailSheet` keeps its last metric while closing. Verified headless at 390 px (`peak_performance_data/artifacts/ux-baseline/sheet-exit-2026-10-16/check.json`): the closed sheet animates its transform for about 300 ms, then detaches. Tests: `tests/components/mobile` 12/12, dialog consumers 36/36, fitness 52/52.
+
+### RG-59: MetricStrip/FilterBar grid-class test assertions no longer match emitted classes
+
+- **Source:** 2026-11-01 shell/i18n verification runs (`pnpm vitest run tests/components/ui`)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `tests/components/ui/metric.test.tsx` (4), `tests/components/ui/data-display.test.tsx` (1) and `tests/components/ui/form-fields.test.tsx` (1) assert grid/combobox classes the components no longer emit (e.g. expected `grid-cols-3`/`sm:grid-cols-5`, component emits `grid-cols-2 sm:grid-cols-4 lg:grid-cols-7`; expected combobox `min-w-[10rem]`, component emits a responsive `min-w` pair). The pattern is consistent with an in-flight MetricStrip/FilterBar rework owned by another agent, not with the shell/i18n changes.
+- **Owner action required:** Confirm the in-flight rework intended the new grid classes; then either update the assertions or revert the class change.
+
+### RG-60: Service worker `pages-cache-v2` can serve a stale locale page offline for 24h
+
+- **Source:** 2026-11-01 locale-persistence investigation (Task 1 root-cause)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `next.config.js` runtimeCaching rule `pages-cache-v2` (NetworkFirst, 24 h) caches navigated `/xx/...` HTML keyed by URL only. Offline, an installed PWA can replay a cached `/ca/...` shell regardless of the `NEXT_LOCALE` cookie. Reachability is limited to the offline window (NetworkFirst revalidates online), so it was noted but not changed during the locale fix.
+- **Owner action required:** Decide whether to exclude locale-prefixed pages from this rule or key the cache by `NEXT_LOCALE`.
+
+### RG-61: Stale `preferred_language` + failed PATCH overrides the cookie on next sync
+
+- **Source:** 2026-11-01 locale-persistence implementation review
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `profiles.preferred_language` is the source of truth by design. If a PATCH from `useLanguageChange`/`LocalePreferenceSync` fails (or the write never lands), the stale profile value wins on the next cold start and reverts the user's cookie-level choice until a repatch succeeds. The pending marker covers the immediate switch, but not a permanently failed write.
+- **Owner action required:** Approve a server-side write-through or a client retry queue, or accept the profile-wins semantics.
+
+### RG-62: No authenticated browser session fixture for shell screenshot verification
+
+- **Source:** 2026-11-01 shell responsiveness audit (Task 8)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The shell (NavBar/BottomNav/drawer) renders only on authenticated routes, and `tests/helpers/with-auth-mock.ts` mocks API route handlers, not a browser session. `tests/e2e` has specs but no `storageState`/login fixture, so 320/360/390/430/768 px and 150%-font screenshots could not be captured; only jsdom class-contract assertions exist (`tests/navigation/shell-responsive.test.tsx`).
+- **Owner action required:** Approve adding an authenticated Playwright fixture (seeded user + storageState) so shell visual checks can run.
+
+### RG-63: Cold-start html/body first paint stays theme-aware navy/white, not brand blue
+
+- **Source:** 2026-11-01 brand chrome rework (Task 6)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `layout.tsx` cold-start inline CSS paints the app theme background (light `#fcfcfc` / dark `#0d1726`), unchanged for the solid-brand launch. Between the new all-blue iOS splash/app-icon and the app first paint there can be a colour step for the default brand. Left as-is because the cold-start surface is the app's own first paint, not the launch splash.
+- **Owner action required:** Decide whether the default brand's cold-start background should be `#2563eb` (matching the launch surface) or stay theme-aware.
+
+### RG-64: Academy (non-default) brands still use the dynamic logo-on-plate icon pipeline
+
+- **Source:** 2026-11-01 brand chrome rework (Task 6)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** Only `assets.symbolUrl`-bearing brands (currently the default platform brand) emit static `/icons/*.png` and single-colour splash/theme-color. Academies still render their logo composited on the brand plate via `/api/pwa-icon` + per-scheme `/api/splash` — a different launch look by design, but worth confirming.
+- **Owner action required:** Confirm academies keep the per-brand dynamic pipeline, or supply symbol assets per academy to opt in.
+
+### RG-65: Repo ui-rules conflicted with the shell spec's 11px uppercase section labels
+
+- **Source:** 2026-11-01 drawer compaction (Task 3)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The design brief asked for `text-[11px] uppercase tracking-wide` section labels and a `text-[10px]` env tag, but `scripts/check-mobile-ui-rules.mjs` forbids text under 12px (`no-tiny-text`) and uppercase labels (`no-uppercase-label`). The implementation used the `text-label`/`text-meta`/`text-caption` tokens (12px) instead.
+- **Owner action required:** Decide whether the ui-rules minimum should relax to 11px for chrome labels, or ratify the 12px token usage.
+
+### RG-66: `hasFeature('ai')` / env flag still gate the in-bar assistant button
+
+- **Source:** 2026-11-01 ADR-0004 implementation (Task 2)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The owner asked for the assistant on every authenticated page for all roles; the implemented gates remain `NEXT_PUBLIC_ENABLE_AI_VOICE_ASSISTANT` and `hasFeature('ai')`, so plan-gated users see a 4/5-tab bar with no centre slot. Whether a gated user should instead see a locked/upsell affordance was not decided.
+- **Owner action required:** Decide: keep hidden when the feature is off, or render a disabled/upsell state.
+
+### RG-67: Personal-mode 5th tab dropped from the bottom bar — owner confirmation
+
+- **Source:** 2026-11-01 ADR-0004 implementation (Task 2)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** To fit `2 tabs | assistant | 2 tabs`, the personal-mode bar dropped its 5th item (`/settings`, the 'You' tab) and demoted Log+ to a normal right-side tab. `/settings` remains reachable from the drawer footer link, the account menu, and `/settings` deep links — but the bar no longer offers it on phones.
+- **Owner action required:** Confirm the dropped tab is acceptable, or pick which personal item yields its slot instead.
+
+### RG-68: `public/Logo*.png` wordmark/circle assets still render in-app
+
+- **Source:** 2026-11-01 brand chrome rework (Task 6)
+- **Risk:** Low
+- **Status:** Open
+- **Description:** The one-look rule was applied to launch surfaces only (icons, splash, favicon, apple-touch-icon, offline page). `BrandLogo` in the navbar and `logoUrl`/`logoFullUrl` still serve the old white-circle + wordmark art, so the three-colour look can still appear inside the app.
+- **Owner action required:** Decide whether in-app brand surfaces should also switch to the symbol/blue look or keep the full wordmark.

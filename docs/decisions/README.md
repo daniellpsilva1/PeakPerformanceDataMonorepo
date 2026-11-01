@@ -20,3 +20,4 @@ This directory contains ADRs for the PeakPerformanceData portfolio. Each ADR rec
 | [ADR-0001](0001-documentation-system.md) | Adopt a repository-first documentation system | Draft |
 | [ADR-0002](0002-ai-proposal-approval-model.md) | AI proposal/approval model and per-task model routing | Draft |
 | [ADR-0003](0003-locale-persistence.md) | Locale persistence via NEXT_LOCALE cookie and profile preference | Draft |
+| [ADR-0004](0004-assistant-bottom-bar.md) | Assistant button lives in the bottom bar centre slot (supersedes drawer-only placement) | Proposed — pending owner approval |
