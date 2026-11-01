@@ -1,6 +1,6 @@
 ---
 id: PPD-PORTFOLIO-AUDIT-REMEDIATION-BACKLOG
-last_reviewed: 2026-10-11
+last_reviewed: 2026-11-01
 owner: daniel
 related:
   - docs/audits/documentation-baseline.md
@@ -601,3 +601,43 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Open
 - **Description:** The one-look rule was applied to launch surfaces only (icons, splash, favicon, apple-touch-icon, offline page). `BrandLogo` in the navbar and `logoUrl`/`logoFullUrl` still serve the old white-circle + wordmark art, so the three-colour look can still appear inside the app.
 - **Owner action required:** Decide whether in-app brand surfaces should also switch to the symbol/blue look or keep the full wordmark.
+
+### RG-69: Fitness benchmark category scores saturate at 100
+
+- **Source:** 2026-11-01 coach-app page redesign (fitness tests page)
+- **Risk:** Medium
+- **Status:** Open
+- **Description:** `physical-test-benchmarks.ts` clamps scores to `Math.min(100, topAnchorScore + 10)` (lines ~251/254) and `physical-test-metrics.ts` clamps own-history percentiles at 100 (line ~216). Strong athletes pin every category at 100 while deltas keep growing, so the summary reads "all 100 with +40..+51".
+- **Owner action required:** Decide whether scores may exceed 100, use a different scale, or keep the cap with an explicit "maxed out" display treatment.
+
+### RG-70: Report list rows cannot show review status
+
+- **Source:** 2026-11-01 coach reports redesign
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `getTrainingReportSummariesByOrganization` / `/api/reports?summary=1` do not select `review_status`, so list rows show the PSE rating instead of review state (the detail dialog does fetch it). Row-level status needs a select/API change.
+- **Owner action required:** Approve adding `review_status` to the summary payload if it should appear on rows.
+
+### RG-71: DataTable mobile card mode never renders an empty state
+
+- **Source:** 2026-11-01 coach reports/tournaments/players redesigns
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `data-table.tsx` renders no empty slot in the `mobileCard` representation (~lines 438-465), so the `emptyState` prop is invisible on phones. Reports, tournaments and players worked around it with page-level `EmptyState`. The primitive should gain a shared empty slot.
+- **Owner action required:** Approve a `ui/data-table.tsx` primitive change (currently owned by the parallel shell agent).
+
+### RG-72: Mobile card rows have no selection affordance
+
+- **Source:** 2026-11-01 coach players redesign
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `DataTable` `selectable` only renders the checkbox column inside the `<table>`; `mobileCard` rows offer no way to select on phones, so bulk actions (e.g. message selected athletes) are desktop-only.
+- **Owner action required:** Approve a `ui/data-table.tsx` primitive change for mobile selection, or accept desktop-only bulk actions.
+
+### RG-73: Dead code and component taxonomy mismatches (housekeeping)
+
+- **Source:** 2026-11-01 remaining-surfaces audit
+- **Risk:** Low
+- **Status:** Open
+- **Description:** `src/app/[locale]/coach/CoachStats.tsx` has zero imports; `TrainingReports` uses a different report taxonomy (`training_type`) than `coach/reports` (`report_type`), so the new shared report components could not be reused there; athlete-detail matches-tab still truncates. All left in place pending cleanup approval.
+- **Owner action required:** Authorize deletion of `CoachStats.tsx` and a taxonomy alignment for training reports.
