@@ -606,38 +606,38 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 
 - **Source:** 2026-11-01 coach-app page redesign (fitness tests page)
 - **Risk:** Medium
-- **Status:** Open
-- **Description:** `physical-test-benchmarks.ts` clamps scores to `Math.min(100, topAnchorScore + 10)` (lines ~251/254) and `physical-test-metrics.ts` clamps own-history percentiles at 100 (line ~216). Strong athletes pin every category at 100 while deltas keep growing, so the summary reads "all 100 with +40..+51".
-- **Owner action required:** Decide whether scores may exceed 100, use a different scale, or keep the cap with an explicit "maxed out" display treatment.
+- **Status:** Resolved (2026-11-01)
+- **Description:** `physical-test-benchmarks.ts` clamped scores to `Math.min(100, topAnchorScore + 10)` and `physical-test-metrics.ts` clamps own-history percentiles at 100 (percentiles are definitionally bounded — retained). Strong athletes pinned every category at 100 while deltas kept growing.
+- **Resolution:** Benchmark scores now extrapolate the final segment's slope above the excellent anchor's 100, capped at 120; fixed-scale visuals (rings, radar radii, bar widths) still clamp to 100 while the number stays truthful. The own-history percentile clamp is unchanged (0-100 by definition).
 
 ### RG-70: Report list rows cannot show review status
 
 - **Source:** 2026-11-01 coach reports redesign
 - **Risk:** Low
-- **Status:** Open
-- **Description:** `getTrainingReportSummariesByOrganization` / `/api/reports?summary=1` do not select `review_status`, so list rows show the PSE rating instead of review state (the detail dialog does fetch it). Row-level status needs a select/API change.
-- **Owner action required:** Approve adding `review_status` to the summary payload if it should appear on rows.
+- **Status:** Resolved (2026-11-01)
+- **Description:** `getTrainingReportSummariesByOrganization` / `/api/reports?summary=1` did not select `review_status`, so list rows showed the PSE rating instead of review state.
+- **Resolution:** `review_status` added to the summary select; `ReportRow` renders the shared status-badge map (extracted to `report-type.tsx` and reused by the detail dialog).
 
 ### RG-71: DataTable mobile card mode never renders an empty state
 
 - **Source:** 2026-11-01 coach reports/tournaments/players redesigns
 - **Risk:** Low
-- **Status:** Open
-- **Description:** `data-table.tsx` renders no empty slot in the `mobileCard` representation (~lines 438-465), so the `emptyState` prop is invisible on phones. Reports, tournaments and players worked around it with page-level `EmptyState`. The primitive should gain a shared empty slot.
-- **Owner action required:** Approve a `ui/data-table.tsx` primitive change (currently owned by the parallel shell agent).
+- **Status:** Resolved (2026-11-01)
+- **Description:** `data-table.tsx` rendered no empty slot in the `mobileCard` representation, so the `emptyState` prop was invisible on phones.
+- **Resolution:** The primitive now shares one `emptyContent` node across cards and table representations. Page-level `EmptyState` wrappers in reports/tournaments/players still work and may be retired later.
 
 ### RG-72: Mobile card rows have no selection affordance
 
 - **Source:** 2026-11-01 coach players redesign
 - **Risk:** Low
-- **Status:** Open
-- **Description:** `DataTable` `selectable` only renders the checkbox column inside the `<table>`; `mobileCard` rows offer no way to select on phones, so bulk actions (e.g. message selected athletes) are desktop-only.
-- **Owner action required:** Approve a `ui/data-table.tsx` primitive change for mobile selection, or accept desktop-only bulk actions.
+- **Status:** Resolved (2026-11-01)
+- **Description:** `DataTable` `selectable` only rendered the checkbox column inside the `<table>`; `mobileCard` rows offered no way to select on phones, so bulk actions were desktop-only.
+- **Resolution:** The primitive wraps each card in a checkbox + `min-w-0 flex-1` row when `selectable`, using the same `selectRow` aria key and handlers as the table column. A latent bug rendering a literal `_select` label in default cards was also fixed.
 
 ### RG-73: Dead code and component taxonomy mismatches (housekeeping)
 
 - **Source:** 2026-11-01 remaining-surfaces audit
 - **Risk:** Low
-- **Status:** Open
-- **Description:** `src/app/[locale]/coach/CoachStats.tsx` has zero imports; `TrainingReports` uses a different report taxonomy (`training_type`) than `coach/reports` (`report_type`), so the new shared report components could not be reused there; athlete-detail matches-tab still truncates. All left in place pending cleanup approval.
-- **Owner action required:** Authorize deletion of `CoachStats.tsx` and a taxonomy alignment for training reports.
+- **Status:** Partially resolved (2026-11-01)
+- **Description:** `src/app/[locale]/coach/CoachStats.tsx` has zero imports; `TrainingReports` uses a different report taxonomy (`training_type`) than `coach/reports` (`report_type`), so the new shared report components could not be reused there; athlete-detail matches-tab still truncates.
+- **Resolution:** `CoachStats.tsx` deleted (owner-approved). The taxonomy alignment is still open — needs a product decision on which type system wins before components can be shared.
