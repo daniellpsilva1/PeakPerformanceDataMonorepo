@@ -641,3 +641,96 @@ Entries RG-20 through RG-24 record remediations applied during the 2026-09-23 Cl
 - **Status:** Partially resolved (2026-11-01)
 - **Description:** `src/app/[locale]/coach/CoachStats.tsx` has zero imports; `TrainingReports` uses a different report taxonomy (`training_type`) than `coach/reports` (`report_type`), so the new shared report components could not be reused there; athlete-detail matches-tab still truncates.
 - **Resolution:** `CoachStats.tsx` deleted (owner-approved). The taxonomy alignment is still open — needs a product decision on which type system wins before components can be shared.
+
+### RG-74: Mobile UI redesign — device and environment verification outstanding
+
+- **Source:** 2026-11-02 UI redesign Phases 1-8 (mobile-first, hairline surfaces)
+- **Risk:** Medium
+- **Status:** Open (2026-11-02)
+- **Description:** The code side of the redesign is complete and verified (lint, typecheck, ui-rules, i18n parity, 3000+ vitest cases green), but several items require a physical device or deployed environment: T001-T005 on-device checks (dynamic island/notch overlap, safe-area paint under the bottom nav, tap targets in practice), T056/T057 deploy-time verification (PWA install banner, `NEXT_PUBLIC_*` env var on Hetzner/Coolify), and T156 before/after screenshots for design sign-off.
+- **Resolution:** Pending owner device pass and deploy verification. The code-side prerequisites are done: `viewport-fit=cover` is set, the dark body is a flat navy `--background`, the BottomNav paints its own safe-area padding, and sub-44px buttons carry an `after:` pseudo hit area.
+
+### RG-75: Contrast and a11y audit values (recorded, no action needed)
+
+- **Source:** 2026-11-02 redesign Phase 8 audit (T153-T155)
+- **Risk:** Low
+- **Status:** Resolved (2026-11-02)
+- **Description:** `--muted-foreground` on the navy dark `--background` computes to 6.89:1 (6.55:1 on card); light theme is 5.14:1 — both above the 4.5:1 body-text threshold, so no token change was made. `default`/`sm`/`icon` buttons now reach >=44px effective touch area via `after:absolute -inset-1`; kebabs and week-strip day chips already meet 44px. New row components (SettingsRow, StatusDot) are non-interactive; interactive controls keep `focus-visible` rings and colour-only transitions.
+- **Resolution:** Verified in code; values recorded here for future audits.
+
+### RG-76: i18n static-usage baseline (161 known gaps)
+
+- **Source:** 2026-11-03 UI redesign i18n audit (`scripts/check-i18n-usage.mjs`)
+- **Risk:** Low
+- **Status:** Open (2026-11-03)
+- **Description:** The CI-able i18n usage checker resolves 4820 static `t('key')` calls across all 8 locales, but 161 keys are baselined in `tests/scripts/fixtures/i18n-usage-baseline.txt`. Several are real missing keys — e.g. `common.backToLogin`/`common.emailLabel` used on auth pages where the strings actually live under `auth.*` — plus dynamic-key patterns in `tennis-scorekeeper`.
+- **Resolution:** Pending triage: fix wrong-namespace usages (auth keys), allowlist genuine dynamic keys, shrink the baseline to zero. The ratchet already prevents new gaps entering CI.
+
+## UI redesign 2026-11 — open items (sidekick)
+
+- **T057** — `NEXT_PUBLIC_ENABLE_AI_VOICE_ASSISTANT` must be set explicitly in
+  deploy config (Coolify/GitHub env); empty/whitespace now means enabled in code
+  but the build arg should be authoritative. Requires owner (deploy config).
+- **T048/T049** — "blue strip" below bottom bar on staging PWA: navy launch
+  surface landed (T042-T047) but end-to-end safe-area/body-bg verification needs
+  a real device build; not yet reproduced.
+- **InsightsTab test coverage** — no dedicated test exists for the Insights tab
+  after the sports-science-injury visual refactor; add one.
+- **Dynamic t() calls** — `scripts/check-i18n-keys.mjs` logs 8-12 dynamic
+  translation calls that cannot be statically verified; manual review needed.
+- **tailwind.config.js** — pre-existing eslint `require()` errors at lines
+  ~362-364 (project predates flat-config rule); not caused by the redesign.
+- **generate-brand-icons.mjs** — pre-existing eslint warnings (unused imports,
+  console statements).
+
+- **User export rate limit** — `/api/user/export` cooldown is an in-memory
+  per-instance map; it resets on restart and is not shared across instances.
+  Persisting it needs infrastructure/owner approval. Per-table failures are now
+  reported in the payload `_errors` list.
+- **UI megaplan leftovers** — visual verification (390px screenshots, PWA
+  reinstall check, overview waterfall) was not performed; see the plan file for
+  the unfinished polish tasks.
+- **UI megaplan polish pass 2** — fitness, reports, training, athlete detail,
+  messaging, tennis, settings, home, players sort, tournaments and assistant
+  were reviewed and adjusted (tap targets, collapsible athlete summary, mobile
+  header overflow menu, lazy-loaded ParentHome cards, players sort via `?sort=`).
+  Still open: real-device 360/390px visual pass and PWA reinstall check
+  (production manifest was observed serving the old blue theme color; reinstall
+  after deploy and confirm the origin in use).
+- **UI megaplan polish pass 3 (2026-11-06, uncommitted)** — Remaining plan
+  tasks completed: Overview card ordering + tennis snapshot + lazy below-fold
+  cards; players rows/sort/overflow; profile tabs (kept `TabsList` — already
+  scroll/fade/keepActiveTabInView) + stat row + last match; tournaments
+  date-grouped compact cards; training toolbar/week-strip verification;
+  reports counts subtitle + status/period chips + duplicate-title session
+  distinguisher + form sections; messaging list/composer density; tennis
+  header overflow fix (primary + icon overflow), meta-row cards, detail
+  `TabsList`, insights severity + metric-target bar; physio labeled range
+  pills ("1 mo…All" + Custom) + "More metrics" disclosure; fitness radar
+  duplicate-score fix + compact benchmark chip + row cleanup + form units/
+  sticky footer; settings verified. `/design/preview` now drives visual QA
+  (before/after shots at `peak_performance_data/artifacts/ui-megaplan/`);
+  fixture SWR seeding + route namespaces fixed.
+  Still open (owner/staging actions): real signed-in device pass at
+  360/390px, PWA reinstall from the correct origin, `/coach` load waterfall
+  measurement before touching the 1.2s/1.5s seed timeouts, and deploy
+  promotion (`main` is behind `development` and still serves the old blue
+  manifest). The regenerated `src/i18n/route-namespaces.generated.ts` has a
+  broad diff reflecting the whole uncommitted import graph — review before
+  commit. Non-English translations added this pass are drafts.
+- **Verification pass 4 (2026-11-06, uncommitted)** — Closed T001 and T003:
+  60-shot true-before set captured from a `git worktree` at HEAD into
+  `artifacts/ui-redesign/before/` (10 preview surfaces × 390/768/1280 ×
+  light+dark) plus matching `after/` set; `artifacts/ui-megaplan/after/`
+  extended to 100 shots (320/360/390/768/1280). T003 resolved: no
+  `organizations` row carries `staging.peakperformancedata.app` (Supabase
+  query), and the staging host serves all-default navy chrome. Blue-strip
+  evidence strengthened (T004/T048/T049): `viewport-fit=cover` confirmed,
+  bottom-edge element resolves to flat `bg-background` (`#0d1726`/`#fcfcfc`),
+  staging theme-color = `#0d1726` — an in-page blue strip is not possible;
+  residual risk is a stale installed WebAPK / OS nav bar, owner device check.
+  Still open (owner actions): T004 device reproduction, T005 staging
+  MISSING_MESSAGE console check (PPD_QA creds invalid on staging; static i18n
+  clean — 135 report keys + 4838 keys resolve in all 8 locales), T156
+  authenticated real-page pass, `/coach` waterfall, deploy promotion.
+  `_plans/ui-megaplan-benchmarks.md` written (megaplan task 3).
